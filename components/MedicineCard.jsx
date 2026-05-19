@@ -258,7 +258,7 @@ export default function MedicineCard({ med, onViewDetails }) {
           )}
           {/* Options / Select */}
           <button
-            className="flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white
+            className="flex items-center gap-1.5 bg-[#162555] hover:bg-[#1f3477]  text-white
                        text-[11px] sm:text-[13px] font-semibold px-2.5 sm:px-4 py-2 sm:py-2.5
                        rounded-lg transition-colors whitespace-nowrap"
             onClick={(e) => {
@@ -314,7 +314,7 @@ export default function MedicineCard({ med, onViewDetails }) {
               return (
                 <div
                   key={strength}
-                  className="flex items-center bg-white border border-gray-200 rounded-lg px-2.5 py-2 gap-2 hover:border-teal-400 hover:shadow-sm transition-all"
+                  className="flex items-center bg-white border border-gray-200 rounded-lg px-2.5 py-2 gap-2 hover:border-[#1f3477] hover:shadow-sm transition-all"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* LEFT GROUP: strength + dropdown + price — takes remaining space, clips if needed */}
@@ -360,7 +360,7 @@ export default function MedicineCard({ med, onViewDetails }) {
                       className={`text-[11px] font-bold px-2.5 py-1 rounded-md border-[1.5px] transition-all whitespace-nowrap ${
                         added
                           ? "bg-teal-600 text-white border-teal-600"
-                          : "bg-white text-teal-600 border-teal-500 hover:bg-teal-600 hover:text-white"
+                          : "bg-[#ffffff] hover:bg-[#1f3477] text-[#162555] hover:text-white"
                       }`}
                       aria-label={`Add ${strength} to cart`}
                     >
