@@ -11,6 +11,8 @@ import { MedicineProvider } from "../context/MedicineContext";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+// import CartBar from "../components/CartBar";
+import CartBarWrapper from "../components/CartBarWrapper";
 
 export default function RootLayout({ children }) {
   return (
@@ -24,7 +26,7 @@ export default function RootLayout({ children }) {
 
               {/* PAGE CONTENT */}
               <main className="flex-1">{children}</main>
-
+              <CartBarWrapper />
               {/* 🔥 GLOBAL FOOTER */}
               <Footer />
 

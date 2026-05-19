@@ -24,8 +24,8 @@ import { useCart } from "../context/CartContext";
 
 const NAV_LINKS = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/blog", label: "Blog", icon: Newspaper },
-  { href: "/medicines", label: "Products", icon: Pill },
+  { href: "/blogs", label: "Blog", icon: Newspaper },
+  { href: "/products", label: "Products", icon: Pill },
   { href: "/contact", label: "Contact", icon: Phone },
 ];
 
@@ -48,7 +48,7 @@ export default function Header() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (!search.trim()) return;
-    router.push(`/medicines?search=${encodeURIComponent(search)}`);
+    router.push(`/products?search=${encodeURIComponent(search)}`);
     setShowSearch(false);
     setMobileMenu(false);
   };
@@ -102,10 +102,10 @@ export default function Header() {
             <Link href="/" className="hover:text-blue-600 transition">
               Home
             </Link>
-            <Link href="/blog" className="hover:text-cyan-500 transition">
+            <Link href="/blogs" className="hover:text-cyan-500 transition">
               Blog
             </Link>
-            <Link href="/medicines" className="hover:text-blue-600 transition">
+            <Link href="/products" className="hover:text-blue-600 transition">
               Products
             </Link>
             <Link href="/contact" className="hover:text-blue-600 transition">
@@ -127,7 +127,7 @@ export default function Header() {
 
             {/* CART */}
             <button
-              onClick={() => setCartOpen(true)}
+              onClick={() => router.push("/checkout")}
               className="relative hover:text-blue-600 transition hover:scale-110"
             >
               <ShoppingCart size={20} />
@@ -139,7 +139,7 @@ export default function Header() {
             </button>
 
             {/* DESKTOP PROFILE */}
-            <div className="relative hidden md:flex items-center">
+            {/* <div className="relative hidden md:flex items-center">
               <button
                 ref={profileBtnRef}
                 onClick={() => setOpenProfile(!openProfile)}
@@ -237,7 +237,7 @@ export default function Header() {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* MOBILE HAMBURGER */}
             <button
@@ -302,7 +302,7 @@ export default function Header() {
         `}
       >
         {/* DRAWER HEADER — user info */}
-        <div className="bg-gradient-to-r from-blue-600 to-cyan-500 px-5 pt-10 pb-6">
+        <div className=" px-5 pt-10 pb-6">
           <button
             onClick={() => setMobileMenu(false)}
             className="absolute top-4 right-4 text-white/80 hover:text-white transition"
@@ -310,8 +310,13 @@ export default function Header() {
           >
             <X size={22} />
           </button>
-
-          <div className="flex items-center gap-3">
+          <h2
+            onClick={() => router.push("/")}
+            className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent cursor-pointer select-none whitespace-nowrap"
+          >
+            US Pharmacy
+          </h2>
+          {/* <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-full bg-white/20 border-2 border-white/30 flex items-center justify-center shrink-0">
               <UserCircle2 size={24} className="text-white" />
             </div>
@@ -332,7 +337,7 @@ export default function Header() {
                 </>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* NAV LINKS */}
@@ -395,7 +400,7 @@ export default function Header() {
                 </span>
                 Cart
               </button>
-
+              {/* 
               <button
                 onClick={() => {
                   router.push("/orders");
@@ -410,9 +415,9 @@ export default function Header() {
                   />
                 </span>
                 Orders
-              </button>
+              </button> */}
 
-              <button
+              {/* <button
                 onClick={() => {
                   logout();
                   router.push("/");
@@ -427,11 +432,11 @@ export default function Header() {
                   />
                 </span>
                 Logout
-              </button>
+              </button> */}
             </>
           ) : (
             <div className="px-1 pt-2 space-y-2">
-              <button
+              {/* <button
                 onClick={() => {
                   router.push("/login");
                   setMobileMenu(false);
@@ -440,7 +445,7 @@ export default function Header() {
               >
                 <LogOut size={16} className="rotate-180" />
                 Login / Sign Up
-              </button>
+              </button> */}
             </div>
           )}
         </nav>
