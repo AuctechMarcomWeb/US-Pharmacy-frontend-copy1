@@ -39,10 +39,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/medicines"
+                  href="/products"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  Medicines
+                  Products
                 </Link>
               </li>
               <li>

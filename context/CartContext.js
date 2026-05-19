@@ -22,54 +22,104 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // SET FULL CART (used after login to sync server cart)
+  // SYNC (used after login to merge server cart)
   const syncCart = (newCart) => setCart(newCart || []);
 
   // ADD ITEM
-  // Always ACCUMULATES qty when the same product id already exists.
-  // This mirrors what the server /cart/add does (it also accumulates).
-  // The previous "replace" approach caused cart qty to show the last-added
-  // batch instead of the running total (e.g. add 1 then add 3 more → showed
-  // 3 instead of 4). Callers wanting an exact qty should use updateQty.
-  const addToCart = (product) => {
+  // Each unique line = medId + variantId combo.
+  // Passing { ...med, selectedVariant: variant } from MedicineCard.
+  const addToCart = (product, qty = 1) => {
+    const { selectedVariant, ...med } = product;
+
+    // Legacy path (no selectedVariant)
+    if (!selectedVariant) {
+      setCart((prev) => {
+        const exist = prev.find((item) => item.id === med.id);
+        if (exist) {
+          return prev.map((item) =>
+            item.id === med.id
+              ? { ...item, qty: item.qty + (med.qty ?? qty) }
+              : item,
+          );
+        }
+        return [...prev, { ...med, qty: med.qty ?? qty }];
+      });
+      return;
+    }
+
+    // Variant-aware path
+    const lineKey = `${med.id}__${selectedVariant._id}`;
+
     setCart((prev) => {
-      const exist = prev.find((item) => item.id === product.id);
+      const exist = prev.find((item) => item.lineKey === lineKey);
       if (exist) {
         return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, qty: item.qty + product.qty }
+          item.lineKey === lineKey
+            ? { ...item, qty: item.qty + qty } // ← qty instead of + 1
             : item,
         );
       }
-      return [...prev, product];
+      return [
+        ...prev,
+        {
+          lineKey,
+          id: med.id,
+          title: med.title,
+          thumbnail: med.thumbnail?.startsWith("http")
+            ? med.thumbnail
+            : (med.images?.[0] ?? ""),
+          category: med.category?.name ?? "",
+          isRx: med.isRx ?? false,
+          variantId: selectedVariant._id,
+          brand: selectedVariant.brand,
+          strength: selectedVariant.strength,
+          packageQty: selectedVariant.packageQty,
+          sku: selectedVariant.sku ?? "",
+          stock: selectedVariant.stock ?? 0,
+          price: selectedVariant.price,
+          mrp: selectedVariant.mrp,
+          qty, // ← qty instead of hardcoded 1
+        },
+      ];
     });
   };
 
-  // REMOVE
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+  // REMOVE — works with both lineKey (new) and id (legacy)
+  const removeFromCart = (key) => {
+    setCart((prev) =>
+      prev.filter((item) => item.lineKey !== key && item.id !== key),
+    );
   };
 
-  // UPDATE QTY
-  // FIX: signature was (id, variantId, qty) but checkout called it as (id, qty).
-  // Simplified to (id, qty) — variantId is not used anywhere for lookup.
-  const updateQty = (id, qty) => {
+  // UPDATE QTY — works with both lineKey (new) and id (legacy)
+  const updateQty = (key, qty) => {
+    if (qty < 1) return;
     setCart((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, qty } : item)),
+      prev.map((item) =>
+        item.lineKey === key || item.id === key ? { ...item, qty } : item,
+      ),
     );
   };
 
   // CLEAR
   const clearCart = () => setCart([]);
 
-  // TOTAL COUNT
-  const cartCount = cart.length;
+  // TOTAL ITEM COUNT (sum of all qtys)
+  const cartCount = cart.reduce((s, i) => s + (i.qty ?? 1), 0);
 
-  // TOTAL
+  // TOTAL PRICE
   const totalPrice = cart.reduce(
     (sum, item) => sum + (item.price ?? 0) * (item.qty ?? 1),
     0,
   );
+
+  // TOTAL MRP (to show savings)
+  const totalMrp = cart.reduce(
+    (sum, item) => sum + (item.mrp ?? item.price ?? 0) * (item.qty ?? 1),
+    0,
+  );
+
+  const totalSavings = totalMrp - totalPrice;
 
   return (
     <CartContext.Provider
@@ -81,8 +131,10 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         updateQty,
         clearCart,
-        totalPrice,
         cartCount,
+        totalPrice,
+        totalMrp,
+        totalSavings,
       }}
     >
       {children}

@@ -15,8 +15,6 @@ import { noTokenGetRequest } from "../helper/index";
     apiEndpoint        — defaults to "/category" (optional)
 ─────────────────────────────────────────────────────────────────────────────── */
 
-
-
 const Skeleton = () => (
   <div
     style={{
@@ -40,10 +38,7 @@ const Skeleton = () => (
   </div>
 );
 
-export default function Categories({
-  onSelect,
-  apiEndpoint = "/category",
-}) {
+export default function Categories({ onSelect, apiEndpoint = "/category" }) {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -83,7 +78,7 @@ export default function Categories({
   const handleClick = (cat) => {
     setActive(cat._id);
     if (onSelect) onSelect(cat);
-    else router.push(`/medicines?categoryId=${cat._id}`);
+    else router.push(`/products?categoryId=${cat._id}`);
   };
 
   return (
@@ -336,16 +331,16 @@ export default function Categories({
         {/* Header */}
         <div className="cat-header">
           <div>
-            <div className="cat-eyebrow">
+            {/* <div className="cat-eyebrow">
               <span className="cat-eyebrow-dot" />
               Browse
-            </div>
+            </div> */}
             <h2 className="cat-title">
               Shop by <span>Category</span>
             </h2>
             <p className="cat-subtitle">Find exactly what you need, fast</p>
           </div>
-          <a href="/medicines" className="cat-view-all">
+          {/* <a href="/medicines" className="cat-view-all">
             View All
             <svg
               width="14" height="14" viewBox="0 0 24 24"
@@ -354,7 +349,7 @@ export default function Categories({
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </a>
+          </a> */}
         </div>
 
         {/* Grid */}
@@ -389,7 +384,9 @@ export default function Categories({
                   ) : (
                     <div
                       className="cat-bg"
-                      style={{ background: "linear-gradient(135deg, #334155, #1e293b)" }}
+                      style={{
+                        background: "linear-gradient(135deg, #334155, #1e293b)",
+                      }}
                     />
                   )}
 
@@ -397,9 +394,7 @@ export default function Categories({
                   <div className="cat-scrim" />
 
                   {/* Fallback emoji if no image */}
-                  {!cat.image && (
-                    <span className="cat-emoji-fallback">💊</span>
-                  )}
+                  {!cat.image && <span className="cat-emoji-fallback">💊</span>}
 
                   {/* Product count badge */}
                   {cat.productCount != null && (
@@ -411,9 +406,14 @@ export default function Categories({
                     <p className="cat-name">{cat.name}</p>
                     <div className="cat-arrow">
                       <svg
-                        width="11" height="11" viewBox="0 0 24 24"
-                        fill="none" stroke="#fff"
-                        strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
+                        width="11"
+                        height="11"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#fff"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
