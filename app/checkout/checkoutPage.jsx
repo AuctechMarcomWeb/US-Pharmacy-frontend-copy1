@@ -561,15 +561,15 @@ export default function CheckoutPage() {
                 <div className="h-14 w-14 rounded-2xl bg-emerald-100 flex items-center justify-center mb-4">
                   <BadgeCheck size={28} className="text-emerald-600" />
                 </div>
-                <h1 className="text-4xl md:text-5xl font-black text-[#162555] leading-tight">
+                <h1 className="text-3xl md:text-5xl font-black text-[#162555] leading-tight">
                   Thank you for
                   <br />
-                  your purchase!
+                  submitting your Request!
                 </h1>
                 <p className="mt-3 text-slate-500 text-sm leading-relaxed max-w-sm">
-                  Your order will be processed within 24 hours during working
-                  days. We will notify you by phone once your order has been
-                  shipped.
+                  Your request will be processed within 24 hours during working
+                  days. We will notify you by phone once your request has been
+                  submitted.
                 </p>
               </div>
 

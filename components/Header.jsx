@@ -128,7 +128,7 @@ export default function Header() {
             {/* CART */}
             <button
               onClick={() => router.push("/checkout")}
-              className="relative hover:text-blue-600 transition hover:scale-110"
+              className="relative  hover:text-blue-600 transition hover:scale-110"
             >
               <ShoppingCart size={20} />
               {cartCount > 0 && (
