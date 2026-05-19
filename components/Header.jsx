@@ -87,7 +87,7 @@ export default function Header() {
   return (
     <>
       {/* ── HEADER ── */}
-      <header className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-2xl border-b border-white/20 shadow-sm">
+      <header className="fixed top-0 left-0 w-full z-50 bg-white/100 backdrop-blur-2xl border-b border-white/20 shadow-sm">
         <div className="flex items-center justify-between px-4 md:px-10 h-[65px]">
           {/* LOGO */}
           <h2
@@ -120,7 +120,7 @@ export default function Header() {
               type="button"
               ref={searchBtnRef}
               onClick={() => setShowSearch(!showSearch)}
-              className="hover:text-blue-600 transition hover:scale-110"
+              className="text-black hover:text-blue-600 transition hover:scale-110"
             >
               <Search size={20} />
             </button>
@@ -128,7 +128,7 @@ export default function Header() {
             {/* CART */}
             <button
               onClick={() => router.push("/checkout")}
-              className="relative  hover:text-blue-600 transition hover:scale-110"
+              className="relative text-black hover:text-blue-600 transition hover:scale-110"
             >
               <ShoppingCart size={20} />
               {cartCount > 0 && (
