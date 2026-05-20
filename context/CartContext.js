@@ -105,7 +105,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => setCart([]);
 
   // TOTAL ITEM COUNT (sum of all qtys)
-  const cartCount = cart.reduce((s, i) => s + (i.qty ?? 1), 0);
+  const cartCount = cart.length;
 
   // TOTAL PRICE
   const totalPrice = cart.reduce(

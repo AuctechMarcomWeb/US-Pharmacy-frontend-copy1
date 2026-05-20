@@ -590,7 +590,7 @@ export default function MedicinesPage() {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto px-12 md:px-12 py-10">
+      <div className="max-w-7xl mx-auto px-3 md:px-12 py-10">
         <div className="flex gap-8">
           {/* DESKTOP SIDEBAR */}
           {/* DESKTOP SIDEBAR — card + alphabet strip side-by-side */}

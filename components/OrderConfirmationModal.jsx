@@ -1,21 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Modal, Checkbox, Button } from "antd";
-import { AlertTriangle, ShieldCheck, Package, Loader2 } from "lucide-react";
+import { Modal, Checkbox } from "antd";
+import { AlertTriangle, ShieldCheck, Package } from "lucide-react";
 
-/**
- * OrderConfirmModal
- *
- * Props:
- *  - open         {boolean}  — controls visibility
- *  - onCancel     {fn}       — called when user closes/cancels modal
- *  - onConfirm    {fn}       — called when user checks box & clicks Submit (triggers the real place-order API)
- *  - loading      {boolean}  — disables & shows spinner on Submit while API is in-flight
- *  - total        {number}   — order total to display in the modal
- *  - itemCount    {number}   — number of cart items
- *  - selectedCountry {string} — country name the user selected
- */
 export default function OrderConfirmModal({
   open,
   onCancel,
@@ -27,7 +15,6 @@ export default function OrderConfirmModal({
 }) {
   const [acknowledged, setAcknowledged] = useState(false);
 
-  // Reset checkbox each time the modal opens
   const handleOpenChange = (visible) => {
     if (visible) setAcknowledged(false);
   };
@@ -43,14 +30,16 @@ export default function OrderConfirmModal({
       centered
       closable={!loading}
       mask={{ closable: !loading }}
-      width={480}
+      width="100%"
+      style={{ maxWidth: 480, margin: "0 auto" }}
       styles={{
         content: {
-          borderRadius: "1.25rem",
+          borderRadius: "1rem",
           padding: 0,
           overflow: "hidden",
           boxShadow:
             "0 25px 60px -10px rgba(22,37,85,0.18), 0 8px 24px -6px rgba(22,37,85,0.10)",
+          margin: "0 12px",
         },
         mask: {
           backdropFilter: "blur(4px)",
@@ -59,13 +48,13 @@ export default function OrderConfirmModal({
       }}
     >
       {/* ── Header ── */}
-      <div className="bg-gradient-to-br from-[#162555] to-[#2846a5] px-6 pt-6 pb-5">
-        <div className="flex items-start gap-4">
-          <div className="h-11 w-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
-            <Package size={22} className="text-white" />
+      <div className="bg-gradient-to-br from-[#162555] to-[#2846a5] px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-5">
+        <div className="flex items-start gap-3 sm:gap-4">
+          <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
+            <Package size={20} className="text-white" />
           </div>
           <div>
-            <h2 className="text-lg font-black text-white leading-snug">
+            <h2 className="text-base sm:text-lg font-black text-white leading-snug">
               Confirm Your Order
             </h2>
             <p className="text-blue-200 text-xs mt-0.5 font-medium">
@@ -75,7 +64,7 @@ export default function OrderConfirmModal({
         </div>
 
         {/* Quick summary pills */}
-        <div className="flex items-center gap-2 mt-4">
+        <div className="flex items-center flex-wrap gap-2 mt-3 sm:mt-4">
           <span className="text-[11px] font-bold bg-white/10 border border-white/20 text-white px-3 py-1 rounded-full">
             {itemCount} item{itemCount !== 1 ? "s" : ""}
           </span>
@@ -91,17 +80,17 @@ export default function OrderConfirmModal({
       </div>
 
       {/* ── Body ── */}
-      <div className="px-6 pt-5 pb-6 space-y-5 bg-white">
+      <div className="px-4 sm:px-6 pt-4 sm:pt-5 pb-4 sm:pb-6 space-y-4 sm:space-y-5 bg-white">
         {/* Disclaimer card */}
-        <div className="flex gap-3 p-4 rounded-2xl bg-amber-50 border border-amber-200">
+        <div className="flex gap-3 p-3 sm:p-4 rounded-2xl bg-amber-50 border border-amber-200">
           <div className="h-8 w-8 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <AlertTriangle size={16} className="text-amber-600" />
+            <AlertTriangle size={15} className="text-amber-600" />
           </div>
           <div>
-            <p className="text-sm font-black text-amber-800 leading-snug mb-1">
+            <p className="text-xs sm:text-sm font-black text-amber-800 leading-snug mb-1">
               Delivery Availability Notice
             </p>
-            <p className="text-xs text-amber-700 leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-amber-700 leading-relaxed">
               We currently ship to{" "}
               <span className="font-bold">select countries only</span>. If your
               selected country —{" "}
@@ -117,7 +106,7 @@ export default function OrderConfirmModal({
 
         {/* Acknowledgement checkbox */}
         <div
-          className={`flex items-start gap-3 p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
+          className={`flex items-start gap-3 p-3 sm:p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
             acknowledged
               ? "border-cyan-400 bg-cyan-50"
               : "border-slate-200 bg-slate-50 hover:border-slate-300"
@@ -132,7 +121,7 @@ export default function OrderConfirmModal({
             }}
             className="mt-0.5 flex-shrink-0"
           />
-          <p className="text-xs font-semibold text-slate-600 leading-relaxed select-none">
+          <p className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-relaxed select-none">
             I understand that if my country (
             <span className="font-black text-[#162555]">
               {selectedCountry || "selected country"}
@@ -146,8 +135,11 @@ export default function OrderConfirmModal({
         </div>
 
         {/* Trust note */}
-        <div className="flex items-center gap-2 text-xs text-slate-400">
-          <ShieldCheck size={13} className="text-emerald-500 flex-shrink-0" />
+        <div className="flex items-start sm:items-center gap-2 text-[11px] sm:text-xs text-slate-400">
+          <ShieldCheck
+            size={13}
+            className="text-emerald-500 flex-shrink-0 mt-0.5 sm:mt-0"
+          />
           <span>
             Your order is secured with 256-bit SSL encryption. No payment is
             charged until dispatch.
@@ -155,12 +147,12 @@ export default function OrderConfirmModal({
         </div>
 
         {/* Action buttons */}
-        <div className="flex gap-3 pt-1">
+        <div className="flex gap-2 sm:gap-3 pt-1">
           <button
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="flex-1 py-3 rounded-xl border-2 border-slate-200 text-slate-500 font-bold text-sm hover:border-slate-300 hover:bg-slate-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 py-2.5 sm:py-3 rounded-xl border-2 border-slate-200 text-slate-500 font-bold text-xs sm:text-sm hover:border-slate-300 hover:bg-slate-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Go Back
           </button>
@@ -169,7 +161,7 @@ export default function OrderConfirmModal({
             type="button"
             onClick={onConfirm}
             disabled={!acknowledged || loading}
-            className={`flex-1 py-3 rounded-xl font-black text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg ${
+            className={`flex-1 py-2.5 sm:py-3 rounded-xl font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg ${
               acknowledged && !loading
                 ? "bg-gradient-to-r from-[#162555] to-[#2846a5] hover:from-[#1e3370] hover:to-[#3156cc] text-white shadow-blue-900/30 hover:scale-[1.02] active:scale-[0.98]"
                 : "bg-slate-100 text-slate-400 cursor-not-allowed shadow-none"
@@ -178,7 +170,7 @@ export default function OrderConfirmModal({
             {loading ? (
               <>
                 <svg
-                  className="animate-spin h-4 w-4"
+                  className="animate-spin h-3.5 w-3.5 sm:h-4 sm:w-4"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -197,10 +189,10 @@ export default function OrderConfirmModal({
                     d="M4 12a8 8 0 018-8v8H4z"
                   />
                 </svg>
-                Placing Order…
+                Placing…
               </>
             ) : (
-              <>Confirm &amp; Place Order</>
+              <>Confirm &amp; Place</>
             )}
           </button>
         </div>
