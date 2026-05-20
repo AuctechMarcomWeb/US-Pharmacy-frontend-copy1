@@ -23,7 +23,7 @@ export default function ContactPage() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState(null); // { type: "success" | "error", msg: string }
+  const [toast, setToast] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -67,7 +67,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-100 to-[#eef3ff] px-6 py-16 overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-100 to-[#eef3ff] px-4 sm:px-6 py-10 sm:py-16 overflow-hidden relative">
       {/* BACKGROUND GLOW */}
       <div className="absolute top-0 left-[-100px] w-[320px] h-[320px] bg-cyan-400/10 blur-3xl rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-[-100px] w-[320px] h-[320px] bg-[#162555]/10 blur-3xl rounded-full pointer-events-none" />
@@ -75,7 +75,7 @@ export default function ContactPage() {
       {/* TOAST */}
       {toast && (
         <div
-          className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-xl border text-sm font-semibold max-w-sm transition-all animate-in slide-in-from-top-2 ${
+          className={`fixed top-4 right-4 left-4 sm:left-auto sm:right-6 sm:top-6 z-50 flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 rounded-2xl shadow-xl border text-sm font-semibold sm:max-w-sm transition-all ${
             toast.type === "success"
               ? "bg-emerald-50 border-emerald-200 text-emerald-700"
               : "bg-red-50 border-red-200 text-red-700"
@@ -100,63 +100,39 @@ export default function ContactPage() {
       )}
 
       {/* HEADER */}
-      <div className="max-w-4xl mx-auto text-center mb-14 relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-sm mb-5 backdrop-blur-xl">
+      <div className="max-w-4xl mx-auto text-center mb-10 sm:mb-14 relative z-10">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-sm mb-4 sm:mb-5 backdrop-blur-xl">
           <Mail size={16} />
           Secure Communication Channel
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#162555]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#162555]">
           Contact US Pharmacy
         </h1>
-        <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-3 sm:mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
           Send secure queries to our clinical intelligence support system.
         </p>
       </div>
 
-      {/* GRID */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 relative z-10">
-        {/* LEFT INFO */}
-        <div className="space-y-6">
-          {[
-            { icon: Phone, label: "Hotline", value: "+91 98765 43210" },
-            { icon: Mail, label: "Email", value: "support@medicoforensic.com" },
-            {
-              icon: MapPin,
-              label: "Location",
-              value: "Forensic Medical HQ, India",
-            },
-          ].map(({ icon: Icon, label, value }) => (
-            <div
-              key={label}
-              className="bg-[#C6E9FF] backdrop-blur-2xl border border-slate-200 rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <div className="flex items-center gap-3 text-cyan-700 mb-3">
-                <Icon size={20} />
-                <h2 className="font-bold text-lg">{label}</h2>
-              </div>
-              <p className="text-slate-600">{value}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* FORM */}
+      {/* GRID — form first on mobile via order */}
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-10 relative z-10">
+        {/* FORM — order-1 on mobile (shows first), order-2 on md+ (shows second/right) */}
         <form
           onSubmit={handleSubmit}
-          className="bg-[#C6E9FF] backdrop-blur-2xl border border-slate-200 rounded-3xl p-7 shadow-xl"
+          className="order-1 md:order-2 bg-[#C6E9FF] backdrop-blur-2xl border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-xl"
         >
-          <h2 className="text-2xl font-bold text-[#162555] mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#162555] mb-5 sm:mb-6">
             Send Message
           </h2>
 
           {/* NAME + PHONE row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
             <input
               name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="Your Name"
               required
-              className="w-full p-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all"
+              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
             />
             <input
               name="phone"
@@ -166,7 +142,7 @@ export default function ContactPage() {
               required
               type="tel"
               maxLength={10}
-              className="w-full p-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all"
+              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
             />
           </div>
 
@@ -178,17 +154,17 @@ export default function ContactPage() {
             placeholder="Your Email"
             required
             type="email"
-            className="w-full p-4 mb-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all"
+            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
           />
 
-          {/* TITLE / SUBJECT */}
+          {/* TITLE */}
           <input
             name="title"
             value={form.title}
             onChange={handleChange}
             placeholder="Subject / Title"
             required
-            className="w-full p-4 mb-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all"
+            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
           />
 
           {/* MESSAGE */}
@@ -197,16 +173,16 @@ export default function ContactPage() {
             value={form.discription}
             onChange={handleChange}
             placeholder="Your Message"
-            rows={5}
+            rows={4}
             required
-            className="w-full p-4 mb-5 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none resize-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all"
+            className="w-full p-3 sm:p-4 mb-4 sm:mb-5 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none resize-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
           />
 
           {/* SUBMIT */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 p-4 rounded-2xl bg-[#162555] hover:bg-[#1e3477] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99]"
+            className="w-full flex items-center justify-center gap-2 p-3.5 sm:p-4 rounded-2xl bg-[#162555] hover:bg-[#1e3477] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] text-sm sm:text-base"
           >
             {loading ? (
               <>
@@ -221,10 +197,34 @@ export default function ContactPage() {
             )}
           </button>
         </form>
+
+        {/* LEFT INFO — order-2 on mobile (shows second), order-1 on md+ (shows first/left) */}
+        <div className="order-2 md:order-1 space-y-4 sm:space-y-6">
+          {[
+            { icon: Phone, label: "Hotline", value: "+91 98765 43210" },
+            { icon: Mail, label: "Email", value: "support@medicoforensic.com" },
+            {
+              icon: MapPin,
+              label: "Location",
+              value: "Forensic Medical HQ, India",
+            },
+          ].map(({ icon: Icon, label, value }) => (
+            <div
+              key={label}
+              className="bg-[#C6E9FF] backdrop-blur-2xl border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 text-cyan-700 mb-2 sm:mb-3">
+                <Icon size={20} />
+                <h2 className="font-bold text-base sm:text-lg">{label}</h2>
+              </div>
+              <p className="text-slate-600 text-sm sm:text-base">{value}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* FOOTNOTE */}
-      <div className="text-center mt-16 text-slate-500 text-sm relative z-10">
+      <div className="text-center mt-10 sm:mt-16 text-slate-500 text-xs sm:text-sm relative z-10">
         Encrypted communication enabled • US Pharmacy
       </div>
     </div>

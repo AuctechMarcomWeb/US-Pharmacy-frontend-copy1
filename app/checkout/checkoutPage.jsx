@@ -707,35 +707,59 @@ export default function CheckoutPage() {
       <div className="relative z-20 bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-[#162555] flex items-center justify-center">
+            <div className="h-8 w-8 rounded-lg bg-[#162555] flex items-center justify-center hidden sm:block">
               <LockKeyhole size={14} className="text-white" />
             </div>
-            <span className="font-black text-[#162555] tracking-tight text-lg hidden sm:block">
+            <span className="font-black text-[#162555] tracking-tight text-lg hidden sm:block ">
               Secure Checkout
             </span>
           </div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-            {["Cart", "Shipping", "Confirm"].map((step, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div
-                  className={`h-6 w-6 rounded-full flex items-center justify-center text-[10px] font-black ${
-                    i <= 1
-                      ? "bg-[#162555] text-white"
-                      : "bg-slate-100 text-slate-400 border border-slate-200"
-                  }`}
-                >
-                  {i < 1 ? "✓" : i + 1}
+          <div className="w-full overflow-x-auto scrollbar-hide">
+            <div className="flex items-center justify-between min-w-[280px] sm:min-w-0 gap-1 sm:gap-2 text-[10px] sm:text-xs font-semibold text-slate-500">
+              {["Cart", "Shipping", "Confirm"].map((step, i) => (
+                <div key={i} className="flex items-center flex-1 min-w-0">
+                  {/* Step */}
+                  <div className="flex items-center gap-1 sm:gap-2 min-w-0">
+                    <div
+                      className={`
+                        h-5 w-5 sm:h-6 sm:w-6
+                        rounded-full
+                        flex items-center justify-center
+                        text-[9px] sm:text-[10px]
+                        font-black
+                        flex-shrink-0
+                        ${
+                          i <= 1
+                            ? "bg-[#162555] text-white"
+                            : "bg-slate-100 text-slate-400 border border-slate-200"
+                        }
+                      `}
+                    >
+                      {i < 1 ? "✓" : i + 1}
+                    </div>
+
+                    <span
+                      className={`
+              truncate whitespace-nowrap
+              ${i <= 1 ? "text-[#162555]" : "text-slate-400"}
+            `}
+                    >
+                      {step}
+                    </span>
+                  </div>
+
+                  {/* Connector */}
+                  {i < 2 && (
+                    <div
+                      className={`
+              flex-1 h-px mx-1 sm:mx-2 min-w-[16px]
+              ${i < 1 ? "bg-[#162555]" : "bg-slate-200"}
+            `}
+                    />
+                  )}
                 </div>
-                <span className={i <= 1 ? "text-[#162555]" : "text-slate-400"}>
-                  {step}
-                </span>
-                {i < 2 && (
-                  <div
-                    className={`w-8 h-px ${i < 1 ? "bg-[#162555]" : "bg-slate-200"}`}
-                  />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-400">
             <ShieldCheck size={14} className="text-emerald-500" />
@@ -744,7 +768,7 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-10">
+      <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 md:py-10">
         <div className="mb-8 text-center">
           <h1 className="text-3xl md:text-4xl font-black tracking-tight text-[#162555]">
             Submit your order Request
@@ -761,7 +785,7 @@ export default function CheckoutPage() {
             className="bg-white rounded-[1.75rem] border border-slate-200 shadow-xl shadow-slate-200/60"
           >
             {/* Shipping */}
-            <div className="px-6 md:px-8 pt-7 pb-6 border-b border-slate-100">
+            <div className="px-4 md:px-8 pt-7 pb-6 border-b border-slate-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="h-10 w-10 rounded-2xl bg-cyan-50 border border-cyan-100 flex items-center justify-center">
                   <Truck size={20} className="text-cyan-600" />
@@ -872,7 +896,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Payment */}
-            <div className="px-6 md:px-8 pt-6 pb-7">
+            <div className="px-4 md:px-8 pt-6 pb-7">
               <div className="flex items-center gap-3 mb-5">
                 <div className="h-10 w-10 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
                   <CreditCard size={20} className="text-indigo-600" />
@@ -951,17 +975,51 @@ export default function CheckoutPage() {
                   paymentMethods.length === 0 ||
                   orderLoading
                 }
-                className="w-full mt-6 py-4 rounded-2xl bg-gradient-to-r from-[#162555] to-[#2846a5] hover:from-[#1e3370] hover:to-[#3156cc] text-white font-black text-base transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] shadow-2xl shadow-blue-900/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                className="
+    w-full mt-5 sm:mt-6
+
+    h-12 sm:h-14
+    px-3 sm:px-5
+
+    rounded-xl sm:rounded-2xl
+
+    bg-gradient-to-r from-[#162555] to-[#2846a5]
+    hover:from-[#1e3370] hover:to-[#3156cc]
+
+    text-white
+    font-black
+
+    text-[13px] sm:text-base
+
+    transition-all duration-300
+    active:scale-[0.98]
+
+    shadow-xl sm:shadow-2xl shadow-blue-900/30
+
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    disabled:hover:scale-100
+
+    flex items-center justify-center gap-1.5 sm:gap-2
+
+    whitespace-nowrap
+  "
               >
                 {orderLoading ? (
                   <>
-                    <Loader2 size={18} className="animate-spin" /> Placing Your
-                    Order...
+                    <Loader2 size={16} className="animate-spin flex-shrink-0" />
+
+                    <span className="truncate">Placing Your Order...</span>
                   </>
                 ) : (
                   <>
-                    <LockKeyhole size={16} /> Place Secure Order · ₹{fmt(total)}{" "}
-                    <ArrowRight size={16} />
+                    <LockKeyhole size={15} className="flex-shrink-0" />
+
+                    <span className="truncate">
+                      Place Secure Order · ₹{fmt(total)}
+                    </span>
+
+                    <ArrowRight size={15} className="flex-shrink-0" />
                   </>
                 )}
               </button>

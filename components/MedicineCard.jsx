@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 const fmt = (n) => Number(n).toFixed(2);
 const FALLBACK = "https://placehold.co/72x72/f1f5f9/94a3b8?text=Rx";
 
-// ── Small chevron SVG ──────────────────────────────────────────────────────
 const ChevronDown = ({ size = 12, className = "" }) => (
   <svg
     width={size}
@@ -27,7 +26,6 @@ const ChevronDown = ({ size = 12, className = "" }) => (
   </svg>
 );
 
-// ── NativeSelect-style dropdown (mobile-friendly, keyboard accessible) ─────
 function PkgDropdown({ options, value, onChange }) {
   return (
     <div className="relative flex-shrink-0">
@@ -35,15 +33,7 @@ function PkgDropdown({ options, value, onChange }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onClick={(e) => e.stopPropagation()}
-        className="
-          appearance-none cursor-pointer
-          h-8 pl-2.5 pr-7
-          text-[11px] sm:text-[12px] font-semibold text-slate-700
-          bg-slate-100 border border-slate-200
-          rounded-lg
-          focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400
-          transition
-        "
+        className="appearance-none cursor-pointer h-8 pl-2 pr-6 text-[11px] sm:text-[12px] font-semibold text-slate-700 bg-slate-100 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition max-w-[90px] sm:max-w-none"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -51,15 +41,13 @@ function PkgDropdown({ options, value, onChange }) {
           </option>
         ))}
       </select>
-      {/* custom chevron overlay */}
-      <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-400">
+      <span className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-slate-400">
         <ChevronDown size={11} />
       </span>
     </div>
   );
 }
 
-// ── Qty stepper ────────────────────────────────────────────────────────────
 function QtyStepper({ qty, onDec, onInc }) {
   return (
     <div
@@ -69,26 +57,18 @@ function QtyStepper({ qty, onDec, onInc }) {
       <button
         onClick={onDec}
         disabled={qty <= 1}
-        className="h-8 w-7 sm:w-8 flex items-center justify-center text-slate-500
-                   hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed
-                   transition text-sm font-bold"
+        className="h-7 w-6 sm:h-8 sm:w-8 flex items-center justify-center text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-sm font-bold"
         aria-label="Decrease quantity"
       >
         −
       </button>
-      <span
-        className="h-8 w-7 sm:w-8 flex items-center justify-center
-                   text-[12px] sm:text-[13px] font-bold text-slate-800
-                   border-x border-slate-200 select-none"
-      >
+      <span className="h-7 w-6 sm:h-8 sm:w-8 flex items-center justify-center text-[11px] sm:text-[13px] font-bold text-slate-800 border-x border-slate-200 select-none">
         {qty}
       </span>
       <button
         onClick={onInc}
         disabled={qty >= 99}
-        className="h-8 w-7 sm:w-8 flex items-center justify-center text-slate-500
-                   hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed
-                   transition text-sm font-bold"
+        className="h-7 w-6 sm:h-8 sm:w-8 flex items-center justify-center text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-sm font-bold"
         aria-label="Increase quantity"
       >
         +
@@ -97,7 +77,6 @@ function QtyStepper({ qty, onDec, onInc }) {
   );
 }
 
-// ── Group variants by strength ─────────────────────────────────────────────
 function groupByStrength(variants) {
   const map = new Map();
   for (const v of variants) {
@@ -105,34 +84,26 @@ function groupByStrength(variants) {
     if (!map.has(key)) map.set(key, []);
     map.get(key).push(v);
   }
-  // Sort each group by packageQty ascending
   for (const [, arr] of map) arr.sort((a, b) => a.packageQty - b.packageQty);
-  return map; // Map<strength, variant[]>
+  return map;
 }
 
-// ── Discount helper ────────────────────────────────────────────────────────
 const discountPct = (price, mrp) =>
   mrp > price ? Math.round(((mrp - price) / mrp) * 100) : null;
 
-// ── Main component ─────────────────────────────────────────────────────────
 export default function MedicineCard({ med, onViewDetails }) {
   const { addToCart } = useCart();
   const [open, setOpen] = useState(false);
 
   const activeVariants =
     med.variants?.filter((v) => v.isActive !== false) ?? [];
-  const grouped = groupByStrength(activeVariants); // Map<strength, variant[]>
+  const grouped = groupByStrength(activeVariants);
   const strengths = [...grouped.keys()];
 
-  // Per-strength state: { [strength]: { variantId, qty, added } }
   const [rowState, setRowState] = useState(() => {
     const init = {};
     for (const [strength, variants] of grouped) {
-      init[strength] = {
-        variantId: variants[0]._id,
-        qty: 1,
-        added: false,
-      };
+      init[strength] = { variantId: variants[0]._id, qty: 1, added: false };
     }
     return init;
   });
@@ -145,7 +116,6 @@ export default function MedicineCard({ med, onViewDetails }) {
       [strength]: { ...prev[strength], ...patch },
     }));
 
-  // Lowest price across all variants (for card header)
   const lowestVariant = activeVariants.length
     ? activeVariants.reduce((a, b) => (a.price < b.price ? a : b))
     : null;
@@ -164,9 +134,7 @@ export default function MedicineCard({ med, onViewDetails }) {
     const { variantId, qty } = rowState[strength];
     const variant = grouped.get(strength).find((v) => v._id === variantId);
     if (!variant) return;
-
     const brandObj = med.brands?.find((b) => b._id === variant.brand) ?? null;
-
     addToCart(
       {
         ...med,
@@ -176,13 +144,10 @@ export default function MedicineCard({ med, onViewDetails }) {
       },
       qty,
     );
-
     toast.success(
       `${med.title} (${variant.strength}, ${variant.packageQty} tabs) ×${qty} added!`,
     );
     updateRow(strength, { added: true });
-
-    // clear "added" state after 2 s
     clearTimeout(timerRefs.current[strength]);
     timerRefs.current[strength] = setTimeout(
       () => updateRow(strength, { added: false }),
@@ -190,7 +155,6 @@ export default function MedicineCard({ med, onViewDetails }) {
     );
   };
 
-  // Cleanup timers on unmount
   useEffect(
     () => () => Object.values(timerRefs.current).forEach(clearTimeout),
     [],
@@ -198,9 +162,9 @@ export default function MedicineCard({ med, onViewDetails }) {
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl overflow-hidden transition-shadow hover:shadow-md w-full">
-      {/* ── HEADER ROW ───────────────────────────────────────────────────── */}
+      {/* ── HEADER ROW ── */}
       <div
-        className="flex items-center gap-3 px-3 sm:px-4 py-3 cursor-pointer"
+        className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
           onViewDetails?.(med);
@@ -210,7 +174,7 @@ export default function MedicineCard({ med, onViewDetails }) {
         <img
           src={thumbSrc}
           alt={med.title}
-          className="w-14 h-14 sm:w-[68px] sm:h-[68px] rounded-lg object-cover flex-shrink-0 border border-gray-100 bg-gray-50"
+          className="w-12 h-12 sm:w-[68px] sm:h-[68px] rounded-lg object-cover flex-shrink-0 border border-gray-100 bg-gray-50"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = FALLBACK;
@@ -231,8 +195,8 @@ export default function MedicineCard({ med, onViewDetails }) {
             {med.description}
           </p>
           {lowestVariant && (
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-[13px] sm:text-[14px] font-bold text-gray-900 font-mono">
+            <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap">
+              <span className="text-[12px] sm:text-[14px] font-bold text-gray-900 font-mono">
                 ₹{fmt(lowestVariant.price)}
               </span>
               <span className="text-[10px] sm:text-[11px] text-gray-400 line-through font-mono">
@@ -252,28 +216,15 @@ export default function MedicineCard({ med, onViewDetails }) {
           )}
         </div>
 
-        {/* Right */}
+        {/* Options button */}
         <div className="flex flex-col items-end justify-center gap-1 flex-shrink-0">
           {med.isRx && (
             <span className="text-[9px] font-bold border border-gray-300 text-gray-500 rounded px-1.5 py-[1px] leading-none">
               Rx
             </span>
           )}
-
-          {/* OPTIONS */}
           <button
-            className="
-      flex items-center gap-1
-      bg-[#162555] hover:bg-[#1f3477]
-      text-white text-[11px] sm:text-[12px]
-      font-semibold
-      px-3 py-2
-      rounded-lg
-      transition-all
-      whitespace-nowrap
-      min-w-[92px]
-      justify-center
-    "
+            className="flex items-center gap-1 bg-[#162555] hover:bg-[#1f3477] text-white text-[11px] sm:text-[12px] font-semibold px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all whitespace-nowrap min-w-[80px] sm:min-w-[92px] justify-center"
             onClick={(e) => {
               e.stopPropagation();
               setOpen((p) => !p);
@@ -281,40 +232,19 @@ export default function MedicineCard({ med, onViewDetails }) {
             aria-expanded={open}
           >
             <span>Options</span>
-
             <ChevronDown
               size={11}
-              className={`transition-transform duration-200 ${
-                open ? "rotate-180" : ""
-              }`}
+              className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
             />
           </button>
-
-          {/* VIEW DETAILS */}
-          {/* <button
-            className="
-      text-[11px]
-      font-semibold
-      text-teal-600
-      hover:text-teal-800
-      transition-colors
-      whitespace-nowrap
-      leading-none
-    "
-            onClick={(e) => {
-              e.stopPropagation();
-              onViewDetails?.(med);
-            }}
-          >
-            View Details
-          </button> */}
         </div>
       </div>
 
+      {/* ── VARIANTS PANEL ── */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${open ? "max-h-[600px] border-t border-gray-100" : "max-h-0"}`}
       >
-        <div className="bg-slate-50 px-3 sm:px-4 py-2.5">
+        <div className="bg-slate-50 px-2.5 sm:px-4 py-2.5">
           <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2">
             Choose Strength &amp; Pack
           </p>
@@ -337,22 +267,22 @@ export default function MedicineCard({ med, onViewDetails }) {
               return (
                 <div
                   key={strength}
-                  className="@container flex items-center bg-white border border-gray-200 rounded-lg px-2.5 py-2 gap-2 hover:border-[#1f3477] hover:shadow-sm transition-all"
+                  className="flex items-center bg-white border border-gray-200 rounded-lg px-2 sm:px-2.5 py-2 gap-1.5 sm:gap-2 hover:border-[#1f3477] hover:shadow-sm transition-all"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* LEFT GROUP */}
-                  <div className="flex items-center gap-2 flex-1 min-w-0 overflow-hidden">
-                    {/* Strength + price below on narrow containers */}
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-0">
+                    {/* Strength + price below on mobile */}
                     <div className="flex flex-col flex-shrink-0">
-                      <span className="text-[11px] font-bold text-teal-700 bg-teal-50 px-1.5 py-0.5 rounded font-mono min-w-[36px] text-center">
+                      <span className="text-[10px] sm:text-[11px] font-bold text-teal-700 bg-teal-50 px-1.5 py-0.5 rounded font-mono min-w-[32px] sm:min-w-[36px] text-center">
                         {strength}
                       </span>
-                      {/* Price below strength — only on narrow cards */}
-                      <span className="@[300px]:hidden text-[11px] font-bold text-gray-900 font-mono leading-tight mt-0.5">
+                      {/* Price below strength — mobile only (below sm) */}
+                      <span className="sm:hidden text-[10px] font-bold text-gray-900 font-mono leading-tight mt-0.5">
                         ₹{fmt(selectedVariant.price)}
                       </span>
                       {vOff && (
-                        <span className="@[300px]:hidden text-[9px] font-bold text-red-500 leading-tight">
+                        <span className="sm:hidden text-[9px] font-bold text-red-500 leading-tight">
                           {vOff}% off
                         </span>
                       )}
@@ -365,8 +295,8 @@ export default function MedicineCard({ med, onViewDetails }) {
                       onChange={(id) => updateRow(strength, { variantId: id })}
                     />
 
-                    {/* Price inline — only on wider cards */}
-                    <div className="hidden @[300px]:flex flex-col min-w-0 flex-shrink overflow-hidden">
+                    {/* Price inline — sm and above only */}
+                    <div className="hidden sm:flex flex-col min-w-0 flex-shrink overflow-hidden">
                       <span className="text-[12px] font-bold text-gray-900 font-mono leading-tight truncate">
                         ₹{fmt(selectedVariant.price)}
                       </span>
@@ -378,8 +308,8 @@ export default function MedicineCard({ med, onViewDetails }) {
                     </div>
                   </div>
 
-                  {/* RIGHT GROUP — unchanged */}
-                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                  {/* RIGHT GROUP */}
+                  <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
                     <QtyStepper
                       qty={qty}
                       onDec={() =>
@@ -391,10 +321,10 @@ export default function MedicineCard({ med, onViewDetails }) {
                     />
                     <button
                       onClick={(e) => handleAddToCart(e, strength)}
-                      className={`text-[11px] font-bold px-2.5 py-1 rounded-md border-[1.5px] transition-all whitespace-nowrap ${
+                      className={`text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-1 rounded-md border-[1.5px] transition-all whitespace-nowrap ${
                         added
                           ? "bg-teal-600 text-white border-teal-600"
-                          : "bg-[#ffffff] hover:bg-[#1f3477] text-[#162555] hover:text-white"
+                          : "bg-white hover:bg-[#1f3477] text-[#162555] hover:text-white"
                       }`}
                       aria-label={`Add ${strength} to cart`}
                     >

@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
     "antd": "^6.4.3",
     "axios": "^1.16.0",
     "cookies": "^0.9.1",

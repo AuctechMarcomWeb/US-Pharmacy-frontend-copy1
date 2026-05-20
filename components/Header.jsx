@@ -241,7 +241,7 @@ export default function Header() {
 
             {/* MOBILE HAMBURGER */}
             <button
-              className="md:hidden p-1 hover:text-blue-600 transition"
+              className="md:hidden p-1 text-black hover:text-blue-600 transition"
               onClick={() => setMobileMenu(true)}
               aria-label="Open menu"
             >

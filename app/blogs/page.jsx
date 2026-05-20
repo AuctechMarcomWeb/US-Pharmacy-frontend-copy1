@@ -400,7 +400,7 @@ export default function BlogPage() {
                           <img
                             src={p.images[activeImg]}
                             alt={p.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                           />
                         </div>
 
@@ -452,22 +452,6 @@ export default function BlogPage() {
                           {p.name}
                         </h2>
 
-                        {/* STARS */}
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="flex gap-0.5">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <StarIcon
-                                key={i}
-                                filled={i < Math.round(p.rating)}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-xs text-slate-400">
-                            {p.reviewCount > 0
-                              ? `${p.reviewCount} reviews`
-                              : "No reviews yet"}
-                          </span>
-                        </div>
 
                         {/* DESCRIPTION */}
                         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3 line-clamp-2">
@@ -504,7 +488,7 @@ export default function BlogPage() {
                           </span>
                           {saved > 0 && (
                             <span className="text-xs font-bold text-green-600">
-                              Save ₹{saved}
+                              Save ₹{saved.toFixed(2)}
                             </span>
                           )}
                         </div>
