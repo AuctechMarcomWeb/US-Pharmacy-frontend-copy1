@@ -91,7 +91,7 @@ export default function CartBar() {
                         if (item.qty <= 1) removeFromCart(lineKey);
                         else updateQty(lineKey, item.qty - 1);
                       }}
-                      className="h-6 w-6 rounded-md bg-slate-200 hover:bg-red-100 hover:text-red-500 flex items-center justify-center transition"
+                      className="h-6 w-6 rounded-md bg-slate-200 text-slate-500 hover:bg-red-100 hover:text-red-500 flex items-center justify-center transition"
                       title={item.qty <= 1 ? "Remove item" : "Decrease qty"}
                     >
                       {item.qty <= 1 ? (
@@ -105,7 +105,7 @@ export default function CartBar() {
                     </span>
                     <button
                       onClick={() => updateQty(lineKey, item.qty + 1)}
-                      className="h-6 w-6 rounded-md bg-slate-200 hover:bg-slate-300 flex items-center justify-center transition"
+                      className="h-6 w-6 rounded-md bg-slate-200 text-slate-500 hover:bg-slate-300 flex items-center justify-center transition"
                     >
                       <Plus size={11} />
                     </button>
