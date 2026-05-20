@@ -118,6 +118,8 @@ export default function MedicinesPage() {
     searchParams.get("categoryId") || "",
   );
   const [sortBy, setSortBy] = useState("");
+  const [minPriceInput, setMinPriceInput] = useState("");
+  const [maxPriceInput, setMaxPriceInput] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
@@ -139,6 +141,14 @@ export default function MedicinesPage() {
   const categoryDropdownRef = useRef(null);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMinPrice(minPriceInput);
+      setMaxPrice(maxPriceInput);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [minPriceInput, maxPriceInput]);
 
   // ── fetch categories once ──────────────────────────────────────────────────
   useEffect(() => {
@@ -275,6 +285,8 @@ export default function MedicinesPage() {
     setActiveLetter("");
     setCategoryId("");
     setSortBy("");
+    setMinPriceInput(""); // ← add
+    setMaxPriceInput("");
     setMinPrice("");
     setMaxPrice("");
     setIsFeatured(false);
@@ -466,8 +478,8 @@ export default function MedicinesPage() {
                 type="number"
                 min="0"
                 placeholder="0"
-                value={minPrice}
-                onChange={(e) => setMinPrice(e.target.value)}
+                value={minPriceInput} // ← changed
+                onChange={(e) => setMinPriceInput(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
               />
             </div>
@@ -480,8 +492,8 @@ export default function MedicinesPage() {
                 type="number"
                 min="0"
                 placeholder="Any"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
+                value={maxPriceInput} // ← changed
+                onChange={(e) => setMaxPriceInput(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
               />
             </div>
@@ -491,8 +503,12 @@ export default function MedicinesPage() {
             min="0"
             max="10000"
             step="50"
-            value={maxPrice === "" ? 10000 : Math.min(Number(maxPrice), 10000)}
-            onChange={(e) => setMaxPrice(e.target.value)}
+            value={
+              maxPriceInput === ""
+                ? 10000
+                : Math.min(Number(maxPriceInput), 10000)
+            } // ← changed
+            onChange={(e) => setMaxPriceInput(e.target.value)} // ← changed
             className="w-full accent-cyan-600 cursor-pointer"
           />
           <div className="flex justify-between text-[11px] text-slate-400">
@@ -716,7 +732,7 @@ export default function MedicinesPage() {
                   <MedicineCard
                     key={med.id}
                     med={med}
-                    // onViewDetails={(med) => router.push(`/products/${med.id}`)}
+                    onViewDetails={(med) => router.push(`/products/${med.id}`)}
                   />
                 ))}
               </div>
