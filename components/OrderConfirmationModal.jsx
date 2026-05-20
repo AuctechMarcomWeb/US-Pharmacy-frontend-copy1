@@ -42,7 +42,7 @@ export default function OrderConfirmModal({
       footer={null}
       centered
       closable={!loading}
-      maskClosable={!loading}
+      mask={{ closable: !loading }}
       width={480}
       styles={{
         content: {
@@ -104,8 +104,11 @@ export default function OrderConfirmModal({
             <p className="text-xs text-amber-700 leading-relaxed">
               We currently ship to{" "}
               <span className="font-bold">select countries only</span>. If your
-              selected country — <span className="font-bold">{selectedCountry || "your country"}</span> — is
-              outside our delivery network, your order{" "}
+              selected country —{" "}
+              <span className="font-bold">
+                {selectedCountry || "your country"}
+              </span>{" "}
+              — is outside our delivery network, your order{" "}
               <span className="font-bold">may not reach you</span>. Please
               verify availability before confirming.
             </p>
@@ -135,7 +138,9 @@ export default function OrderConfirmModal({
               {selectedCountry || "selected country"}
             </span>
             ) is not in the serviceable delivery zone, my order{" "}
-            <span className="font-bold text-red-600">will not be delivered</span>{" "}
+            <span className="font-bold text-red-600">
+              will not be delivered
+            </span>{" "}
             and I accept full responsibility for this.
           </p>
         </div>

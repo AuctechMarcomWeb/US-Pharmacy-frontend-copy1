@@ -201,7 +201,10 @@ export default function MedicineCard({ med, onViewDetails }) {
       {/* ── HEADER ROW ───────────────────────────────────────────────────── */}
       <div
         className="flex items-center gap-3 px-3 sm:px-4 py-3 cursor-pointer"
-        onClick={() => setOpen((p) => !p)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onViewDetails?.(med);
+        }}
       >
         {/* Thumbnail */}
         <img
@@ -250,17 +253,27 @@ export default function MedicineCard({ med, onViewDetails }) {
         </div>
 
         {/* Right */}
-        <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
+        <div className="flex flex-col items-end justify-center gap-1 flex-shrink-0">
           {med.isRx && (
-            <span className="text-[9px] sm:text-[10px] font-bold border-[1.5px] border-gray-400 text-gray-500 rounded px-1.5 py-0.5">
+            <span className="text-[9px] font-bold border border-gray-300 text-gray-500 rounded px-1.5 py-[1px] leading-none">
               Rx
             </span>
           )}
-          {/* Options / Select */}
+
+          {/* OPTIONS */}
           <button
-            className="flex items-center gap-1.5 bg-[#162555] hover:bg-[#1f3477]  text-white
-                       text-[11px] sm:text-[13px] font-semibold px-2.5 sm:px-4 py-2 sm:py-2.5
-                       rounded-lg transition-colors whitespace-nowrap"
+            className="
+      flex items-center gap-1
+      bg-[#162555] hover:bg-[#1f3477]
+      text-white text-[11px] sm:text-[12px]
+      font-semibold
+      px-3 py-2
+      rounded-lg
+      transition-all
+      whitespace-nowrap
+      min-w-[92px]
+      justify-center
+    "
             onClick={(e) => {
               e.stopPropagation();
               setOpen((p) => !p);
@@ -268,16 +281,26 @@ export default function MedicineCard({ med, onViewDetails }) {
             aria-expanded={open}
           >
             <span>Options</span>
+
             <ChevronDown
-              size={10}
-              className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+              size={11}
+              className={`transition-transform duration-200 ${
+                open ? "rotate-180" : ""
+              }`}
             />
           </button>
-          {/* View Details */}
+
+          {/* VIEW DETAILS */}
           {/* <button
-            className="text-[10px] sm:text-[11px] font-semibold text-teal-600
-                       hover:text-teal-800 underline underline-offset-2
-                       transition-colors whitespace-nowrap"
+            className="
+      text-[11px]
+      font-semibold
+      text-teal-600
+      hover:text-teal-800
+      transition-colors
+      whitespace-nowrap
+      leading-none
+    "
             onClick={(e) => {
               e.stopPropagation();
               onViewDetails?.(med);
@@ -314,15 +337,26 @@ export default function MedicineCard({ med, onViewDetails }) {
               return (
                 <div
                   key={strength}
-                  className="flex items-center bg-white border border-gray-200 rounded-lg px-2.5 py-2 gap-2 hover:border-[#1f3477] hover:shadow-sm transition-all"
+                  className="@container flex items-center bg-white border border-gray-200 rounded-lg px-2.5 py-2 gap-2 hover:border-[#1f3477] hover:shadow-sm transition-all"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* LEFT GROUP: strength + dropdown + price — takes remaining space, clips if needed */}
+                  {/* LEFT GROUP */}
                   <div className="flex items-center gap-2 flex-1 min-w-0 overflow-hidden">
-                    {/* Strength badge */}
-                    <span className="text-[11px] font-bold text-teal-700 bg-teal-50 px-1.5 py-0.5 rounded font-mono flex-shrink-0 min-w-[36px] text-center">
-                      {strength}
-                    </span>
+                    {/* Strength + price below on narrow containers */}
+                    <div className="flex flex-col flex-shrink-0">
+                      <span className="text-[11px] font-bold text-teal-700 bg-teal-50 px-1.5 py-0.5 rounded font-mono min-w-[36px] text-center">
+                        {strength}
+                      </span>
+                      {/* Price below strength — only on narrow cards */}
+                      <span className="@[300px]:hidden text-[11px] font-bold text-gray-900 font-mono leading-tight mt-0.5">
+                        ₹{fmt(selectedVariant.price)}
+                      </span>
+                      {vOff && (
+                        <span className="@[300px]:hidden text-[9px] font-bold text-red-500 leading-tight">
+                          {vOff}% off
+                        </span>
+                      )}
+                    </div>
 
                     {/* Pack dropdown */}
                     <PkgDropdown
@@ -331,8 +365,8 @@ export default function MedicineCard({ med, onViewDetails }) {
                       onChange={(id) => updateRow(strength, { variantId: id })}
                     />
 
-                    {/* Price — shrinks last, never pushes right group off screen */}
-                    <div className="flex flex-col min-w-0 flex-shrink overflow-hidden">
+                    {/* Price inline — only on wider cards */}
+                    <div className="hidden @[300px]:flex flex-col min-w-0 flex-shrink overflow-hidden">
                       <span className="text-[12px] font-bold text-gray-900 font-mono leading-tight truncate">
                         ₹{fmt(selectedVariant.price)}
                       </span>
@@ -344,7 +378,7 @@ export default function MedicineCard({ med, onViewDetails }) {
                     </div>
                   </div>
 
-                  {/* RIGHT GROUP: stepper + add — always visible, never shrinks */}
+                  {/* RIGHT GROUP — unchanged */}
                   <div className="flex items-center gap-1.5 flex-shrink-0">
                     <QtyStepper
                       qty={qty}
