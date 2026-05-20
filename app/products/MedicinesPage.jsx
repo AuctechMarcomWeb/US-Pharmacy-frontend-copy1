@@ -846,17 +846,31 @@ export default function MedicinesPage() {
           />
           <div className="relative w-[300px] h-full bg-white shadow-2xl flex flex-col">
             {/* Header */}
+            {/* Header */}
             <div
               className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 flex-shrink-0"
               onClick={(e) => e.stopPropagation()}
             >
               <span className="text-lg font-bold text-[#162555]">Filters</span>
-              <button
-                onClick={() => setMobileSidebar(false)}
-                className="h-8 w-8 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 transition"
-              >
-                <X size={16} />
-              </button>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMobileApply(); // already calls setMobileSidebar(false)
+                  }}
+                  className="px-4 py-1.5 rounded-lg bg-[#162555] hover:bg-[#1d3475] text-white text-sm font-bold transition shadow-sm"
+                >
+                  Apply
+                </button>
+
+                <button
+                  onClick={() => setMobileSidebar(false)}
+                  className="h-8 w-8 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-slate-200 transition"
+                >
+                  <X size={16} />
+                </button>
+              </div>
             </div>
 
             {/* Scrollable content */}
@@ -881,19 +895,6 @@ export default function MedicinesPage() {
                   />
                 </div>
               </div>
-            </div>
-
-            {/* Sticky Apply button */}
-            <div className="flex-shrink-0 px-6 py-4 border-t border-slate-100 bg-white">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleMobileApply();
-                }}
-                className="w-full py-3 rounded-xl bg-[#162555] hover:bg-[#1d3475] text-white text-sm font-bold transition shadow-md"
-              >
-                Apply Filters
-              </button>
             </div>
           </div>
         </div>
