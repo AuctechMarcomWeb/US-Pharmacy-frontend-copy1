@@ -705,11 +705,11 @@ export default function CheckoutPage() {
 
       {/* Top bar */}
       <div className="relative z-20 bg-white border-b border-slate-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-10 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-[#162555] flex items-center justify-center hidden sm:block">
+            {/* <div className="h-8 w-8 rounded-lg bg-[#162555] flex items-center justify-center hidden sm:block">
               <LockKeyhole size={14} className="text-white" />
-            </div>
+            </div> */}
             <span className="font-black text-[#162555] tracking-tight text-lg hidden sm:block ">
               Secure Checkout
             </span>
@@ -761,10 +761,7 @@ export default function CheckoutPage() {
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <ShieldCheck size={14} className="text-emerald-500" />
-            <span className="hidden sm:block">256-bit SSL</span>
-          </div>
+    
         </div>
       </div>
 
