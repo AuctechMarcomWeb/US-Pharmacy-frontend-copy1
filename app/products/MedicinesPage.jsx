@@ -124,23 +124,38 @@ export default function MedicinesPage() {
   const [maxPrice, setMaxPrice] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
   const [page, setPage] = useState(1);
-
-  // ── NEW: active alphabet letter ──────────────────────────────────────────
   const [activeLetter, setActiveLetter] = useState("");
-
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
-
   const [categories, setCategories] = useState([]);
   const [catLoading, setCatLoading] = useState(true);
-
   const [mobileSidebar, setMobileSidebar] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
+  const [stagedCategory, setStagedCategory] = useState(categoryId);
+  const [stagedMinPrice, setStagedMinPrice] = useState(minPriceInput);
+  const [stagedMaxPrice, setStagedMaxPrice] = useState(maxPriceInput);
+  const [stagedFeatured, setStagedFeatured] = useState(isFeatured);
+  const [stagedLetter, setStagedLetter] = useState(activeLetter);
+  const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
+
   const categoryDropdownRef = useRef(null);
+  const mounted = useRef(false);
 
   const router = useRouter();
+
+  // Sync staged state when mobile drawer opens
+  useEffect(() => {
+    if (mobileSidebar) {
+      setStagedCategory(categoryId);
+      setStagedMinPrice(minPriceInput);
+      setStagedMaxPrice(maxPriceInput);
+      setStagedFeatured(isFeatured);
+      setStagedLetter(activeLetter);
+      setMobileCategoryOpen(false);
+    }
+  }, [mobileSidebar]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -234,7 +249,7 @@ export default function MedicinesPage() {
   ]);
 
   // reset page to 1 on filter change
-  const mounted = useRef(false);
+
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
@@ -262,6 +277,28 @@ export default function MedicinesPage() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  const handleMobileApply = () => {
+    setCategoryId(stagedCategory);
+    setMinPriceInput(stagedMinPrice);
+    setMaxPriceInput(stagedMaxPrice);
+    setIsFeatured(stagedFeatured);
+    setActiveLetter(stagedLetter);
+    if (stagedLetter) {
+      setSearchInput("");
+      setAppliedSearch("");
+    }
+    setPage(1);
+    setMobileSidebar(false);
+  };
+
+  const handleMobileReset = () => {
+    setStagedCategory("");
+    setStagedMinPrice("");
+    setStagedMaxPrice("");
+    setStagedFeatured(false);
+    setStagedLetter("");
+  };
 
   // ── handlers ──────────────────────────────────────────────────────────────
   const handleSearchSubmit = (e) => {
@@ -556,6 +593,247 @@ export default function MedicinesPage() {
     </div>
   );
 
+  const renderMobileSidebarContent = () => (
+    <div className="space-y-0">
+      {/* SEARCH — same as desktop, applies immediately */}
+      <SidebarSection title="Search">
+        <form onSubmit={handleSearchSubmit} className="relative">
+          <input
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search products…"
+            className="w-full border border-slate-200 rounded-xl pl-4 pr-10 py-2.5 text-sm text-[#162555] placeholder-slate-400 outline-none bg-slate-50 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+          />
+          <button
+            type="submit"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#162555] transition"
+          >
+            <Search size={16} />
+          </button>
+        </form>
+      </SidebarSection>
+
+      {/* CATEGORIES — uses staged state */}
+      {/* CATEGORIES — uses staged state */}
+      <SidebarSection title="Product Categories">
+        {catLoading ? (
+          <div className="h-10 bg-slate-100 rounded-xl animate-pulse" />
+        ) : (
+          <div className="relative">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setMobileCategoryOpen((v) => !v);
+              }}
+              className="w-full flex items-center gap-3 border border-slate-200 rounded-xl pl-3 pr-3 py-2.5 text-sm bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+            >
+              {stagedCategory === "" ? (
+                <div className="h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 border-cyan-400 bg-cyan-100">
+                  <Tag size={13} className="text-cyan-600" />
+                </div>
+              ) : (
+                <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 border-cyan-400">
+                  <img
+                    src={
+                      categories.find((c) => c._id === stagedCategory)?.image
+                    }
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              )}
+              <span className="flex-1 text-left text-[#162555] font-medium truncate">
+                {stagedCategory === ""
+                  ? "All Products"
+                  : categories.find((c) => c._id === stagedCategory)?.name}
+              </span>
+              <ChevronDown
+                size={16}
+                className={`text-slate-400 transition-transform flex-shrink-0 ${mobileCategoryOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            {/* ✅ Inline render instead of absolute — avoids overflow clipping */}
+            {mobileCategoryOpen && (
+              <div className="mt-1 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-48 overflow-y-auto">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setStagedCategory("");
+                    setMobileCategoryOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${
+                    stagedCategory === "" ? "bg-cyan-50" : "hover:bg-slate-50"
+                  }`}
+                >
+                  <div
+                    className={`h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 transition ${
+                      stagedCategory === ""
+                        ? "border-cyan-400 bg-cyan-100"
+                        : "border-slate-200 bg-slate-100"
+                    }`}
+                  >
+                    <Tag
+                      size={13}
+                      className={
+                        stagedCategory === ""
+                          ? "text-cyan-600"
+                          : "text-slate-400"
+                      }
+                    />
+                  </div>
+                  <span
+                    className={`flex-1 text-left ${stagedCategory === "" ? "text-cyan-700 font-semibold" : "text-slate-600"}`}
+                  >
+                    All Products
+                  </span>
+                  {stagedCategory === "" && (
+                    <span className="h-2 w-2 rounded-full bg-cyan-500 flex-shrink-0" />
+                  )}
+                </button>
+
+                <div className="mx-3 border-t border-slate-100" />
+
+                {categories.map((cat) => (
+                  <button
+                    key={cat._id}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setStagedCategory(cat._id);
+                      setMobileCategoryOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${
+                      stagedCategory === cat._id
+                        ? "bg-cyan-50"
+                        : "hover:bg-slate-50"
+                    }`}
+                  >
+                    <div
+                      className={`h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 transition ${
+                        stagedCategory === cat._id
+                          ? "border-cyan-400"
+                          : "border-slate-200"
+                      }`}
+                    >
+                      <img
+                        src={cat.image}
+                        alt={cat.name}
+                        className="h-full w-full object-cover"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.style.display = "none";
+                        }}
+                      />
+                    </div>
+                    <span
+                      className={`flex-1 text-left capitalize leading-tight ${
+                        stagedCategory === cat._id
+                          ? "text-cyan-700 font-semibold"
+                          : "text-slate-600"
+                      }`}
+                    >
+                      {cat.name}
+                    </span>
+                    {stagedCategory === cat._id && (
+                      <span className="h-2 w-2 rounded-full bg-cyan-500 flex-shrink-0" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </SidebarSection>
+      {/* PRICE RANGE — uses staged state */}
+      <SidebarSection title="Price Range">
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="flex-1">
+              <label className="text-[11px] text-slate-400 font-medium uppercase tracking-wide block mb-1">
+                Min (₹)
+              </label>
+              <input
+                type="number"
+                min="0"
+                placeholder="0"
+                value={stagedMinPrice}
+                onChange={(e) => setStagedMinPrice(e.target.value)}
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+              />
+            </div>
+            <span className="text-slate-300 mt-4">—</span>
+            <div className="flex-1">
+              <label className="text-[11px] text-slate-400 font-medium uppercase tracking-wide block mb-1">
+                Max (₹)
+              </label>
+              <input
+                type="number"
+                min="0"
+                placeholder="Any"
+                value={stagedMaxPrice}
+                onChange={(e) => setStagedMaxPrice(e.target.value)}
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+              />
+            </div>
+          </div>
+          <input
+            type="range"
+            min="0"
+            max="10000"
+            step="50"
+            value={
+              stagedMaxPrice === ""
+                ? 10000
+                : Math.min(Number(stagedMaxPrice), 10000)
+            }
+            onChange={(e) => setStagedMaxPrice(e.target.value)}
+            className="w-full accent-cyan-600 cursor-pointer"
+          />
+          <div className="flex justify-between text-[11px] text-slate-400">
+            <span>₹0</span>
+            <span>₹10,000+</span>
+          </div>
+        </div>
+      </SidebarSection>
+
+      {/* FEATURED — uses staged state */}
+      <SidebarSection title="Filter">
+        <label className="flex items-center gap-3 cursor-pointer group">
+          <div
+            onClick={() => setStagedFeatured(!stagedFeatured)}
+            className={`h-5 w-5 rounded-md border-2 flex items-center justify-center transition cursor-pointer ${stagedFeatured ? "bg-cyan-500 border-cyan-500" : "border-slate-300 bg-white group-hover:border-cyan-400"}`}
+          >
+            {stagedFeatured && (
+              <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
+                <path
+                  d="M1 4L4 7.5L10 1"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </div>
+          <span className="text-sm text-slate-600 group-hover:text-[#162555] transition">
+            Featured products only
+          </span>
+        </label>
+      </SidebarSection>
+
+      {/* RESET */}
+      <button
+        onClick={handleMobileReset}
+        className="w-full py-2.5 rounded-xl border border-slate-200 hover:border-red-300 text-sm font-semibold text-slate-500 hover:text-red-500 transition flex items-center justify-center gap-2"
+      >
+        <X size={14} /> Reset All Filters
+      </button>
+    </div>
+  );
+
   // ── render ─────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-slate-50 text-[#162555]">
@@ -566,8 +844,12 @@ export default function MedicinesPage() {
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setMobileSidebar(false)}
           />
-          <div className="relative w-[300px] h-full bg-white shadow-2xl p-6 overflow-y-auto">
-            <div className="flex items-center justify-between mb-6">
+          <div className="relative w-[300px] h-full bg-white shadow-2xl flex flex-col">
+            {/* Header */}
+            <div
+              className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 flex-shrink-0"
+              onClick={(e) => e.stopPropagation()}
+            >
               <span className="text-lg font-bold text-[#162555]">Filters</span>
               <button
                 onClick={() => setMobileSidebar(false)}
@@ -576,15 +858,42 @@ export default function MedicinesPage() {
                 <X size={16} />
               </button>
             </div>
-            <div className="flex gap-1 items-start">
-              <div className="flex-1 min-w-0">{renderSidebarContent()}</div>
-              {/* A–Z strip on mobile drawer too */}
-              <div className="flex-shrink-0 bg-slate-50 rounded-lg border border-slate-200 py-2 px-1 flex flex-col items-center sticky top-0">
-                <AlphabetIndex
-                  activeLetter={activeLetter}
-                  onSelect={handleLetterSelect}
-                />
+
+            {/* Scrollable content */}
+            <div
+              className="flex-1 overflow-y-auto p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex gap-1 items-start">
+                <div className="flex-1 min-w-0">
+                  {renderMobileSidebarContent()}
+                </div>
+                <div className="flex-shrink-0 bg-slate-50 rounded-lg border border-slate-200 py-2 px-1 flex flex-col items-center sticky top-0">
+                  <AlphabetIndex
+                    activeLetter={stagedLetter}
+                    onSelect={(letter) => {
+                      setStagedLetter(letter);
+                      if (letter) {
+                        setSearchInput("");
+                        setAppliedSearch("");
+                      }
+                    }}
+                  />
+                </div>
               </div>
+            </div>
+
+            {/* Sticky Apply button */}
+            <div className="flex-shrink-0 px-6 py-4 border-t border-slate-100 bg-white">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleMobileApply();
+                }}
+                className="w-full py-3 rounded-xl bg-[#162555] hover:bg-[#1d3475] text-white text-sm font-bold transition shadow-md"
+              >
+                Apply Filters
+              </button>
             </div>
           </div>
         </div>

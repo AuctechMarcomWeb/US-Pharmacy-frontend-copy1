@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Inter, Poppins } from "next/font/google";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -14,10 +15,22 @@ import Footer from "../components/Footer";
 // import CartBar from "../components/CartBar";
 import CartBarWrapper from "../components/CartBarWrapper";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-poppins",
+});
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col bg-white">
+      <body
+        className={`${inter.variable} ${poppins.variable} min-h-screen flex flex-col bg-white`}
+      >
         <AuthProvider>
           <MedicineProvider>
             <CartProvider>
