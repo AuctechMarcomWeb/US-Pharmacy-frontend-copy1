@@ -363,7 +363,7 @@ export default function BlogPage() {
       <div className="min-h-screen bg-[#f5f7fb] px-4 py-8 sm:py-10">
         {/* HEADER */}
         <div className="max-w-4xl mx-auto text-center mb-7 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-3xl font-extrabold text-slate-900 tracking-tight text-[#162555]">
             Our Products
           </h1>
           <p className="text-sm text-slate-400 mt-1.5">
