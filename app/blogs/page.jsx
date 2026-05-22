@@ -7,6 +7,25 @@ import { noTokenGetRequest } from "../../helper/index";
 import { ChevronDown } from "lucide-react";
 import { createPortal } from "react-dom";
 
+ const metadata = {
+  title: "Our Products | US Pharmacy",
+  description:
+    "Browse quality medicines and healthcare products at US Pharmacy. Explore verified medicines, affordable packs, and fast delivery options.",
+  keywords: [
+    "online pharmacy",
+    "buy medicines online",
+    "healthcare products",
+    "pharmacy products",
+    "medicine store",
+    "prescription medicines",
+    "medical products",
+    "US Pharmacy products",
+  ],
+  alternates: {
+    canonical: "/products",
+  },
+};
+
 const StarIcon = ({ filled }) => (
   <svg
     width="13"
@@ -451,7 +470,6 @@ export default function BlogPage() {
                         <h2 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-slate-900 leading-tight mb-1.5 tracking-tight">
                           {p.name}
                         </h2>
-
 
                         {/* DESCRIPTION */}
                         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3 line-clamp-2">

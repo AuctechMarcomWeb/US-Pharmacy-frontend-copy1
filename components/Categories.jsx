@@ -4,17 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { noTokenGetRequest } from "../helper/index";
 
-/* ─── USAGE ────────────────────────────────────────────────────────────────────
-  Drop anywhere on your homepage or medicines page:
-
-  import CategorySection from "@/components/CategorySection";
-  <CategorySection onSelect={(cat) => console.log(cat)} />
-
-  Props:
-    onSelect(category) — called when user clicks a category (optional)
-    apiEndpoint        — defaults to "/category" (optional)
-─────────────────────────────────────────────────────────────────────────────── */
-
 const Skeleton = () => (
   <div
     style={{
@@ -84,7 +73,7 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
+      
 
         @keyframes catPulse {
           0%,100% { opacity:1 }
@@ -101,7 +90,7 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
 
         .cat-section {
           padding: 48px 70px;
-          font-family: 'DM Sans', sans-serif;
+           font-family: var(--font-inter), sans-serif;
         }
 
         /* ── header ── */
@@ -135,7 +124,7 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
           animation: catFloat 2s ease-in-out infinite;
         }
         .cat-title {
-          font-family: 'Sora', sans-serif;
+           font-family: var(--font-poppins), sans-serif;
           font-size: clamp(22px, 4vw, 30px);
           font-weight: 800;
           color: #0f172a;
@@ -268,7 +257,7 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
           gap: 6px;
         }
         .cat-name {
-          font-family: 'Sora', sans-serif;
+          font-family: var(--font-poppins), sans-serif;
           font-size: 13px;
           font-weight: 700;
           color: #fff;
@@ -327,29 +316,19 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
         }
       `}</style>
 
-      <section className="cat-section" ref={sectionRef}>
+      <section
+        className="cat-section"
+        ref={sectionRef}
+        aria-labelledby="shop-category-heading"
+      >
         {/* Header */}
         <div className="cat-header">
           <div>
-            {/* <div className="cat-eyebrow">
-              <span className="cat-eyebrow-dot" />
-              Browse
-            </div> */}
-            <h2 className="cat-title">
+            <h2 className="cat-title" id="shop-category-heading">
               Shop by <span>Category</span>
             </h2>
-            <p className="cat-subtitle">Find exactly what you need, fast</p>
+            <p className="cat-subtitle">Browse medicines you need, fast and easily </p>
           </div>
-          {/* <a href="/medicines" className="cat-view-all">
-            View All
-            <svg
-              width="14" height="14" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor"
-              strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a> */}
         </div>
 
         {/* Grid */}
@@ -374,12 +353,18 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
                   tabIndex={0}
                   onKeyDown={(e) => e.key === "Enter" && handleClick(cat)}
                   aria-label={`Browse ${cat.name}`}
+                  aria-pressed={isActive}
+                  title={cat.name}
                 >
                   {/* Background image — zooms on hover via CSS */}
                   {cat.image ? (
                     <div
                       className="cat-bg"
-                      style={{ backgroundImage: `url(${cat.image})` }}
+                      style={{
+                        backgroundImage: `url(${cat.image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
                     />
                   ) : (
                     <div

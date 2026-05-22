@@ -13,6 +13,22 @@ import {
 } from "lucide-react";
 import { postRequest } from "../../helper";
 
+const metadata = {
+  title: "Contact Us | US Pharmacy",
+  description:
+    "Contact US Pharmacy for medicine support, healthcare assistance, product inquiries, and customer service.",
+  keywords: [
+    "contact pharmacy",
+    "medical support",
+    "healthcare assistance",
+    "online pharmacy contact",
+    "medicine inquiry",
+  ],
+  alternates: {
+    canonical: "/contact",
+  },
+};
+
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
@@ -67,7 +83,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-100 to-[#eef3ff] px-4 sm:px-6 py-10 sm:py-16 overflow-hidden relative">
+    <main
+      className="min-h-screen bg-gradient-to-b from-white via-slate-100 to-[#eef3ff] px-4 sm:px-6 py-10 sm:py-16 overflow-hidden relative"
+      aria-labelledby="contact-heading"
+    >
       {/* BACKGROUND GLOW */}
       <div className="absolute top-0 left-[-100px] w-[320px] h-[320px] bg-cyan-400/10 blur-3xl rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-[-100px] w-[320px] h-[320px] bg-[#162555]/10 blur-3xl rounded-full pointer-events-none" />
@@ -100,21 +119,27 @@ export default function ContactPage() {
       )}
 
       {/* HEADER */}
-      <div className="max-w-4xl mx-auto text-center mb-10 sm:mb-14 relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-sm mb-4 sm:mb-5 backdrop-blur-xl">
+      <header className="max-w-4xl mx-auto text-center mb-10 sm:mb-14 relative z-10">
+        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-sm mb-4 sm:mb-5 backdrop-blur-xl">
           <Mail size={16} />
           Secure Communication Channel
-        </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#162555]">
+        </div> */}
+        <h1
+          className="text-3xl sm:text-4xl md:text-3xl font-extrabold tracking-tight text-[#162555]"
+          id="contact-heading"
+        >
           Contact US Pharmacy
         </h1>
         <p className="mt-3 sm:mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
           Send secure queries to our clinical intelligence support system.
         </p>
-      </div>
+      </header>
 
       {/* GRID — form first on mobile via order */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-10 relative z-10">
+      <section
+        className="max-w-3xl mx-auto grid md:grid-cols-1 gap-6 sm:gap-10 relative z-10"
+        aria-label="Contact information and contact form"
+      >
         {/* FORM — order-1 on mobile (shows first), order-2 on md+ (shows second/right) */}
         <form
           onSubmit={handleSubmit}
@@ -199,7 +224,7 @@ export default function ContactPage() {
         </form>
 
         {/* LEFT INFO — order-2 on mobile (shows second), order-1 on md+ (shows first/left) */}
-        <div className="order-2 md:order-1 space-y-4 sm:space-y-6">
+        {/* <div className="order-2 md:order-1 space-y-4 sm:space-y-6">
           {[
             { icon: Phone, label: "Hotline", value: "+91 98765 43210" },
             { icon: Mail, label: "Email", value: "support@medicoforensic.com" },
@@ -220,13 +245,8 @@ export default function ContactPage() {
               <p className="text-slate-600 text-sm sm:text-base">{value}</p>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* FOOTNOTE */}
-      <div className="text-center mt-10 sm:mt-16 text-slate-500 text-xs sm:text-sm relative z-10">
-        Encrypted communication enabled • US Pharmacy
-      </div>
-    </div>
+        </div> */}
+      </section>
+    </main>
   );
 }

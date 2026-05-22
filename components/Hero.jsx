@@ -7,7 +7,7 @@ export default function Hero() {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
         .hero {
-          font-family: 'DM Sans', sans-serif;
+           font-family: var(--font-inter);
           position: relative;
           overflow: hidden;
           min-height: 280px;
@@ -85,10 +85,10 @@ export default function Hero() {
         }
 
         .hero-title {
-          font-family: 'Playfair Display', serif;
+          font-family: var(--font-playfair);
           font-size: clamp(1.6rem, 5vw, 3rem);
           font-weight: 800;
-          line-height: 1.12;
+          line-height: 1.1;
           color: #fff;
           margin: 0;
           animation: fadeUp 0.6s ease 0.1s both;
@@ -113,7 +113,7 @@ export default function Hero() {
           border: 1px solid rgba(255,255,255,0.25);
           backdrop-filter: blur(6px);
           color: #e0f2fe;
-          font-size: 0.7rem;
+          font-size: 0.78rem;
           font-weight: 600;
           padding: 0.28rem 0.75rem;
           border-radius: 999px;
