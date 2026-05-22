@@ -14,10 +14,10 @@ export default function Footer() {
           {/* BRAND */}
           <div>
             <h2 className="text-2xl font-bold text-blue-400">US Pharmacy</h2>
-            <p className="text-gray-400 mt-3 text-sm leading-relaxed">
+            {/* <p className="text-gray-400 mt-3 text-sm leading-relaxed">
               Advanced medical &amp; forensic medicine platform designed for
               secure, fast and intelligent healthcare management.
-            </p>
+            </p> */}
             <p className="text-xs text-gray-500 mt-4">
               © 2026 US Pharmacy. All Rights Reserved.
             </p>
@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
 
           {/* CONTACT */}
-          <div>
+          {/* <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white">
               Contact Info
             </h3>
@@ -91,14 +91,12 @@ export default function Footer() {
                 <span>Privacy &amp; Terms Protected</span>
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="border-t border-gray-800 text-center px-4 py-4 text-xs text-gray-500 leading-relaxed">
-        Built with ❤️ for Medical &amp; Forensic Intelligence
-      </div>
+   
     </footer>
   );
 }

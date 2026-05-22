@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+
 import MedicineCard from "../../components/MedicineCard";
 import { getRequest, noTokenGetRequest } from "../../helper/index";
 import {
@@ -20,6 +21,22 @@ import { useRouter } from "next/navigation";
 // ─── constants ────────────────────────────────────────────────────────────────
 const PAGE_SIZE = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+export const metadata = {
+  title: "Buy Medicines Online | US Pharmacy",
+  description:
+    "Browse medicines, healthcare products, and wellness essentials at US Pharmacy. Fast delivery, verified products, and secure online ordering.",
+  keywords: [
+    "online pharmacy",
+    "buy medicines online",
+    "healthcare products",
+    "pharmacy",
+    "wellness products",
+  ],
+  alternates: {
+    canonical: "/products",
+  },
+};
 
 // ─── shape: API product → card props ─────────────────────────────────────────
 function mapProduct(p) {

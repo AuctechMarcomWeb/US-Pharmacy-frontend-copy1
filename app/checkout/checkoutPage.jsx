@@ -34,6 +34,25 @@ const fmt = (n) => Number(n).toFixed(2);
 const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=500";
 
+const metadata = {
+  title: "Secure Checkout | US Pharmacy",
+  description:
+    "Complete your secure order request at US Pharmacy with trusted delivery, encrypted checkout, and multiple payment options.",
+
+  keywords: [
+    "US Pharmacy checkout",
+    "secure medicine order",
+    "online pharmacy checkout",
+    "healthcare payment",
+    "medicine delivery",
+    "secure pharmacy order",
+  ],
+
+  alternates: {
+    canonical: "/checkout",
+  },
+};
+
 // ── Country Dropdown (portal) ─────────────────────────────────────────────────
 function CountryDropdown({
   countries,
@@ -761,14 +780,13 @@ export default function CheckoutPage() {
               ))}
             </div>
           </div>
-    
         </div>
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 md:py-10">
         <div className="mb-8 text-center">
           <h1 className="text-3xl md:text-4xl font-black tracking-tight text-[#162555]">
-            Submit your order Request
+            Submit Your Order Request
           </h1>
           <p className="text-slate-500 mt-2 text-sm">
             Fill in your details below — we'll take care of the rest
@@ -1148,50 +1166,6 @@ export default function CheckoutPage() {
                     ₹{fmt(total)}
                   </span>
                 </div>
-              </div>
-            </div>
-
-            {/* Trust badges */}
-            <div className="bg-white rounded-[1.75rem] border border-slate-200 shadow-xl shadow-slate-200/60 p-5">
-              <div className="flex items-center gap-2 mb-4">
-                <ShieldCheck size={16} className="text-emerald-500" />
-                <span className="text-sm font-black text-[#162555]">
-                  Why Choose Us
-                </span>
-              </div>
-              <div className="space-y-3">
-                {[
-                  {
-                    icon: <LockKeyhole size={13} />,
-                    text: "256-bit SSL encrypted payment",
-                  },
-                  {
-                    icon: <BadgeCheck size={13} />,
-                    text: "Verified & licensed pharmacy",
-                  },
-                  {
-                    icon: <Truck size={13} />,
-                    text: "Free delivery on all orders",
-                  },
-                  {
-                    icon: <Clock size={13} />,
-                    text: "Same-day dispatch available",
-                  },
-                  {
-                    icon: <Star size={13} />,
-                    text: "10,000+ satisfied customers",
-                  },
-                ].map((badge, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2.5 text-xs text-slate-600"
-                  >
-                    <div className="h-5 w-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 flex-shrink-0">
-                      {badge.icon}
-                    </div>
-                    {badge.text}
-                  </div>
-                ))}
               </div>
             </div>
           </div>
