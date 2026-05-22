@@ -580,7 +580,7 @@ export default function CheckoutPage() {
                 <div className="h-14 w-14 rounded-2xl bg-emerald-100 flex items-center justify-center mb-4">
                   <BadgeCheck size={28} className="text-emerald-600" />
                 </div>
-                <h1 className="text-3xl md:text-5xl font-black text-[#162555] leading-tight">
+                <h1 className="text-3xl md:text-3xl font-black text-[#162555] leading-tight">
                   Thank you for
                   <br />
                   submitting your Request!
@@ -724,15 +724,15 @@ export default function CheckoutPage() {
 
       {/* Top bar */}
       <div className="relative z-20 bg-white border-b border-slate-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-10 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="max-w-xl mx-auto px-10 py-4 flex items-center justify-center">
+          {/* <div className="flex items-center gap-2"> */}
             {/* <div className="h-8 w-8 rounded-lg bg-[#162555] flex items-center justify-center hidden sm:block">
               <LockKeyhole size={14} className="text-white" />
             </div> */}
-            <span className="font-black text-[#162555] tracking-tight text-lg hidden sm:block ">
+            {/* <span className="font-black text-[#162555] tracking-tight text-lg hidden sm:block ">
               Secure Checkout
-            </span>
-          </div>
+            </span> */}
+          {/* </div> */}
           <div className="w-full overflow-x-auto scrollbar-hide">
             <div className="flex items-center justify-between min-w-[280px] sm:min-w-0 gap-1 sm:gap-2 text-[10px] sm:text-xs font-semibold text-slate-500">
               {["Cart", "Shipping", "Confirm"].map((step, i) => (
@@ -785,7 +785,7 @@ export default function CheckoutPage() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 md:py-10">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl md:text-4xl font-black tracking-tight text-[#162555]">
+          <h1 className="text-3xl md:text-3xl font-bold tracking-tight text-[#162555]">
             Submit Your Order Request
           </h1>
           <p className="text-slate-500 mt-2 text-sm">
