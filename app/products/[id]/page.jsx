@@ -128,7 +128,7 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
         onClick={handleOpen}
         className={`w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl border-2 text-sm font-semibold transition-all bg-white ${
           open
-            ? "border-cyan-400 ring-2 ring-cyan-100"
+            ? "border-emerald-400 ring-2 ring-emerald-100"
             : "border-slate-200 hover:border-slate-300"
         }`}
       >
@@ -193,7 +193,7 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
                       idx < variants.length - 1
                         ? "border-b border-slate-100"
                         : ""
-                    } ${isSelected ? "bg-cyan-50 text-cyan-700" : "hover:bg-slate-50 text-slate-600"}`}
+                    } ${isSelected ? "bg-emerald-50 text-emerald-700" : "hover:bg-slate-50 text-slate-600"}`}
                   >
                     <div className="flex flex-col items-start">
                       <span className="font-semibold text-sm">{mv.label}</span>
@@ -216,7 +216,7 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
                         ₹{mv.price}
                       </span>
                       {isSelected && (
-                        <span className="text-[9px] font-black text-cyan-600 bg-cyan-100 px-1.5 py-0.5 rounded-full">
+                        <span className="text-[9px] font-black text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded-full">
                           ✓
                         </span>
                       )}
@@ -422,10 +422,10 @@ export default function MedicineDetailPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white gap-4 px-4">
         <Pill size={48} className="text-slate-300" />
-        <p className="text-[#162555] text-xl font-bold">Medicine not found</p>
+        <p className="text-[#166534] text-xl font-bold">Medicine not found</p>
         <button
           onClick={() => router.back()}
-          className="px-6 py-2.5 rounded-xl bg-[#162555] text-white text-sm font-semibold hover:bg-[#1d3475] transition"
+          className="px-6 py-2.5 rounded-xl bg-[#166534] text-white text-sm font-semibold hover:bg-[#1d3475] transition"
         >
           Go Back
         </button>
@@ -437,18 +437,18 @@ export default function MedicineDetailPage() {
     : [medicine.image].filter(Boolean);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f0f7ff] via-white to-[#dceeff] text-[#162555]">
+    <div className="min-h-screen bg-gradient-to-br from-[#f0f7ff] via-white to-[#dceeff] text-[#166534]">
       {/* BG GLOWS */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-80px] left-[-80px] w-[360px] h-[360px] bg-cyan-300/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-[-100px] w-[400px] h-[400px] bg-[#162555]/8 rounded-full blur-3xl" />
+        <div className="absolute top-[-80px] left-[-80px] w-[360px] h-[360px] bg-emerald-300/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-[-100px] w-[400px] h-[400px] bg-[#166534]/8 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-6 sm:py-8">
         {/* BACK */}
         <button
           onClick={() => router.back()}
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-[#162555] transition mb-6 group"
+          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-[#166534] transition mb-6 group"
         >
           <ChevronLeft
             size={16}
@@ -463,7 +463,7 @@ export default function MedicineDetailPage() {
           <div>
             <div className="relative bg-gradient-to-br from-[#e8f4ff] to-[#f5f9ff] rounded-[0.5rem] overflow-hidden border border-slate-100 shadow-inner">
               {medicine.isFeatured && (
-                <span className="absolute top-3 left-3 z-10 flex items-center gap-1 bg-[#162555] text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-lg">
+                <span className="absolute top-3 left-3 z-10 flex items-center gap-1 bg-[#166534] text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-lg">
                   <BadgeCheck size={11} /> Featured
                 </span>
               )}
@@ -491,7 +491,7 @@ export default function MedicineDetailPage() {
                     onClick={() => setActiveImg(idx)}
                     className={`flex-shrink-0 h-14 w-14 sm:h-20 sm:w-20 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
                       activeImg === idx
-                        ? "border-cyan-500 shadow-md shadow-cyan-200 scale-105"
+                        ? "border-emerald-500 shadow-md shadow-emerald-200 scale-105"
                         : "border-slate-200 opacity-60 hover:opacity-100 hover:border-slate-300"
                     }`}
                   >
@@ -517,13 +517,13 @@ export default function MedicineDetailPage() {
                   className="h-5 w-5 sm:h-6 sm:w-6 rounded-md object-cover border border-slate-200"
                 />
               )}
-              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-cyan-600 bg-cyan-50 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-cyan-100">
+              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-emerald-100">
                 {medicine.category}
               </span>
             </div>
 
             {/* NAME */}
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#162555] leading-tight mb-2.5 sm:mb-3">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#166534] leading-tight mb-2.5 sm:mb-3">
               {medicine.name}
             </h1>
 
@@ -568,7 +568,7 @@ export default function MedicineDetailPage() {
                     ₹{variant.mrp}
                   </span>
                 )}
-                <span className="text-3xl sm:text-4xl font-black text-[#162555]">
+                <span className="text-3xl sm:text-4xl font-black text-[#166534]">
                   ₹{variant.price}
                 </span>
                 {hasDiscount && (
@@ -587,18 +587,18 @@ export default function MedicineDetailPage() {
               <div className="flex items-center bg-slate-100 rounded-xl overflow-hidden border border-slate-200">
                 <button
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center text-[#162555] hover:bg-slate-200 transition font-bold text-lg"
+                  className="h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center text-[#166534] hover:bg-slate-200 transition font-bold text-lg"
                 >
                   −
                 </button>
-                <span className="h-10 w-10 sm:h-11 sm:w-12 flex items-center justify-center font-bold text-[#162555] text-base border-x border-slate-200">
+                <span className="h-10 w-10 sm:h-11 sm:w-12 flex items-center justify-center font-bold text-[#166534] text-base border-x border-slate-200">
                   {qty}
                 </span>
                 <button
                   onClick={() =>
                     setQty((q) => Math.min(variant?.stock ?? 99, q + 1))
                   }
-                  className="h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center text-[#162555] hover:bg-slate-200 transition font-bold text-lg"
+                  className="h-10 w-10 sm:h-11 sm:w-11 flex items-center justify-center text-[#166534] hover:bg-slate-200 transition font-bold text-lg"
                 >
                   +
                 </button>
@@ -614,7 +614,7 @@ export default function MedicineDetailPage() {
                   ? "bg-green-500 text-white shadow-lg shadow-green-200"
                   : !variant || variant.stock === 0
                     ? "bg-slate-200 text-slate-400 cursor-not-allowed"
-                    : "bg-[#162555] hover:bg-[#1f3477] text-white shadow-lg shadow-[#162555]/20 hover:shadow-xl hover:-translate-y-0.5"
+                    : "bg-[#166534] hover:bg-[#1f3477] text-white shadow-lg shadow-[#166534]/20 hover:shadow-xl hover:-translate-y-0.5"
               }`}
             >
               <ShoppingCart size={16} />
@@ -630,7 +630,7 @@ export default function MedicineDetailPage() {
         {/* ── REVIEWS ── */}
         {/* <div className="mt-8 sm:mt-10 bg-white/70 backdrop-blur border border-white rounded-[0.3rem] shadow-sm p-4 sm:p-6 md:p-8">
           <div className="flex items-center justify-between mb-5 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-extrabold text-[#162555]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#166534]">
               Customer Reviews
             </h2>
             <span className="text-xs sm:text-sm text-slate-400 font-medium">
@@ -639,7 +639,7 @@ export default function MedicineDetailPage() {
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-[0.3rem] p-3 sm:p-4 mb-5 sm:mb-6">
-            <p className="text-sm font-semibold text-[#162555] mb-3">
+            <p className="text-sm font-semibold text-[#166534] mb-3">
               Write a Review
             </p>
             <div className="flex items-center gap-1 mb-3">
@@ -676,13 +676,13 @@ export default function MedicineDetailPage() {
                 }
                 placeholder="Share your experience…"
                 disabled={reviewSubmitting}
-                className="flex-1 px-3 sm:px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-[#162555] placeholder-slate-400 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-3 sm:px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-[#166534] placeholder-slate-400 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <button
                 onClick={handleAddReview}
                 disabled={reviewSubmitting || !reviewText.trim()}
                 type="button"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-[#162555] hover:bg-[#1d3475] text-white text-sm font-semibold rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-[#166534] hover:bg-[#1d3475] text-white text-sm font-semibold rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {reviewSubmitting ? (
                   <>
@@ -718,12 +718,12 @@ export default function MedicineDetailPage() {
         {related.length > 0 && (
           <div className="mt-8 sm:mt-10">
             <div className="flex items-center justify-between mb-4 sm:mb-5">
-              <h2 className="text-xl sm:text-2xl font-extrabold text-[#162555]">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#166534]">
                 Related Products
               </h2>
               <Link
                 href={`/products?categoryId=${medicine?.categoryId ?? ""}`}
-                className="text-sm text-cyan-600 hover:text-cyan-500 font-semibold transition"
+                className="text-sm text-emerald-600 hover:text-emerald-500 font-semibold transition"
               >
                 View all →
               </Link>

@@ -132,7 +132,7 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
           letter-spacing: -0.6px;
           line-height: 1.15;
         }
-        .cat-title span { color: #0e7490; }
+        .cat-title span { color: #249349; }
         .cat-subtitle {
           font-size: 14px;
           color: #64748b;

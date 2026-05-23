@@ -224,7 +224,7 @@ export default function MedicineCard({ med, onViewDetails }) {
             </span>
           )}
           <button
-            className="flex items-center gap-1 bg-[#162555] hover:bg-[#1f3477] text-white text-[11px] sm:text-[12px] font-semibold px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all whitespace-nowrap min-w-[80px] sm:min-w-[92px] justify-center"
+            className="flex items-center gap-1 bg-[#337642] hover:bg-[#285e35] text-white text-[11px] sm:text-[12px] font-semibold px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all whitespace-nowrap min-w-[80px] sm:min-w-[92px] justify-center"
             onClick={(e) => {
               e.stopPropagation();
               setOpen((p) => !p);
@@ -267,7 +267,7 @@ export default function MedicineCard({ med, onViewDetails }) {
               return (
                 <div
                   key={strength}
-                  className="flex items-center bg-white border border-gray-200 rounded-lg px-2 sm:px-2.5 py-2 gap-1.5 sm:gap-2 hover:border-[#1f3477] hover:shadow-sm transition-all"
+                  className="flex items-center bg-white border border-gray-200 rounded-lg px-2 sm:px-2.5 py-2 gap-1.5 sm:gap-2 hover:border-[#337642] hover:shadow-sm transition-all"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* LEFT GROUP */}
@@ -324,7 +324,7 @@ export default function MedicineCard({ med, onViewDetails }) {
                       className={`text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-1 rounded-md border-[1.5px] transition-all whitespace-nowrap ${
                         added
                           ? "bg-teal-600 text-white border-teal-600"
-                          : "bg-white hover:bg-[#1f3477] text-[#162555] hover:text-white"
+                          : "bg-white hover:bg-[#337642] text-[#162555] hover:text-white"
                       }`}
                       aria-label={`Add ${strength} to cart`}
                     >

@@ -7,13 +7,13 @@ export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-r from-gray-900 via-gray-950 to-black text-white">
       {/* TOP GLOW LINE */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600" />
+      <div className="h-[2px] w-full bg-gradient-to-r from-[#285e35] via-[#337642] to-[#4f9b62]" />
 
       <div className="max-w-6xl mx-auto px-5 sm:px-6 py-10 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
           {/* BRAND */}
           <div>
-            <h2 className="text-2xl font-bold text-blue-400">US Pharmacy</h2>
+            <h2 className="text-2xl font-bold text-[#4f9b62]">US Pharmacy</h2>
             {/* <p className="text-gray-400 mt-3 text-sm leading-relaxed">
               Advanced medical &amp; forensic medicine platform designed for
               secure, fast and intelligent healthcare management.
@@ -32,7 +32,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="hover:text-blue-400 transition-colors"
+                  className="hover:text-[#4f9b62] transition-colors"
                 >
                   Home
                 </Link>
@@ -40,7 +40,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/products"
-                  className="hover:text-blue-400 transition-colors"
+                  className="hover:text-[#4f9b62] transition-colors"
                 >
                   Products
                 </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-blue-400 transition-colors"
+                  className="hover:text-[#4f9b62] transition-colors"
                 >
                   Contact
                 </Link>

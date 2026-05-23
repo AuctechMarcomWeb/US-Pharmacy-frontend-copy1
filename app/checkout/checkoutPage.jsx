@@ -130,23 +130,23 @@ function CountryDropdown({
         disabled={loading || !!error}
         className={`w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl border-2 transition-all text-sm font-semibold bg-slate-50 disabled:opacity-60 disabled:cursor-not-allowed ${
           isOpen
-            ? "border-cyan-400 bg-white ring-2 ring-cyan-100"
+            ? "border-emerald-400 bg-white ring-2 ring-emerald-100"
             : "border-slate-200 hover:border-slate-300"
         }`}
       >
         <div className="flex items-center gap-3 min-w-0">
-          <div className="h-8 w-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center flex-shrink-0">
+          <div className="h-8 w-8 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0">
             {loading ? (
-              <Loader2 size={14} className="text-indigo-400 animate-spin" />
+              <Loader2 size={14} className="text-green-400 animate-spin" />
             ) : selectedCountry?.flag ? (
               <span className="text-base leading-none">
                 {selectedCountry.flag}
               </span>
             ) : (
-              <Globe size={14} className="text-indigo-500" />
+              <Globe size={14} className="text-green-500" />
             )}
           </div>
-          <span className="text-[#162555] truncate">
+          <span className="text-[#166534] truncate">
             {loading
               ? "Loading countries…"
               : error
@@ -191,7 +191,7 @@ function CountryDropdown({
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search country…"
-                  className="w-full pl-8 pr-4 py-2 text-xs font-medium rounded-lg bg-slate-50 border border-slate-200 text-[#162555] placeholder-slate-300 outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-100 transition-all"
+                  className="w-full pl-8 pr-4 py-2 text-xs font-medium rounded-lg bg-slate-50 border border-slate-200 text-[#166534] placeholder-slate-300 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-100 transition-all"
                 />
                 {search && (
                   <button
@@ -223,7 +223,7 @@ function CountryDropdown({
                       i < filtered.length - 1 ? "border-b border-slate-50" : ""
                     } ${
                       selectedCountry?.name === country.name
-                        ? "bg-cyan-50 text-cyan-700"
+                        ? "bg-emerald-50 text-emerald-700"
                         : "text-slate-600 hover:bg-slate-50"
                     }`}
                   >
@@ -232,7 +232,7 @@ function CountryDropdown({
                     </span>
                     <span className="flex-1 text-left">{country.name}</span>
                     {selectedCountry?.name === country.name && (
-                      <span className="text-[10px] font-black text-cyan-600 bg-cyan-100 px-2 py-0.5 rounded-full flex-shrink-0">
+                      <span className="text-[10px] font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full flex-shrink-0">
                         SELECTED
                       </span>
                     )}
@@ -309,15 +309,15 @@ function PaymentDropdown({
         }}
         className={`w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl border-2 transition-all text-sm font-semibold bg-slate-50 ${
           isOpen
-            ? "border-cyan-400 bg-white ring-2 ring-cyan-100"
+            ? "border-emerald-400 bg-white ring-2 ring-emerald-100"
             : "border-slate-200 hover:border-slate-300"
         }`}
       >
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-cyan-50 border border-cyan-100 flex items-center justify-center flex-shrink-0">
-            <CreditCard size={14} className="text-cyan-600" />
+          <div className="h-8 w-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center flex-shrink-0">
+            <CreditCard size={14} className="text-emerald-600" />
           </div>
-          <span className="text-[#162555] capitalize">
+          <span className="text-[#166534] capitalize">
             {selectedPaymentMethod?.name || "Select a payment method"}
           </span>
         </div>
@@ -353,14 +353,14 @@ function PaymentDropdown({
                       : ""
                   } ${
                     selectedId === method._id
-                      ? "bg-cyan-50 text-cyan-700"
+                      ? "bg-emerald-50 text-emerald-700"
                       : "text-slate-600 hover:bg-slate-50"
                   }`}
                 >
                   <div
                     className={`h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
                       selectedId === method._id
-                        ? "bg-cyan-100 border border-cyan-200"
+                        ? "bg-emerald-100 border border-emerald-200"
                         : "bg-slate-100 border border-slate-200"
                     }`}
                   >
@@ -368,14 +368,14 @@ function PaymentDropdown({
                       size={14}
                       className={
                         selectedId === method._id
-                          ? "text-cyan-600"
+                          ? "text-emerald-600"
                           : "text-slate-400"
                       }
                     />
                   </div>
                   <span className="flex-1 text-left">{method.name}</span>
                   {selectedId === method._id && (
-                    <span className="text-[10px] font-black text-cyan-600 bg-cyan-100 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-black text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">
                       SELECTED
                     </span>
                   )}
@@ -580,7 +580,7 @@ export default function CheckoutPage() {
                 <div className="h-14 w-14 rounded-2xl bg-emerald-100 flex items-center justify-center mb-4">
                   <BadgeCheck size={28} className="text-emerald-600" />
                 </div>
-                <h1 className="text-3xl md:text-3xl font-black text-[#162555] leading-tight">
+                <h1 className="text-3xl md:text-3xl font-black text-[#166534] leading-tight">
                   Thank you for
                   <br />
                   submitting your Request!
@@ -593,7 +593,7 @@ export default function CheckoutPage() {
               </div>
 
               <div>
-                <h2 className="text-base font-black text-[#162555] mb-4">
+                <h2 className="text-base font-black text-[#166534] mb-4">
                   Billing address
                 </h2>
                 <div className="space-y-2.5">
@@ -611,7 +611,7 @@ export default function CheckoutPage() {
                       <span className="w-20 text-slate-400 font-semibold flex-shrink-0">
                         {label}
                       </span>
-                      <span className="text-[#162555] font-medium">
+                      <span className="text-[#166534] font-medium">
                         {value || "—"}
                       </span>
                     </div>
@@ -621,7 +621,7 @@ export default function CheckoutPage() {
 
               <button
                 onClick={() => router.push("/products")}
-                className="w-fit px-7 py-3 rounded-full bg-gradient-to-r from-[#162555] to-[#2846a5] text-white font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+                className="w-fit px-7 py-3 rounded-full bg-gradient-to-r from-[#166534] to-[#16a34a] text-white font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg"
               >
                 Continue Shopping
               </button>
@@ -630,17 +630,17 @@ export default function CheckoutPage() {
             {/* Right: Receipt */}
             <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
               <div className="px-6 pt-6 pb-4 border-b border-dashed border-slate-200">
-                <h2 className="text-xl font-black text-[#162555] mb-4">
+                <h2 className="text-xl font-black text-[#166534] mb-4">
                   Order Summary
                 </h2>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div>
                     <p className="text-slate-400 font-medium mb-0.5">Date</p>
-                    <p className="text-[#162555] font-bold">{orderDate}</p>
+                    <p className="text-[#166534] font-bold">{orderDate}</p>
                   </div>
                   <div>
                     <p className="text-slate-400 font-medium mb-0.5">Payment</p>
-                    <p className="text-[#162555] font-bold capitalize">
+                    <p className="text-[#166534] font-bold capitalize">
                       {confirmedPaymentName}
                     </p>
                   </div>
@@ -662,7 +662,7 @@ export default function CheckoutPage() {
                       }}
                     />
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-[#162555] text-sm truncate">
+                      <h4 className="font-bold text-[#166534] text-sm truncate">
                         {item.title}
                       </h4>
                       {item.strength && (
@@ -672,7 +672,7 @@ export default function CheckoutPage() {
                       )}
                       <p className="text-slate-400 text-xs">Qty: {item.qty}</p>
                     </div>
-                    <div className="text-sm font-bold text-[#162555] flex-shrink-0">
+                    <div className="text-sm font-bold text-[#166534] flex-shrink-0">
                       ₹{fmt(item.price * item.qty)}
                     </div>
                   </div>
@@ -682,7 +682,7 @@ export default function CheckoutPage() {
               <div className="px-6 py-4 space-y-2.5">
                 <div className="flex justify-between text-sm text-slate-500">
                   <span>Sub Total</span>
-                  <span className="text-[#162555] font-semibold">
+                  <span className="text-[#166534] font-semibold">
                     ₹{fmt(confirmedTotal)}
                   </span>
                 </div>
@@ -691,10 +691,10 @@ export default function CheckoutPage() {
                   <span className="text-emerald-600 font-semibold">Free</span>
                 </div>
                 <div className="flex justify-between items-center pt-3 border-t border-slate-200">
-                  <span className="text-base font-black text-[#162555]">
+                  <span className="text-base font-black text-[#166534]">
                     Total
                   </span>
-                  <span className="text-xl font-black text-[#162555]">
+                  <span className="text-xl font-black text-[#166534]">
                     ₹{fmt(confirmedTotal)}
                   </span>
                 </div>
@@ -718,18 +718,21 @@ export default function CheckoutPage() {
   // MAIN CHECKOUT
   // ─────────────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#f0f4ff] text-[#162555] relative overflow-hidden pb-10">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-200/30 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-200/30 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen bg-[#f0f4ff] text-[#166534] relative overflow-hidden pb-10">
+      <div
+        className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-200/30
+bg-green-200/30 rounded-full blur-[120px] pointer-events-none"
+      />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-200/30 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Top bar */}
       <div className="relative z-20 bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-xl mx-auto px-10 py-4 flex items-center justify-center">
           {/* <div className="flex items-center gap-2"> */}
-            {/* <div className="h-8 w-8 rounded-lg bg-[#162555] flex items-center justify-center hidden sm:block">
+          {/* <div className="h-8 w-8 rounded-lg bg-[#166534] flex items-center justify-center hidden sm:block">
               <LockKeyhole size={14} className="text-white" />
             </div> */}
-            {/* <span className="font-black text-[#162555] tracking-tight text-lg hidden sm:block ">
+          {/* <span className="font-black text-[#166534] tracking-tight text-lg hidden sm:block ">
               Secure Checkout
             </span> */}
           {/* </div> */}
@@ -749,7 +752,7 @@ export default function CheckoutPage() {
                         flex-shrink-0
                         ${
                           i <= 1
-                            ? "bg-[#162555] text-white"
+                            ? "bg-[#166534] text-white"
                             : "bg-slate-100 text-slate-400 border border-slate-200"
                         }
                       `}
@@ -760,7 +763,7 @@ export default function CheckoutPage() {
                     <span
                       className={`
               truncate whitespace-nowrap
-              ${i <= 1 ? "text-[#162555]" : "text-slate-400"}
+              ${i <= 1 ? "text-[#166534]" : "text-slate-400"}
             `}
                     >
                       {step}
@@ -772,7 +775,7 @@ export default function CheckoutPage() {
                     <div
                       className={`
               flex-1 h-px mx-1 sm:mx-2 min-w-[16px]
-              ${i < 1 ? "bg-[#162555]" : "bg-slate-200"}
+              ${i < 1 ? "bg-[#166534]" : "bg-slate-200"}
             `}
                     />
                   )}
@@ -785,7 +788,7 @@ export default function CheckoutPage() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 md:py-10">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl md:text-3xl font-bold tracking-tight text-[#162555]">
+          <h1 className="text-3xl md:text-3xl font-bold tracking-tight text-[#166534]">
             Submit Your Order Request
           </h1>
           <p className="text-slate-500 mt-2 text-sm">
@@ -802,11 +805,11 @@ export default function CheckoutPage() {
             {/* Shipping */}
             <div className="px-4 md:px-8 pt-7 pb-6 border-b border-slate-100">
               <div className="flex items-center gap-3 mb-6">
-                <div className="h-10 w-10 rounded-2xl bg-cyan-50 border border-cyan-100 flex items-center justify-center">
-                  <Truck size={20} className="text-cyan-600" />
+                <div className="h-10 w-10 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+                  <Truck size={20} className="text-emerald-600" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-black text-[#162555] leading-none">
+                  <h2 className="text-xl font-black text-[#166534] leading-none">
                     Shipping Details
                   </h2>
                   <p className="text-slate-400 text-xs mt-1">
@@ -824,7 +827,7 @@ export default function CheckoutPage() {
                     name="fullName"
                     placeholder="e.g. John Smith"
                     onChange={handleChange}
-                    className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[#162555] placeholder-slate-300 outline-none focus:border-cyan-400 focus:bg-white focus:ring-2 focus:ring-cyan-100 transition-all text-sm font-medium"
+                    className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[#166534] placeholder-slate-300 outline-none focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-100 transition-all text-sm font-medium"
                     required
                   />
                 </div>
@@ -852,7 +855,7 @@ export default function CheckoutPage() {
                           })
                         }
                         maxLength={15}
-                        className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[#162555] placeholder-slate-300 outline-none focus:border-cyan-400 focus:bg-white focus:ring-2 focus:ring-cyan-100 transition-all text-sm font-medium"
+                        className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[#166534] placeholder-slate-300 outline-none focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-100 transition-all text-sm font-medium"
                         required
                       />
                     </div>
@@ -871,7 +874,7 @@ export default function CheckoutPage() {
                         type="email"
                         placeholder="you@email.com"
                         onChange={handleChange}
-                        className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[#162555] placeholder-slate-300 outline-none focus:border-cyan-400 focus:bg-white focus:ring-2 focus:ring-cyan-100 transition-all text-sm font-medium"
+                        className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[#166534] placeholder-slate-300 outline-none focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-100 transition-all text-sm font-medium"
                         required
                       />
                     </div>
@@ -887,7 +890,7 @@ export default function CheckoutPage() {
                     placeholder="House / Flat No., Street, Area..."
                     onChange={handleChange}
                     rows={3}
-                    className="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 text-[#162555] placeholder-slate-300 outline-none resize-none focus:border-cyan-400 focus:bg-white focus:ring-2 focus:ring-cyan-100 transition-all text-sm font-medium"
+                    className="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 text-[#166534] placeholder-slate-300 outline-none resize-none focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-100 transition-all text-sm font-medium"
                     required
                   />
                 </div>
@@ -913,11 +916,11 @@ export default function CheckoutPage() {
             {/* Payment */}
             <div className="px-4 md:px-8 pt-6 pb-7">
               <div className="flex items-center gap-3 mb-5">
-                <div className="h-10 w-10 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
-                  <CreditCard size={20} className="text-indigo-600" />
+                <div className="h-10 w-10 rounded-2xl bg-green-50 border border-green-100 flex items-center justify-center">
+                  <CreditCard size={20} className="text-green-600" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-black text-[#162555] leading-none">
+                  <h2 className="text-xl font-black text-[#166534] leading-none">
                     Payment Method
                   </h2>
                   <p className="text-slate-400 text-xs mt-1">
@@ -928,7 +931,7 @@ export default function CheckoutPage() {
 
               {paymentLoading ? (
                 <div className="flex items-center gap-3 px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-400 text-sm">
-                  <Loader2 size={16} className="animate-spin text-cyan-400" />
+                  <Loader2 size={16} className="animate-spin text-emerald-400" />
                   Loading payment options...
                 </div>
               ) : paymentError ? (
@@ -937,7 +940,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => window.location.reload()}
-                    className="text-xs text-cyan-600 font-bold underline ml-3"
+                    className="text-xs text-emerald-600 font-bold underline ml-3"
                   >
                     Retry
                   </button>
@@ -998,8 +1001,8 @@ export default function CheckoutPage() {
 
     rounded-xl sm:rounded-2xl
 
-    bg-gradient-to-r from-[#162555] to-[#2846a5]
-    hover:from-[#1e3370] hover:to-[#3156cc]
+    bg-gradient-to-r from-[#166534] to-[#16a34a]
+hover:from-[#14532d] hover:to-[#15803d]
 
     text-white
     font-black
@@ -1052,7 +1055,7 @@ export default function CheckoutPage() {
                 <div className="h-9 w-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center">
                   <Package size={16} className="text-emerald-600" />
                 </div>
-                <h2 className="text-lg font-black text-[#162555]">
+                <h2 className="text-lg font-black text-[#166534]">
                   Order Summary
                 </h2>
                 <span className="ml-auto text-xs bg-slate-100 text-slate-500 font-bold px-2.5 py-1 rounded-full">
@@ -1081,11 +1084,11 @@ export default function CheckoutPage() {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-[#162555] text-sm line-clamp-2 leading-snug">
+                          <h3 className="font-bold text-[#166534] text-sm line-clamp-2 leading-snug">
                             {item.title}
                           </h3>
                           {item.category && (
-                            <span className="inline-block text-[10px] bg-cyan-50 text-cyan-600 border border-cyan-100 px-2 py-0.5 rounded-full mt-1 font-semibold">
+                            <span className="inline-block text-[10px] bg-emerald-50 text-emerald-600 border border-emerald-100 px-2 py-0.5 rounded-full mt-1 font-semibold">
                               {item.category}
                             </span>
                           )}
@@ -1098,7 +1101,7 @@ export default function CheckoutPage() {
                             <span className="text-xs text-slate-400">
                               ₹{fmt(item.price)} each
                             </span>
-                            <span className="text-sm font-black text-[#162555]">
+                            <span className="text-sm font-black text-[#166534]">
                               ₹{fmt(item.price * item.qty)}
                             </span>
                           </div>
@@ -1122,13 +1125,13 @@ export default function CheckoutPage() {
                               <Minus size={12} />
                             )}
                           </button>
-                          <span className="w-7 text-center text-sm font-black text-[#162555]">
+                          <span className="w-7 text-center text-sm font-black text-[#166534]">
                             {item.qty}
                           </span>
                           <button
                             type="button"
                             onClick={() => updateQty(lineKey, item.qty + 1)}
-                            className="h-7 w-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:border-cyan-400 hover:text-cyan-600 hover:bg-cyan-50 transition-all"
+                            className="h-7 w-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:border-emerald-400 hover:text-emerald-600 hover:bg-emerald-50 transition-all"
                           >
                             <Plus size={12} />
                           </button>
@@ -1150,7 +1153,7 @@ export default function CheckoutPage() {
               <div className="px-5 pb-5 pt-3 border-t border-slate-100 space-y-2.5">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Subtotal</span>
-                  <span className="font-semibold text-[#162555]">
+                  <span className="font-semibold text-[#166534]">
                     ₹{fmt(total)}
                   </span>
                 </div>
@@ -1159,10 +1162,10 @@ export default function CheckoutPage() {
                   <span className="font-semibold text-emerald-600">Free</span>
                 </div>
                 <div className="flex justify-between items-center pt-3 border-t border-slate-100">
-                  <span className="text-base font-black text-[#162555]">
+                  <span className="text-base font-black text-[#166534]">
                     Total
                   </span>
-                  <span className="text-2xl font-black text-[#162555]">
+                  <span className="text-2xl font-black text-[#166534]">
                     ₹{fmt(total)}
                   </span>
                 </div>

@@ -48,7 +48,7 @@ export default function OrderConfirmModal({
       }}
     >
       {/* ── Header ── */}
-      <div className="bg-gradient-to-br from-[#162555] to-[#2846a5] px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-5">
+      <div className="bg-gradient-to-br from-[#166534] to-[#16a34a] px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-5">
         <div className="flex items-start gap-3 sm:gap-4">
           <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
             <Package size={20} className="text-white" />
@@ -108,7 +108,7 @@ export default function OrderConfirmModal({
         <div
           className={`flex items-start gap-3 p-3 sm:p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
             acknowledged
-              ? "border-cyan-400 bg-cyan-50"
+              ? "border-emerald-400 bg-emerald-50"
               : "border-slate-200 bg-slate-50 hover:border-slate-300"
           }`}
           onClick={() => setAcknowledged((v) => !v)}
@@ -123,7 +123,7 @@ export default function OrderConfirmModal({
           />
           <p className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-relaxed select-none">
             I understand that if my country (
-            <span className="font-black text-[#162555]">
+            <span className="font-black text-[#166534]">
               {selectedCountry || "selected country"}
             </span>
             ) is not in the serviceable delivery zone, my order{" "}
@@ -163,7 +163,7 @@ export default function OrderConfirmModal({
             disabled={!acknowledged || loading}
             className={`flex-1 py-2.5 sm:py-3 rounded-xl font-black text-xs sm:text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg ${
               acknowledged && !loading
-                ? "bg-gradient-to-r from-[#162555] to-[#2846a5] hover:from-[#1e3370] hover:to-[#3156cc] text-white shadow-blue-900/30 hover:scale-[1.02] active:scale-[0.98]"
+                ? "bg-gradient-to-r from-[#166534] to-[#16a34a] hover:from-[#16a34a] hover:to-[#16a34a] text-white shadow-blue-900/30 hover:scale-[1.02] active:scale-[0.98]"
                 : "bg-slate-100 text-slate-400 cursor-not-allowed shadow-none"
             }`}
           >

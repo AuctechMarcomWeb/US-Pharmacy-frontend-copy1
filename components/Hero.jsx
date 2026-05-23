@@ -27,12 +27,12 @@ export default function Hero() {
         .hero-bg-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(
-            110deg,
-            rgba(3, 60, 110, 0.88) 0%,
-            rgba(14, 165, 233, 0.78) 45%,
-            rgba(56, 189, 248, 0.60) 100%
-          );
+    background: linear-gradient(
+  110deg,
+  rgba(20, 70, 32, 0.9) 0%,
+  rgba(51, 118, 66, 0.8) 45%,
+  rgba(92, 168, 108, 0.6) 100%
+);
           z-index: 1;
         }
 
@@ -80,7 +80,7 @@ export default function Hero() {
           font-style: italic;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #7dd3fc;
+          color: #337642;
           animation: fadeUp 0.5s ease both;
         }
 
@@ -97,7 +97,7 @@ export default function Hero() {
 
         .hero-title em {
           font-style: italic;
-          color: #38bdf8;
+          color: #38c657;
         }
 
         .hero-tags {

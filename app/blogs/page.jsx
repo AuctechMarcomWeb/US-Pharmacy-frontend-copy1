@@ -128,7 +128,7 @@ function PackDropdown({ packs, activePack, onSelect }) {
         onClick={handleOpen}
         className={`w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all bg-white ${
           open
-            ? "border-cyan-400 ring-2 ring-cyan-100"
+            ? "border-emerald-400 ring-2 ring-emerald-100"
             : "border-slate-200 hover:border-slate-300"
         }`}
       >
@@ -176,7 +176,7 @@ function PackDropdown({ packs, activePack, onSelect }) {
                     idx < packs.length - 1 ? "border-b border-slate-100" : ""
                   } ${
                     activePack === idx
-                      ? "bg-cyan-50 text-cyan-700"
+                      ? "bg-emerald-50 text-emerald-700"
                       : "hover:bg-slate-50 text-slate-600"
                   }`}
                 >
@@ -193,7 +193,7 @@ function PackDropdown({ packs, activePack, onSelect }) {
                       ₹{pack.price}
                     </span>
                     {activePack === idx && (
-                      <span className="text-[9px] font-black text-cyan-600 bg-cyan-100 px-1.5 py-0.5 rounded-full">
+                      <span className="text-[9px] font-black text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded-full">
                         ✓
                       </span>
                     )}
@@ -363,7 +363,7 @@ export default function BlogPage() {
       <div className="min-h-screen bg-[#f5f7fb] px-4 py-8 sm:py-10">
         {/* HEADER */}
         <div className="max-w-4xl mx-auto text-center mb-7 sm:mb-8">
-          <h1 className="text-3xl sm:text-3xl font-extrabold text-slate-900 tracking-tight text-[#162555]">
+          <h1 className="text-3xl sm:text-3xl font-extrabold text-slate-900 tracking-tight text-[#166534]">
             Our Products
           </h1>
           <p className="text-sm text-slate-400 mt-1.5">
@@ -439,7 +439,7 @@ export default function BlogPage() {
                                 }
                                 className={`w-10 h-10 object-cover rounded-lg shrink-0 cursor-pointer transition-all border-2 ${
                                   activeImg === idx
-                                    ? "border-cyan-400 scale-105 opacity-100"
+                                    ? "border-emerald-400 scale-105 opacity-100"
                                     : "border-slate-200 opacity-60 hover:opacity-90"
                                 }`}
                               />
@@ -542,7 +542,7 @@ export default function BlogPage() {
                                 ? "bg-slate-200 text-slate-400 cursor-not-allowed"
                                 : isAdded
                                   ? "bg-teal-600 text-white shadow-md"
-                                  : "bg-[#162555] hover:bg-[#1f3477] text-white shadow-md"
+                                  : "bg-[#166534] hover:bg-[#1f3477] text-white shadow-md"
                             }`}
                           >
                             <CartIcon />

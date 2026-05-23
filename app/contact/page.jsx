@@ -84,19 +84,19 @@ export default function ContactPage() {
 
   return (
     <main
-      className="min-h-screen bg-gradient-to-b from-white via-slate-100 to-[#eef3ff] px-4 sm:px-6 py-10 sm:py-16 overflow-hidden relative"
+      className="min-h-screen bg-gradient-to-b from-white via-green-50 to-[#eef8f1] px-4 sm:px-6 py-10 sm:py-16 overflow-hidden relative"
       aria-labelledby="contact-heading"
     >
       {/* BACKGROUND GLOW */}
-      <div className="absolute top-0 left-[-100px] w-[320px] h-[320px] bg-cyan-400/10 blur-3xl rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-[-100px] w-[320px] h-[320px] bg-[#162555]/10 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-[-100px] w-[320px] h-[320px] bg-[#4f9b62]/10 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-[-100px] w-[320px] h-[320px] bg-[#337642]/10 blur-3xl rounded-full pointer-events-none" />
 
       {/* TOAST */}
       {toast && (
         <div
           className={`fixed top-4 right-4 left-4 sm:left-auto sm:right-6 sm:top-6 z-50 flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 rounded-2xl shadow-xl border text-sm font-semibold sm:max-w-sm transition-all ${
             toast.type === "success"
-              ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+              ? "bg-green-50 border-green-200 text-[#285e35]"
               : "bg-red-50 border-red-200 text-red-700"
           }`}
         >
@@ -125,7 +125,7 @@ export default function ContactPage() {
           Secure Communication Channel
         </div> */}
         <h1
-          className="text-3xl sm:text-4xl md:text-3xl font-extrabold tracking-tight text-[#162555]"
+          className="text-3xl sm:text-4xl md:text-3xl font-extrabold tracking-tight text-[#285e35]"
           id="contact-heading"
         >
           Contact US Pharmacy
@@ -143,9 +143,9 @@ export default function ContactPage() {
         {/* FORM — order-1 on mobile (shows first), order-2 on md+ (shows second/right) */}
         <form
           onSubmit={handleSubmit}
-          className="order-1 md:order-2 bg-[#C6E9FF] backdrop-blur-2xl border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-xl"
+          className="order-1 md:order-2 bg-[#eef8f1] backdrop-blur-2xl border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-xl"
         >
-          <h2 className="text-xl sm:text-2xl font-bold text-[#162555] mb-5 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#285e35] mb-5 sm:mb-6">
             Send Message
           </h2>
 
@@ -157,7 +157,7 @@ export default function ContactPage() {
               onChange={handleChange}
               placeholder="Your Name"
               required
-              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
             />
             <input
               name="phone"
@@ -167,7 +167,7 @@ export default function ContactPage() {
               required
               type="tel"
               maxLength={10}
-              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
             />
           </div>
 
@@ -179,7 +179,7 @@ export default function ContactPage() {
             placeholder="Your Email"
             required
             type="email"
-            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
           />
 
           {/* TITLE */}
@@ -189,7 +189,7 @@ export default function ContactPage() {
             onChange={handleChange}
             placeholder="Subject / Title"
             required
-            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
           />
 
           {/* MESSAGE */}
@@ -200,14 +200,14 @@ export default function ContactPage() {
             placeholder="Your Message"
             rows={4}
             required
-            className="w-full p-3 sm:p-4 mb-4 sm:mb-5 rounded-2xl bg-white border border-slate-200 text-[#162555] placeholder:text-slate-400 outline-none resize-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+            className="w-full p-3 sm:p-4 mb-4 sm:mb-5 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none resize-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
           />
 
           {/* SUBMIT */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 p-3.5 sm:p-4 rounded-2xl bg-[#162555] hover:bg-[#1e3477] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] text-sm sm:text-base"
+            className="w-full flex items-center justify-center gap-2 p-3.5 sm:p-4 rounded-2xl bg-[#337642] hover:bg-[#285e35] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] text-sm sm:text-base"
           >
             {loading ? (
               <>

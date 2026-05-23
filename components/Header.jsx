@@ -92,23 +92,23 @@ export default function Header() {
           {/* LOGO */}
           <h2
             onClick={() => router.push("/")}
-            className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent cursor-pointer select-none whitespace-nowrap"
+            className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-[#285e35] to-[#4f9b62] bg-clip-text text-transparent cursor-pointer select-none whitespace-nowrap"
           >
             US Pharmacy
           </h2>
 
           {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-7 text-gray-700 text-sm font-semibold">
-            <Link href="/" className="hover:text-blue-600 transition">
+            <Link href="/" className="hover:text-[#337642] transition">
               Home
             </Link>
             <Link href="/blogs" className="hover:text-cyan-500 transition">
               Blog
             </Link>
-            <Link href="/products" className="hover:text-blue-600 transition">
+            <Link href="/products" className="hover:text-[#337642] transition">
               Products
             </Link>
-            <Link href="/contact" className="hover:text-blue-600 transition">
+            <Link href="/contact" className="hover:text-[#337642] transition">
               Contact
             </Link>
           </nav>
@@ -120,7 +120,7 @@ export default function Header() {
               type="button"
               ref={searchBtnRef}
               onClick={() => setShowSearch(!showSearch)}
-              className="text-black hover:text-blue-600 transition hover:scale-110"
+              className="text-black hover:text-[#337642] transition hover:scale-110"
             >
               <Search size={20} />
             </button>
@@ -128,7 +128,7 @@ export default function Header() {
             {/* CART */}
             <button
               onClick={() => router.push("/checkout")}
-              className="relative text-black hover:text-blue-600 transition hover:scale-110"
+              className="relative text-black hover:text-[#337642] transition hover:scale-110"
             >
               <ShoppingCart size={20} />
               {cartCount > 0 && (
@@ -241,7 +241,7 @@ export default function Header() {
 
             {/* MOBILE HAMBURGER */}
             <button
-              className="md:hidden p-1 text-black hover:text-blue-600 transition"
+              className="md:hidden p-1 text-black hover:text-[#337642] transition"
               onClick={() => setMobileMenu(true)}
               aria-label="Open menu"
             >
@@ -268,7 +268,7 @@ export default function Header() {
               />
               <button
                 type="submit"
-                className="px-5 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white rounded-xl text-sm font-semibold transition"
+                className="px-5 py-2 bg-gradient-to-r from-[#337642] to-[#4f9b62] hover:from-[#285e35] hover:to-[#337642] text-white rounded-xl text-sm font-semibold transition"
               >
                 Search
               </button>
@@ -312,7 +312,7 @@ export default function Header() {
           </button>
           <h2
             onClick={() => router.push("/")}
-            className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent cursor-pointer select-none whitespace-nowrap"
+            className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-[#285e35] to-[#4f9b62] bg-clip-text text-transparent cursor-pointer select-none whitespace-nowrap"
           >
             US Pharmacy
           </h2>
@@ -347,12 +347,12 @@ export default function Header() {
               key={href}
               href={href}
               onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group"
+              className="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#337642] transition-all duration-200 group"
             >
-              <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-200 shrink-0">
+              <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors duration-200 shrink-0">
                 <Icon
                   size={16}
-                  className="text-gray-500 group-hover:text-blue-600 transition-colors duration-200"
+                  className="text-gray-500 group-hover:text-[#337642] transition-colors duration-200"
                 />
               </span>
               {label}
@@ -369,12 +369,12 @@ export default function Header() {
                   router.push("/profile");
                   setMobileMenu(false);
                 }}
-                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group"
+                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#337642] transition-all duration-200 group"
               >
-                <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-200 shrink-0">
+                <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors duration-200 shrink-0">
                   <UserCircle2
                     size={16}
-                    className="text-gray-500 group-hover:text-blue-600 transition-colors duration-200"
+                    className="text-gray-500 group-hover:text-[#337642] transition-colors duration-200"
                   />
                 </span>
                 Profile
@@ -385,12 +385,12 @@ export default function Header() {
                   setCartOpen(true);
                   setMobileMenu(false);
                 }}
-                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group"
+                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#337642] transition-all duration-200 group"
               >
-                <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-200 shrink-0 relative">
+                <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors duration-200 shrink-0 relative">
                   <ShoppingCart
                     size={16}
-                    className="text-gray-500 group-hover:text-blue-600 transition-colors duration-200"
+                    className="text-gray-500 group-hover:text-[#337642] transition-colors duration-200"
                   />
                   {cartCount > 0 && (
                     <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
@@ -406,12 +406,12 @@ export default function Header() {
                   router.push("/orders");
                   setMobileMenu(false);
                 }}
-                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group"
+                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#337642] transition-all duration-200 group"
               >
-                <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors duration-200 shrink-0">
+                <span className="w-8 h-8 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors duration-200 shrink-0">
                   <Package
                     size={16}
-                    className="text-gray-500 group-hover:text-blue-600 transition-colors duration-200"
+                    className="text-gray-500 group-hover:text-[#337642] transition-colors duration-200"
                   />
                 </span>
                 Orders
@@ -441,7 +441,7 @@ export default function Header() {
                   router.push("/login");
                   setMobileMenu(false);
                 }}
-                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 border border-gray-200"
+                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#337642] transition-all duration-200 border border-gray-200"
               >
                 <LogOut size={16} className="rotate-180" />
                 Login / Sign Up

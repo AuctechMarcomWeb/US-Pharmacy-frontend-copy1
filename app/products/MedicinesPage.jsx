@@ -67,18 +67,18 @@ function SidebarSection({ title, children, defaultOpen = true }) {
         onClick={() => setOpen(!open)}
         className="flex items-center justify-between w-full mb-4 group"
       >
-        <span className="text-[13px] font-bold uppercase tracking-widest text-[#162555]">
+        <span className="text-[13px] font-bold uppercase tracking-widest hover:text-[#166534]">
           {title}
         </span>
         {open ? (
           <ChevronUp
             size={15}
-            className="text-slate-400 group-hover:text-[#162555] transition"
+            className="text-slate-400 group-hover:hover:text-[#166534] transition"
           />
         ) : (
           <ChevronDown
             size={15}
-            className="text-slate-400 group-hover:text-[#162555] transition"
+            className="text-slate-400 group-hover:hover:text-[#166534] transition"
           />
         )}
       </button>
@@ -97,8 +97,8 @@ function AlphabetIndex({ activeLetter, onSelect }) {
         className={`w-6 h-5 text-[10px] font-bold rounded transition leading-none
           ${
             activeLetter === ""
-              ? "bg-cyan-500 text-white shadow-sm"
-              : "text-slate-400 hover:text-cyan-600 hover:bg-cyan-50"
+              ? "bg-emerald-500 text-white shadow-sm"
+              : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
           }`}
       >
         All
@@ -110,8 +110,8 @@ function AlphabetIndex({ activeLetter, onSelect }) {
           className={`w-6 h-5 text-[11px] font-semibold rounded transition leading-none
             ${
               activeLetter === letter
-                ? "bg-cyan-500 text-white shadow-sm"
-                : "text-slate-400 hover:text-cyan-600 hover:bg-cyan-50"
+                ? "bg-emerald-500 text-white shadow-sm"
+                : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
             }`}
         >
           {letter}
@@ -394,12 +394,12 @@ export default function MedicinesPage() {
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search products…"
             className="w-full border border-slate-200 rounded-xl pl-4 pr-10 py-2.5
-                       text-sm text-[#162555] placeholder-slate-400 outline-none bg-slate-50
-                       focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+                       text-sm hover:text-[#166534] placeholder-slate-400 outline-none bg-slate-50
+                       focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
           />
           <button
             type="submit"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#162555] transition"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:hover:text-[#166534] transition"
           >
             <Search size={16} />
           </button>
@@ -417,14 +417,14 @@ export default function MedicinesPage() {
               onClick={() => setCategoryOpen((v) => !v)}
               className="w-full flex items-center gap-3 border border-slate-200 rounded-xl
                  pl-3 pr-3 py-2.5 text-sm bg-slate-50 outline-none
-                 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+                 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
             >
               {categoryId === "" ? (
-                <div className="h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 border-cyan-400 bg-cyan-100">
-                  <Tag size={13} className="text-cyan-600" />
+                <div className="h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 border-emerald-400 bg-emerald-100">
+                  <Tag size={13} className="text-emerald-600" />
                 </div>
               ) : (
-                <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 border-cyan-400">
+                <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 border-emerald-400">
                   <img
                     src={categories.find((c) => c._id === categoryId)?.image}
                     alt=""
@@ -432,7 +432,7 @@ export default function MedicinesPage() {
                   />
                 </div>
               )}
-              <span className="flex-1 text-left text-[#162555] font-medium">
+              <span className="flex-1 text-left hover:text-[#166534] font-medium">
                 {categoryId === ""
                   ? "All Products"
                   : categories.find((c) => c._id === categoryId)?.name}
@@ -456,20 +456,20 @@ export default function MedicinesPage() {
                     setCategoryId("");
                     setCategoryOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${categoryId === "" ? "bg-cyan-50" : "hover:bg-slate-50"}`}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${categoryId === "" ? "bg-emerald-50" : "hover:bg-slate-50"}`}
                 >
                   <div
-                    className={`h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 transition ${categoryId === "" ? "border-cyan-400 bg-cyan-100" : "border-slate-200 bg-slate-100"}`}
+                    className={`h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 transition ${categoryId === "" ? "border-emerald-400 bg-emerald-100" : "border-slate-200 bg-slate-100"}`}
                   >
                     <Tag
                       size={13}
                       className={
-                        categoryId === "" ? "text-cyan-600" : "text-slate-400"
+                        categoryId === "" ? "text-emerald-600" : "text-slate-400"
                       }
                     />
                   </div>
                   <span
-                    className={`flex-1 text-left ${categoryId === "" ? "text-cyan-700 font-semibold" : "text-slate-600"}`}
+                    className={`flex-1 text-left ${categoryId === "" ? "text-emerald-700 font-semibold" : "text-slate-600"}`}
                   >
                     All Products
                   </span>
@@ -477,7 +477,7 @@ export default function MedicinesPage() {
                     {totalProducts}
                   </span>
                   {categoryId === "" && (
-                    <span className="h-2 w-2 rounded-full bg-cyan-500 flex-shrink-0" />
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 flex-shrink-0" />
                   )}
                 </button>
                 <div className="mx-3 border-t border-slate-100" />
@@ -489,10 +489,10 @@ export default function MedicinesPage() {
                       setCategoryId(cat._id);
                       setCategoryOpen(false);
                     }}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${categoryId === cat._id ? "bg-cyan-50" : "hover:bg-slate-50"}`}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${categoryId === cat._id ? "bg-emerald-50" : "hover:bg-slate-50"}`}
                   >
                     <div
-                      className={`h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 transition ${categoryId === cat._id ? "border-cyan-400" : "border-slate-200"}`}
+                      className={`h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 transition ${categoryId === cat._id ? "border-emerald-400" : "border-slate-200"}`}
                     >
                       <img
                         src={cat.image}
@@ -505,12 +505,12 @@ export default function MedicinesPage() {
                       />
                     </div>
                     <span
-                      className={`flex-1 text-left capitalize leading-tight ${categoryId === cat._id ? "text-cyan-700 font-semibold" : "text-slate-600"}`}
+                      className={`flex-1 text-left capitalize leading-tight ${categoryId === cat._id ? "text-emerald-700 font-semibold" : "text-slate-600"}`}
                     >
                       {cat.name}
                     </span>
                     {categoryId === cat._id && (
-                      <span className="h-2 w-2 rounded-full bg-cyan-500 flex-shrink-0" />
+                      <span className="h-2 w-2 rounded-full bg-emerald-500 flex-shrink-0" />
                     )}
                   </button>
                 ))}
@@ -534,7 +534,7 @@ export default function MedicinesPage() {
                 placeholder="0"
                 value={minPriceInput} // ← changed
                 onChange={(e) => setMinPriceInput(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm hover:text-[#166534] bg-slate-50 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
               />
             </div>
             <span className="text-slate-300 mt-4">—</span>
@@ -548,7 +548,7 @@ export default function MedicinesPage() {
                 placeholder="Any"
                 value={maxPriceInput} // ← changed
                 onChange={(e) => setMaxPriceInput(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm hover:text-[#166534] bg-slate-50 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
               />
             </div>
           </div>
@@ -563,7 +563,7 @@ export default function MedicinesPage() {
                 : Math.min(Number(maxPriceInput), 10000)
             } // ← changed
             onChange={(e) => setMaxPriceInput(e.target.value)} // ← changed
-            className="w-full accent-cyan-600 cursor-pointer"
+            className="w-full accent-emerald-600 cursor-pointer"
           />
           <div className="flex justify-between text-[11px] text-slate-400">
             <span>₹0</span>
@@ -578,7 +578,7 @@ export default function MedicinesPage() {
           <div
             onClick={() => setIsFeatured(!isFeatured)}
             className={`h-5 w-5 rounded-md border-2 flex items-center justify-center transition cursor-pointer
-              ${isFeatured ? "bg-cyan-500 border-cyan-500" : "border-slate-300 bg-white group-hover:border-cyan-400"}`}
+              ${isFeatured ? "bg-emerald-500 border-emerald-500" : "border-slate-300 bg-white group-hover:border-emerald-400"}`}
           >
             {isFeatured && (
               <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
@@ -592,7 +592,7 @@ export default function MedicinesPage() {
               </svg>
             )}
           </div>
-          <span className="text-sm text-slate-600 group-hover:text-[#162555] transition">
+          <span className="text-sm text-slate-600 group-hover:hover:text-[#166534] transition">
             Featured products only
           </span>
         </label>
@@ -619,11 +619,11 @@ export default function MedicinesPage() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search products…"
-            className="w-full border border-slate-200 rounded-xl pl-4 pr-10 py-2.5 text-sm text-[#162555] placeholder-slate-400 outline-none bg-slate-50 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+            className="w-full border border-slate-200 rounded-xl pl-4 pr-10 py-2.5 text-sm hover:text-[#166534] placeholder-slate-400 outline-none bg-slate-50 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
           />
           <button
             type="submit"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#162555] transition"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:hover:text-[#166534] transition"
           >
             <Search size={16} />
           </button>
@@ -643,14 +643,14 @@ export default function MedicinesPage() {
                 e.stopPropagation();
                 setMobileCategoryOpen((v) => !v);
               }}
-              className="w-full flex items-center gap-3 border border-slate-200 rounded-xl pl-3 pr-3 py-2.5 text-sm bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+              className="w-full flex items-center gap-3 border border-slate-200 rounded-xl pl-3 pr-3 py-2.5 text-sm bg-slate-50 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
             >
               {stagedCategory === "" ? (
-                <div className="h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 border-cyan-400 bg-cyan-100">
-                  <Tag size={13} className="text-cyan-600" />
+                <div className="h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 border-emerald-400 bg-emerald-100">
+                  <Tag size={13} className="text-emerald-600" />
                 </div>
               ) : (
-                <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 border-cyan-400">
+                <div className="h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 border-emerald-400">
                   <img
                     src={
                       categories.find((c) => c._id === stagedCategory)?.image
@@ -660,7 +660,7 @@ export default function MedicinesPage() {
                   />
                 </div>
               )}
-              <span className="flex-1 text-left text-[#162555] font-medium truncate">
+              <span className="flex-1 text-left hover:text-[#166534] font-medium truncate">
                 {stagedCategory === ""
                   ? "All Products"
                   : categories.find((c) => c._id === stagedCategory)?.name}
@@ -682,13 +682,13 @@ export default function MedicinesPage() {
                     setMobileCategoryOpen(false);
                   }}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${
-                    stagedCategory === "" ? "bg-cyan-50" : "hover:bg-slate-50"
+                    stagedCategory === "" ? "bg-emerald-50" : "hover:bg-slate-50"
                   }`}
                 >
                   <div
                     className={`h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 transition ${
                       stagedCategory === ""
-                        ? "border-cyan-400 bg-cyan-100"
+                        ? "border-emerald-400 bg-emerald-100"
                         : "border-slate-200 bg-slate-100"
                     }`}
                   >
@@ -696,18 +696,18 @@ export default function MedicinesPage() {
                       size={13}
                       className={
                         stagedCategory === ""
-                          ? "text-cyan-600"
+                          ? "text-emerald-600"
                           : "text-slate-400"
                       }
                     />
                   </div>
                   <span
-                    className={`flex-1 text-left ${stagedCategory === "" ? "text-cyan-700 font-semibold" : "text-slate-600"}`}
+                    className={`flex-1 text-left ${stagedCategory === "" ? "text-emerald-700 font-semibold" : "text-slate-600"}`}
                   >
                     All Products
                   </span>
                   {stagedCategory === "" && (
-                    <span className="h-2 w-2 rounded-full bg-cyan-500 flex-shrink-0" />
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 flex-shrink-0" />
                   )}
                 </button>
 
@@ -724,14 +724,14 @@ export default function MedicinesPage() {
                     }}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${
                       stagedCategory === cat._id
-                        ? "bg-cyan-50"
+                        ? "bg-emerald-50"
                         : "hover:bg-slate-50"
                     }`}
                   >
                     <div
                       className={`h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 transition ${
                         stagedCategory === cat._id
-                          ? "border-cyan-400"
+                          ? "border-emerald-400"
                           : "border-slate-200"
                       }`}
                     >
@@ -748,14 +748,14 @@ export default function MedicinesPage() {
                     <span
                       className={`flex-1 text-left capitalize leading-tight ${
                         stagedCategory === cat._id
-                          ? "text-cyan-700 font-semibold"
+                          ? "text-emerald-700 font-semibold"
                           : "text-slate-600"
                       }`}
                     >
                       {cat.name}
                     </span>
                     {stagedCategory === cat._id && (
-                      <span className="h-2 w-2 rounded-full bg-cyan-500 flex-shrink-0" />
+                      <span className="h-2 w-2 rounded-full bg-emerald-500 flex-shrink-0" />
                     )}
                   </button>
                 ))}
@@ -778,7 +778,7 @@ export default function MedicinesPage() {
                 placeholder="0"
                 value={stagedMinPrice}
                 onChange={(e) => setStagedMinPrice(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm hover:text-[#166534] bg-slate-50 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
               />
             </div>
             <span className="text-slate-300 mt-4">—</span>
@@ -792,7 +792,7 @@ export default function MedicinesPage() {
                 placeholder="Any"
                 value={stagedMaxPrice}
                 onChange={(e) => setStagedMaxPrice(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm text-[#162555] bg-slate-50 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm hover:text-[#166534] bg-slate-50 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition"
               />
             </div>
           </div>
@@ -807,7 +807,7 @@ export default function MedicinesPage() {
                 : Math.min(Number(stagedMaxPrice), 10000)
             }
             onChange={(e) => setStagedMaxPrice(e.target.value)}
-            className="w-full accent-cyan-600 cursor-pointer"
+            className="w-full accent-emerald-600 cursor-pointer"
           />
           <div className="flex justify-between text-[11px] text-slate-400">
             <span>₹0</span>
@@ -821,7 +821,7 @@ export default function MedicinesPage() {
         <label className="flex items-center gap-3 cursor-pointer group">
           <div
             onClick={() => setStagedFeatured(!stagedFeatured)}
-            className={`h-5 w-5 rounded-md border-2 flex items-center justify-center transition cursor-pointer ${stagedFeatured ? "bg-cyan-500 border-cyan-500" : "border-slate-300 bg-white group-hover:border-cyan-400"}`}
+            className={`h-5 w-5 rounded-md border-2 flex items-center justify-center transition cursor-pointer ${stagedFeatured ? "bg-emerald-500 border-emerald-500" : "border-slate-300 bg-white group-hover:border-emerald-400"}`}
           >
             {stagedFeatured && (
               <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
@@ -835,7 +835,7 @@ export default function MedicinesPage() {
               </svg>
             )}
           </div>
-          <span className="text-sm text-slate-600 group-hover:text-[#162555] transition">
+          <span className="text-sm text-slate-600 group-hover:hover:text-[#166534] transition">
             Featured products only
           </span>
         </label>
@@ -853,7 +853,7 @@ export default function MedicinesPage() {
 
   // ── render ─────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-slate-50 text-[#162555]">
+    <div className="min-h-screen bg-slate-50 hover:text-[#166534]">
       {/* MOBILE DRAWER */}
       {mobileSidebar && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
@@ -868,7 +868,7 @@ export default function MedicinesPage() {
               className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-100 flex-shrink-0"
               onClick={(e) => e.stopPropagation()}
             >
-              <span className="text-lg font-bold text-[#162555]">Filters</span>
+              <span className="text-lg font-bold text-[#337642]">Filters</span>
 
               <div className="flex items-center gap-2">
                 <button
@@ -876,7 +876,7 @@ export default function MedicinesPage() {
                     e.stopPropagation();
                     handleMobileApply(); // already calls setMobileSidebar(false)
                   }}
-                  className="px-4 py-1.5 rounded-lg bg-[#162555] hover:bg-[#1d3475] text-white text-sm font-bold transition shadow-sm"
+                  className="px-4 py-1.5 rounded-lg bg-[#337642] hover:bg-[#337642] text-white text-sm font-bold transition shadow-sm"
                 >
                   Apply
                 </button>
@@ -944,7 +944,7 @@ export default function MedicinesPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setMobileSidebar(true)}
-                  className="lg:hidden flex items-center gap-2 bg-[#162555] text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition hover:bg-[#1d3475]"
+                  className="lg:hidden flex items-center gap-2 bg-[#337642] text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition hover:bg-[#337642]"
                 >
                   <SlidersHorizontal size={15} /> Filters
                 </button>
@@ -956,16 +956,16 @@ export default function MedicinesPage() {
                   ) : (
                     <>
                       Showing{" "}
-                      <span className="font-semibold text-[#162555]">
+                      <span className="font-semibold hover:text-[#166534]">
                         {startItem}–{endItem}
                       </span>{" "}
                       of{" "}
-                      <span className="font-semibold text-[#162555]">
+                      <span className="font-semibold hover:text-[#166534]">
                         {totalProducts}
                       </span>{" "}
                       results
                       {activeLetter && (
-                        <span className="ml-1 text-cyan-600 font-semibold">
+                        <span className="ml-1 text-emerald-600 font-semibold">
                           · "{activeLetter}…"
                         </span>
                       )}
@@ -979,7 +979,7 @@ export default function MedicinesPage() {
             {hasAnyFilter && (
               <div className="flex flex-wrap gap-2 mb-5">
                 {activeLetter && (
-                  <span className="inline-flex items-center gap-1.5 bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full">
                     Starts with "{activeLetter}"
                     <button onClick={() => handleLetterSelect("")}>
                       <X size={11} />
@@ -987,7 +987,7 @@ export default function MedicinesPage() {
                   </span>
                 )}
                 {appliedSearch && (
-                  <span className="inline-flex items-center gap-1.5 bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full">
                     Search: "{appliedSearch}"
                     <button
                       onClick={() => {
@@ -1000,7 +1000,7 @@ export default function MedicinesPage() {
                   </span>
                 )}
                 {categoryId && (
-                  <span className="inline-flex items-center gap-1.5 bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full">
                     {categories.find((c) => c._id === categoryId)?.name ??
                       "Category"}
                     <button onClick={() => setCategoryId("")}>
@@ -1009,7 +1009,7 @@ export default function MedicinesPage() {
                   </span>
                 )}
                 {isFeatured && (
-                  <span className="inline-flex items-center gap-1.5 bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full">
                     Featured only
                     <button onClick={() => setIsFeatured(false)}>
                       <X size={11} />
@@ -1017,7 +1017,7 @@ export default function MedicinesPage() {
                   </span>
                 )}
                 {(minPrice !== "" || maxPrice !== "") && (
-                  <span className="inline-flex items-center gap-1.5 bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full">
                     ₹{minPrice || 0} – ₹{maxPrice || "Any"}
                     <button
                       onClick={() => {
@@ -1040,7 +1040,7 @@ export default function MedicinesPage() {
             ) : products.length === 0 ? (
               <div className="text-center py-32">
                 <div className="text-5xl mb-4">🔍</div>
-                <h3 className="text-xl font-bold text-[#162555] mb-2">
+                <h3 className="text-xl font-bold hover:text-[#166534] mb-2">
                   No medicines found
                 </h3>
                 <p className="text-slate-500 text-sm">
@@ -1072,7 +1072,7 @@ export default function MedicinesPage() {
                   onClick={() => setPage((p) => Math.max(p - 1, 1))}
                   disabled={page === 1}
                   className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition
-                    ${page === 1 ? "bg-slate-100 text-slate-300 cursor-not-allowed" : "bg-white border border-slate-200 text-[#162555] hover:bg-[#162555] hover:text-white shadow-sm"}`}
+                    ${page === 1 ? "bg-slate-100 text-slate-300 cursor-not-allowed" : "bg-white border border-slate-200 hover:bg-[#166534] hover:text-white hover:text-white shadow-sm"}`}
                 >
                   <ChevronLeft size={16} /> Previous
                 </button>
@@ -1089,7 +1089,7 @@ export default function MedicinesPage() {
                       key={pg}
                       onClick={() => setPage(pg)}
                       className={`h-10 w-10 rounded-xl text-sm font-semibold transition
-                        ${page === pg ? "bg-[#162555] text-white shadow-md" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 shadow-sm"}`}
+                        ${page === pg ? "bg-[#166534] text-white shadow-md" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 shadow-sm"}`}
                     >
                       {pg}
                     </button>
@@ -1099,7 +1099,7 @@ export default function MedicinesPage() {
                   onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
                   disabled={page === totalPages}
                   className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition
-                    ${page === totalPages ? "bg-slate-100 text-slate-300 cursor-not-allowed" : "bg-white border border-slate-200 text-[#162555] hover:bg-[#162555] hover:text-white shadow-sm"}`}
+                    ${page === totalPages ? "bg-slate-100 text-slate-300 cursor-not-allowed" : "bg-white border border-slate-200 hover:bg-[#166534] hover:text-white hover:text-white shadow-sm"}`}
                 >
                   Next <ChevronRight size={16} />
                 </button>

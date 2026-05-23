@@ -40,7 +40,7 @@ export default function CartBar() {
             </span>
             <div className="flex items-center gap-3">
               {totalSavings > 0 && (
-                <span className="text-xs font-semibold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-full">
+                <span className="text-xs font-semibold text-[#337642] bg-green-50 px-2.5 py-1 rounded-full">
                   You save ₹{fmt(totalSavings)}
                 </span>
               )}
@@ -78,7 +78,7 @@ export default function CartBar() {
                     </p>
                     <p className="text-[11px] text-slate-500">
                       {item.strength} · {item.packageQty} tabs ·{" "}
-                      <span className="font-semibold text-teal-700">
+                      <span className="font-semibold text-[#337642]">
                         ₹{fmt(item.price)}
                       </span>
                     </p>
@@ -132,7 +132,7 @@ export default function CartBar() {
       </div>
 
       {/* ── STICKY BAR ── */}
-      <div className="bg-[#162555] text-white shadow-2xl">
+      <div className="bg-[#337642] text-white shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
           {/* Left: toggle + count */}
           <button
@@ -141,7 +141,7 @@ export default function CartBar() {
           >
             <div className="relative">
               <ShoppingCart size={22} />
-              <span className="absolute -top-2 -right-2 h-4 w-4 bg-teal-400 text-[#162555] text-[10px] font-black rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 h-4 w-4 bg-teal-400 text-[#337642] text-[10px] font-black rounded-full flex items-center justify-center">
                 {totalItems > 9 ? "9+" : totalItems}
               </span>
             </div>
@@ -184,7 +184,7 @@ export default function CartBar() {
               </p>
             </div>
             <button
-              className="bg-teal-500 hover:bg-teal-400 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors"
+              className="bg-[#337642] hover:bg-[#285e35] text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors"
               onClick={() => router.push("/checkout")}
             >
               Checkout
