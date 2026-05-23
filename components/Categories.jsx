@@ -8,15 +8,15 @@ const Skeleton = () => (
   <div
     style={{
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
-      gap: 16,
+      gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+      gap: 18,
     }}
   >
     {Array.from({ length: 8 }).map((_, i) => (
       <div
         key={i}
         style={{
-          height: 180,
+          height: 200,
           borderRadius: 20,
           background: "linear-gradient(135deg,#f1f5f9,#e2e8f0)",
           animation: "catPulse 1.4s ease-in-out infinite",
@@ -36,7 +36,6 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  /* ── fetch ── */
   useEffect(() => {
     (async () => {
       try {
@@ -52,7 +51,6 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
     })();
   }, [apiEndpoint]);
 
-  /* ── entrance animation on scroll ── */
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([entry]) => {
@@ -73,58 +71,33 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
   return (
     <>
       <style>{`
-      
-
         @keyframes catPulse {
-          0%,100% { opacity:1 }
-          50%      { opacity:.5 }
-        }
-        @keyframes catFloat {
-          0%,100% { transform: translateY(0px) }
-          50%     { transform: translateY(-5px) }
+          0%,100% { opacity:1 } 50% { opacity:.5 }
         }
         @keyframes catIn {
-          from { opacity:0; transform: translateY(24px) scale(0.95) }
-          to   { opacity:1; transform: translateY(0)   scale(1)    }
+          from { opacity:0; transform: translateY(22px) }
+          to   { opacity:1; transform: translateY(0) }
+        }
+        @keyframes catFloat {
+          0%,100% { transform: translateY(0px) } 50% { transform: translateY(-5px) }
         }
 
         .cat-section {
           padding: 48px 70px;
-           font-family: var(--font-inter), sans-serif;
+          font-family: var(--font-inter), sans-serif;
+          background: #f8faff;
         }
 
-        /* ── header ── */
         .cat-header {
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
-          margin-bottom: 32px;
+          margin-bottom: 28px;
           flex-wrap: wrap;
           gap: 12px;
         }
-        .cat-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: #0e7490;
-          background: #e0f7fa;
-          border: 1px solid #b2ebf2;
-          border-radius: 20px;
-          padding: 5px 14px;
-          margin-bottom: 10px;
-        }
-        .cat-eyebrow-dot {
-          width: 6px; height: 6px;
-          border-radius: 50%;
-          background: #22d3ee;
-          animation: catFloat 2s ease-in-out infinite;
-        }
         .cat-title {
-           font-family: var(--font-poppins), sans-serif;
+          font-family: var(--font-poppins), sans-serif;
           font-size: clamp(22px, 4vw, 30px);
           font-weight: 800;
           color: #0f172a;
@@ -138,166 +111,163 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
           color: #64748b;
           margin: 6px 0 0;
         }
-        .cat-view-all {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 13px;
-          font-weight: 700;
-          color: #162555;
-          border: 1.5px solid #162555;
-          border-radius: 10px;
-          padding: 8px 18px;
-          background: transparent;
-          cursor: pointer;
-          transition: all 0.2s;
-          text-decoration: none;
-          white-space: nowrap;
-          align-self: flex-start;
-          margin-top: 4px;
-        }
-        .cat-view-all:hover {
-          background: #162555;
-          color: #fff;
-        }
-        .cat-view-all svg { transition: transform 0.2s; }
-        .cat-view-all:hover svg { transform: translateX(3px); }
 
-        /* ── grid ── */
+        /* ── GRID ── */
         .cat-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-          gap: 16px;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 18px;
         }
 
-        /* ── card ── */
+        /* ── CARD ── */
         .cat-card {
           position: relative;
-          border-radius: 5px;
-          height: 180px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-end;
-          gap: 0;
+          border-radius: 20px;
+          height: 200px;
           cursor: pointer;
-          border: 2px solid transparent;
-          transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s cubic-bezier(.34,1.56,.64,1);
           overflow: hidden;
           opacity: 0;
-          padding: 0;
+          background: #fff;
+          border: 1.5px solid #e8edf5;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+          transition: transform 0.26s cubic-bezier(.34,1.4,.64,1), box-shadow 0.26s, border-color 0.2s;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 20px;
         }
         .cat-card.visible {
-          animation: catIn 0.45s cubic-bezier(.34,1.2,.64,1) forwards;
+          animation: catIn 0.42s ease forwards;
         }
         .cat-card:hover {
-          transform: translateY(-6px) scale(1.03);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+          transform: translateY(-6px);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+          border-color: #c7dff0;
         }
         .cat-card.active {
-          border-color: #fff !important;
-          box-shadow: 0 0 0 3px #162555, 0 16px 40px rgba(0,0,0,0.18);
-          transform: translateY(-4px) scale(1.02);
+          border-color: #249349;
+          box-shadow: 0 0 0 3px rgba(36,147,73,0.15), 0 12px 32px rgba(0,0,0,0.1);
         }
 
-        /* ── background image with zoom on hover ── */
+        /* ── BACKGROUND IMAGE (subtle, top portion) ── */
         .cat-bg {
           position: absolute;
           inset: 0;
           background-size: cover;
           background-position: center;
-          border-radius: 5px;
           transform: scale(1);
-          transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
           will-change: transform;
         }
-        .cat-card:hover .cat-bg {
-          transform: scale(1.12);
-        }
+        .cat-card:hover .cat-bg { transform: scale(1.07); }
 
-        /* ── bottom gradient scrim for text legibility ── */
+        /* white-to-transparent overlay so text is readable at bottom */
         .cat-scrim {
           position: absolute;
           inset: 0;
-          border-radius: 5px;
           background: linear-gradient(
-            to top,
-            rgba(0,0,0,0.72) 0%,
-            rgba(0,0,0,0.28) 45%,
-            rgba(0,0,0,0) 100%
+            to bottom,
+            rgba(255,255,255,0.18) 0%,
+            rgba(255,255,255,0.55) 35%,
+            rgba(255,255,255,0.92) 62%,
+            rgba(255,255,255,1) 100%
           );
-          transition: opacity 0.35s;
         }
 
-        /* ── count badge ── */
-        .cat-count {
-          position: absolute;
-          top: 12px;
-          right: 12px;
-          font-size: 10px;
-          font-weight: 700;
-          padding: 2px 8px;
-          border-radius: 20px;
-          background: rgba(255,255,255,0.25);
-          color: #fff;
-          backdrop-filter: blur(6px);
-          border: 1px solid rgba(255,255,255,0.4);
-          z-index: 2;
-        }
-
-        /* ── label area ── */
-        .cat-footer {
-          position: relative;
-          z-index: 2;
-          width: 100%;
-          padding: 0 14px 16px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: 6px;
-        }
-        .cat-name {
-          font-family: var(--font-poppins), sans-serif;
-          font-size: 13px;
-          font-weight: 700;
-          color: #fff;
-          line-height: 1.3;
-          letter-spacing: -0.2px;
-          text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-          flex: 1;
-        }
-        /* arrow pill — visible on hover */
-        .cat-arrow {
-          width: 26px; height: 26px;
-          border-radius: 50%;
-          background: rgba(255,255,255,0.2);
-          border: 1.5px solid rgba(255,255,255,0.5);
-          backdrop-filter: blur(4px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          opacity: 0;
-          transform: translateY(6px) scale(0.85);
-          transition: opacity 0.25s, transform 0.25s;
-          flex-shrink: 0;
-        }
-        .cat-card:hover .cat-arrow {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-
-        /* ── fallback emoji if no image ── */
-        .cat-emoji-fallback {
+        /* fallback if no image */
+        .cat-fallback-bg {
           position: absolute;
           inset: 0;
+          background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
+        }
+
+        /* ── ICON BOX ── (top-left, floating above scrim) */
+        .cat-icon-box {
+          position: absolute;
+          top: 18px;
+          left: 18px;
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: rgba(255,255,255,0.82);
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(255,255,255,0.9);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 40px;
-          z-index: 1;
+          font-size: 22px;
+          z-index: 3;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
-        /* ── error ── */
+        /* ── CONTENT (bottom, above scrim) ── */
+        .cat-content {
+          position: relative;
+          z-index: 3;
+        }
+
+        .cat-name {
+          font-family: var(--font-poppins), sans-serif;
+          font-size: 15px;
+          font-weight: 700;
+          color: #0f172a;
+          line-height: 1.3;
+          margin: 0 0 5px;
+        }
+
+        .cat-desc {
+          font-size: 11.5px;
+          color: #64748b;
+          line-height: 1.55;
+          margin: 0 0 10px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        /* arrow row */
+        .cat-arrow-row {
+          display: flex;
+          align-items: center;
+        }
+        .cat-arrow-btn {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: #f0fdf4;
+          border: 1.5px solid #bbf7d0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s, border-color 0.2s, transform 0.2s;
+        }
+        .cat-card:hover .cat-arrow-btn,
+        .cat-card.active .cat-arrow-btn {
+          background: #249349;
+          border-color: #249349;
+          transform: translateX(3px);
+        }
+        .cat-arrow-btn svg { transition: stroke 0.2s; }
+        .cat-card:hover .cat-arrow-btn svg,
+        .cat-card.active .cat-arrow-btn svg { stroke: #fff; }
+
+        /* count badge */
+        .cat-count {
+          position: absolute;
+          top: 18px;
+          right: 18px;
+          z-index: 3;
+          font-size: 10px;
+          font-weight: 700;
+          padding: 3px 9px;
+          border-radius: 20px;
+          background: rgba(255,255,255,0.75);
+          color: #475569;
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(255,255,255,0.9);
+        }
+
         .cat-error {
           text-align: center;
           padding: 40px;
@@ -305,14 +275,25 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
           font-size: 14px;
         }
 
-        @media (max-width: 480px) {
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+          .cat-section { padding: 36px 20px 32px; }
           .cat-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
           }
-          .cat-card { height: 150px; }
-          .cat-name { font-size: 11px; }
-          .cat-section { padding: 36px 16px 32px; }
+          .cat-card { height: 180px; padding: 16px; border-radius: 16px; }
+          .cat-icon-box { width: 38px; height: 38px; border-radius: 10px; font-size: 18px; top: 14px; left: 14px; }
+          .cat-name { font-size: 13px; }
+          .cat-desc { font-size: 11px; -webkit-line-clamp: 2; }
+          .cat-count { top: 14px; right: 14px; }
+        }
+
+        @media (max-width: 400px) {
+          .cat-grid { gap: 10px; }
+          .cat-card { height: 165px; padding: 14px; }
+          .cat-name { font-size: 12px; }
+          .cat-desc { display: none; }
         }
       `}</style>
 
@@ -321,17 +302,17 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
         ref={sectionRef}
         aria-labelledby="shop-category-heading"
       >
-        {/* Header */}
         <div className="cat-header">
           <div>
             <h2 className="cat-title" id="shop-category-heading">
               Shop by <span>Category</span>
             </h2>
-            <p className="cat-subtitle">Browse medicines you need, fast and easily </p>
+            <p className="cat-subtitle">
+              Browse medicines you need, fast and easily
+            </p>
           </div>
         </div>
 
-        {/* Grid */}
         {loading ? (
           <Skeleton />
         ) : error ? (
@@ -342,7 +323,6 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
           <div className="cat-grid">
             {categories.map((cat, idx) => {
               const isActive = active === cat._id;
-
               return (
                 <div
                   key={cat._id || idx}
@@ -356,52 +336,50 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
                   aria-pressed={isActive}
                   title={cat.name}
                 >
-                  {/* Background image — zooms on hover via CSS */}
+                  {/* Background image */}
                   {cat.image ? (
                     <div
                       className="cat-bg"
-                      style={{
-                        backgroundImage: `url(${cat.image})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
+                      style={{ backgroundImage: `url(${cat.image})` }}
                     />
                   ) : (
-                    <div
-                      className="cat-bg"
-                      style={{
-                        background: "linear-gradient(135deg, #334155, #1e293b)",
-                      }}
-                    />
+                    <div className="cat-fallback-bg" />
                   )}
 
-                  {/* Bottom scrim for text */}
+                  {/* White fade scrim */}
                   <div className="cat-scrim" />
 
-                  {/* Fallback emoji if no image */}
-                  {!cat.image && <span className="cat-emoji-fallback">💊</span>}
+                  {/* Icon box top-left */}
+                  <div className="cat-icon-box" aria-hidden="true">
+                    {cat.icon || "💊"}
+                  </div>
 
-                  {/* Product count badge */}
+                  {/* Count badge top-right */}
                   {cat.productCount != null && (
-                    <span className="cat-count">{cat.productCount}</span>
+                    <span className="cat-count">{cat.productCount} items</span>
                   )}
 
-                  {/* Name + arrow */}
-                  <div className="cat-footer">
+                  {/* Bottom content */}
+                  <div className="cat-content">
                     <p className="cat-name">{cat.name}</p>
-                    <div className="cat-arrow">
-                      <svg
-                        width="11"
-                        height="11"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
+                    {cat.description && (
+                      <p className="cat-desc">{cat.description}</p>
+                    )}
+                    <div className="cat-arrow-row">
+                      <div className="cat-arrow-btn" aria-hidden="true">
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#249349"
+                          strokeWidth="2.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>

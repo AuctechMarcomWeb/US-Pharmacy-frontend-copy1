@@ -4,178 +4,299 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 
-        .hero {
-           font-family: var(--font-inter);
+        .ph-hero {
+          font-family: --var(--font-inter);
           position: relative;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          min-height: 250px;
           overflow: hidden;
-          min-height: 280px;
-          display: flex;
-          align-items: center;
+          background: #f7f9f5;
         }
 
-        .hero-bg-image {
-          position: absolute;
-          inset: 0;
-          background:
-            url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1400&q=80')
-            center center / cover no-repeat;
-          z-index: 0;
-        }
-
-        .hero-bg-overlay {
-          position: absolute;
-          inset: 0;
-    background: linear-gradient(
-  110deg,
-  rgba(20, 70, 32, 0.9) 0%,
-  rgba(51, 118, 66, 0.8) 45%,
-  rgba(92, 168, 108, 0.6) 100%
-);
-          z-index: 1;
-        }
-
-        .hero-wave-bottom {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          z-index: 3;
-          line-height: 0;
-        }
-
-        .hero-wave-bottom svg {
-          display: block;
-          width: 100%;
-          height: 48px;
-        }
-
-        .hero-inner {
+        /* ── LEFT PANEL ── */
+        .ph-left {
           position: relative;
           z-index: 2;
-          max-width: 1280px;
-          margin: 0 auto;
-          padding: 3rem 2rem 4.5rem;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 2rem;
-        }
-
-        .hero-left {
+          background: #ffffff;
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
-          max-width: 560px;
+          justify-content: center;
+          padding: 1.4rem 2.5rem 1.4rem 2rem;
+          gap: 0.7rem;
         }
 
-        .hero-badge {
+        .ph-left::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -50px;
+          width: 50px;
+          height: 100%;
+          background: #ffffff;
+          clip-path: polygon(0 0, 0 100%, 100% 100%);
+          z-index: 3;
+        }
+
+        .ph-sale-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          width: fit-content;
+        }
+
+        .ph-badge-pct {
+          font-family: --var(--font-poppins);
+          font-size: 0.65rem;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          background: #e8f5e9;
+          color: #1b5e20;
+          padding: 0.22rem 0.65rem;
+          border-radius: 4px;
+        }
+
+        .ph-badge-label {
+          font-size: 0.68rem;
+          font-weight: 500;
+          color: #999;
+          letter-spacing: 0.03em;
+        }
+
+        .ph-title {
+          font-family: --var(--font-inter);
+          font-size: clamp(1.25rem, 2.8vw, 2rem);
+          font-weight: 800;
+          line-height: 1.08;
+          color: #0d1b0e;
+          margin: 0;
+          letter-spacing: -0.03em;
+        }
+
+        .ph-title .num {
+          position: relative;
+          display: inline-block;
+          color: #2e7d32;
+        }
+
+        .ph-title .num::before {
+          content: '';
+          position: absolute;
+          bottom: 2px;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #a5d6a7;
+          border-radius: 2px;
+          z-index: -1;
+        }
+
+        .ph-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.4rem;
+        }
+
+        .ph-tag {
           display: inline-flex;
           align-items: center;
           gap: 0.4rem;
           font-size: 0.72rem;
-          font-weight: 700;
-          font-style: italic;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #337642;
-          animation: fadeUp 0.5s ease both;
-        }
-
-        .hero-title {
-          font-family: var(--font-playfair);
-          font-size: clamp(1.6rem, 5vw, 3rem);
-          font-weight: 800;
-          line-height: 1.1;
-          color: #fff;
-          margin: 0;
-          animation: fadeUp 0.6s ease 0.1s both;
-          text-shadow: 0 2px 20px rgba(0,0,0,0.25);
-        }
-
-        .hero-title em {
-          font-style: italic;
-          color: #38c657;
-        }
-
-        .hero-tags {
-          display: flex;
-          gap: 0.5rem;
-          flex-wrap: wrap;
-          margin-top: 0.4rem;
-          animation: fadeUp 0.6s ease 0.2s both;
-        }
-
-        .hero-tag {
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.25);
-          backdrop-filter: blur(6px);
-          color: #e0f2fe;
-          font-size: 0.78rem;
-          font-weight: 600;
-          padding: 0.28rem 0.75rem;
+          font-weight: 500;
+          color: #2e2e2e;
+          background: #f4f4f4;
           border-radius: 999px;
-          letter-spacing: 0.03em;
-          white-space: nowrap;
+          padding: 0.22rem 0.65rem;
         }
 
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
+        .ph-tag-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #2e7d32;
+          flex-shrink: 0;
+        }
+
+        .ph-tag-dot.delivery { background: #1565c0; }
+        .ph-tag-dot.verified { background: #6a1b9a; }
+
+        /* ── RIGHT PANEL ── */
+        .ph-right {
+          position: relative;
+          z-index: 1;
+          overflow: hidden;
+        }
+
+        .ph-right-img {
+          position: absolute;
+          inset: 0;
+          background: url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=900&q=85')
+            center center / cover no-repeat;
+        }
+
+        .ph-right-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(46,125,50,0.15) 0%, rgba(0,0,0,0.08) 100%);
+        }
+
+        .ph-discount-card {
+          position: absolute;
+          bottom: 1rem;
+          right: 1rem;
+          background: #ffffff;
+          border-radius: 10px;
+          padding: 0.65rem 0.9rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.1rem;
+          box-shadow: 0 6px 24px rgba(0,0,0,0.16);
+          min-width: 110px;
+          z-index: 4;
+          animation: floatUp 0.7s ease 0.3s both;
+        }
+
+        .ph-discount-card .big-num {
+          font-family: --var(--font-poppins);
+          font-size: 1.75rem;
+          font-weight: 800;
+          color: #2e7d32;
+          line-height: 1;
+          letter-spacing: -0.04em;
+        }
+
+        .ph-discount-card .big-num span {
+          font-size: 0.85rem;
+          vertical-align: super;
+          font-weight: 700;
+        }
+
+        .ph-discount-card .card-label {
+          font-size: 0.65rem;
+          font-weight: 600;
+          color: #444;
+          text-transform: uppercase;
+          letter-spacing: 0.07em;
+        }
+
+        .ph-discount-card .card-sub {
+          font-size: 0.6rem;
+          color: #aaa;
+        }
+
+        .ph-corner-tag {
+          position: absolute;
+          top: 0.85rem;
+          right: 0.85rem;
+          background: #2e7d32;
+          color: #fff;
+          font-size: 0.62rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          padding: 0.28rem 0.7rem;
+          border-radius: 999px;
+          z-index: 4;
+          animation: floatUp 0.6s ease 0.1s both;
+        }
+
+        @keyframes floatUp {
+          from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 860px) {
-          .hero-inner {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 2.5rem 1.5rem 4rem;
+        /* ── MOBILE ── */
+        @media (max-width: 600px) {
+          .ph-hero {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            min-height: unset;
+          }
+
+          /* on mobile: image goes on top as a short strip */
+          .ph-right {
+            order: -1;
+            height: 130px;
+          }
+
+          .ph-left {
+            padding: 1rem 1rem 1.1rem;
+            gap: 0.55rem;
+          }
+
+          .ph-left::after { display: none; }
+
+          .ph-title {
+            font-size: 1.2rem;
+            line-height: 1.1;
+          }
+
+          /* hide the floating card on mobile — too cramped */
+          .ph-discount-card { display: none; }
+
+          /* move corner tag inside the short image strip */
+          .ph-corner-tag {
+            top: 0.6rem;
+            right: 0.6rem;
+            font-size: 0.58rem;
+            padding: 0.22rem 0.55rem;
+          }
+
+          .ph-tags { gap: 0.3rem; }
+
+          .ph-tag {
+            font-size: 0.67rem;
+            padding: 0.18rem 0.55rem;
           }
         }
 
-        @media (max-width: 480px) {
-          .hero { min-height: 220px; }
-          .hero-inner { padding: 2rem 1rem 3.5rem; gap: 1rem; }
-          .hero-title { font-size: 1.5rem; }
-          .hero-tag { font-size: 0.65rem; padding: 0.25rem 0.65rem; }
-          .hero-wave-bottom svg { height: 32px; }
+        @media (max-width: 380px) {
+          .ph-title { font-size: 1.05rem; }
+          .ph-right { height: 110px; }
         }
       `}</style>
 
-      <section className="hero">
-        <div className="hero-bg-image" aria-hidden="true" />
-        <div className="hero-bg-overlay" aria-hidden="true" />
+      <section className="ph-hero" aria-label="New Year Sale — up to 30% off">
+        <div className="ph-left">
+          <div className="ph-sale-badge">
+            <span className="ph-badge-pct">🎉 New Year Sale</span>
+            <span className="ph-badge-label">Limited time offer</span>
+          </div>
 
-        {/* Bottom wave only — top wave removed */}
-        <div className="hero-wave-bottom" aria-hidden="true">
-          <svg
-            viewBox="0 0 1440 48"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0,48 L0,28 C200,8 400,0 600,14 C800,28 1000,44 1200,36 C1320,30 1380,18 1440,14 L1440,48 Z"
-              fill="#ffffff"
-            />
-          </svg>
+          <h1 className="ph-title">
+            Get Upto <span className="num">30% Off</span>
+            <br />
+            On This New Year Sale
+          </h1>
+
+          <div className="ph-tags">
+            <span className="ph-tag">
+              <span className="ph-tag-dot" />
+              💊 Medicines
+            </span>
+            <span className="ph-tag">
+              <span className="ph-tag-dot delivery" />
+              🚚 Fast Delivery
+            </span>
+            <span className="ph-tag">
+              <span className="ph-tag-dot verified" />✅ Verified Products
+            </span>
+          </div>
         </div>
 
-        <div className="hero-inner">
-          <div className="hero-left">
-            {/* <span className="hero-badge">🎉 New Year Sale Offer!</span> */}
-
-            <h1 className="hero-title">
-              Get Upto <em>30% Off</em>
-              <br />
-              On This New Year Sale
-            </h1>
-
-            <div className="hero-tags">
-              <span className="hero-tag">💊 Medicines</span>
-              <span className="hero-tag">🚚 Fast Delivery</span>
-              <span className="hero-tag">✅ Verified Products</span>
+        <div className="ph-right">
+          <div className="ph-right-img" aria-hidden="true" />
+          <div className="ph-right-overlay" aria-hidden="true" />
+          <div className="ph-corner-tag">New Year</div>
+          <div className="ph-discount-card" aria-hidden="true">
+            <div className="big-num">
+              <span>↑</span>30<span>%</span>
             </div>
+            <div className="card-label">Off Today</div>
+            <div className="card-sub">On all medicines</div>
           </div>
         </div>
       </section>
