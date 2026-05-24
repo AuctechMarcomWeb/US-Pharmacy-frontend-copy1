@@ -30,6 +30,8 @@ import {
   Search,
 } from "lucide-react";
 
+import PhoneField from "../../components/PhoneField";
+
 const fmt = (n) => Number(n).toFixed(2);
 const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=500";
@@ -400,6 +402,7 @@ export default function CheckoutPage() {
   const [countriesError, setCountriesError] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
+  const [phoneCountry, setPhoneCountry] = useState(null);
 
   const [form, setForm] = useState({
     fullName: "",
@@ -834,31 +837,16 @@ bg-green-200/30 rounded-full blur-[120px] pointer-events-none"
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">
-                      Mobile Number *
-                    </label>
-                    <div className="relative">
-                      <Phone
-                        size={15}
-                        className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-300"
-                      />
-                      <input
-                        name="mobile"
-                        placeholder="98765 43210"
-                        value={form.mobile}
-                        onChange={(e) =>
-                          setForm({
-                            ...form,
-                            mobile: e.target.value
-                              .replace(/\D/g, "")
-                              .slice(0, 15),
-                          })
-                        }
-                        maxLength={15}
-                        className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-[#166534] placeholder-slate-300 outline-none focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-100 transition-all text-sm font-medium"
-                        required
-                      />
-                    </div>
+                    <PhoneField
+                      value={form.mobile}
+                      onChange={(digits) =>
+                        setForm((p) => ({ ...p, mobile: digits }))
+                      }
+                      onCountryChange={setPhoneCountry}
+                      countries={countries} // already fetched in CheckoutPage
+                      selectedCountry={selectedCountry} // same ref you use for shipping
+                      required
+                    />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">
@@ -931,7 +919,10 @@ bg-green-200/30 rounded-full blur-[120px] pointer-events-none"
 
               {paymentLoading ? (
                 <div className="flex items-center gap-3 px-4 py-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-400 text-sm">
-                  <Loader2 size={16} className="animate-spin text-emerald-400" />
+                  <Loader2
+                    size={16}
+                    className="animate-spin text-emerald-400"
+                  />
                   Loading payment options...
                 </div>
               ) : paymentError ? (

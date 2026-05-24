@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter, Poppins, Playfair_Display } from "next/font/google";
-import "primereact/resources/themes/lara-light-cyan/theme.css";
+// import "primereact/resources/themes/lara-light-emerald/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 

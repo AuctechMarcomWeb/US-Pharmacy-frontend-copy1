@@ -102,7 +102,7 @@ export default function Header() {
             <Link href="/" className="hover:text-[#337642] transition">
               Home
             </Link>
-            <Link href="/blogs" className="hover:text-cyan-500 transition">
+            <Link href="/blogs" className="hover:text-emerald-500 transition">
               Blog
             </Link>
             <Link href="/products" className="hover:text-[#337642] transition">

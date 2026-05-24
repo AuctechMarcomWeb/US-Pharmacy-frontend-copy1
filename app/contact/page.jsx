@@ -120,7 +120,7 @@ export default function ContactPage() {
 
       {/* HEADER */}
       <header className="max-w-4xl mx-auto text-center mb-10 sm:mb-14 relative z-10">
-        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-sm mb-4 sm:mb-5 backdrop-blur-xl">
+        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 text-sm mb-4 sm:mb-5 backdrop-blur-xl">
           <Mail size={16} />
           Secure Communication Channel
         </div> */}
@@ -157,7 +157,7 @@ export default function ContactPage() {
               onChange={handleChange}
               placeholder="Your Name"
               required
-              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all text-sm"
             />
             <input
               name="phone"
@@ -167,7 +167,7 @@ export default function ContactPage() {
               required
               type="tel"
               maxLength={10}
-              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+              className="w-full p-3 sm:p-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all text-sm"
             />
           </div>
 
@@ -179,7 +179,7 @@ export default function ContactPage() {
             placeholder="Your Email"
             required
             type="email"
-            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all text-sm"
           />
 
           {/* TITLE */}
@@ -189,7 +189,7 @@ export default function ContactPage() {
             onChange={handleChange}
             placeholder="Subject / Title"
             required
-            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+            className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all text-sm"
           />
 
           {/* MESSAGE */}
@@ -200,7 +200,7 @@ export default function ContactPage() {
             placeholder="Your Message"
             rows={4}
             required
-            className="w-full p-3 sm:p-4 mb-4 sm:mb-5 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none resize-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 transition-all text-sm"
+            className="w-full p-3 sm:p-4 mb-4 sm:mb-5 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none resize-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all text-sm"
           />
 
           {/* SUBMIT */}
@@ -238,7 +238,7 @@ export default function ContactPage() {
               key={label}
               className="bg-[#C6E9FF] backdrop-blur-2xl border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <div className="flex items-center gap-3 text-cyan-700 mb-2 sm:mb-3">
+              <div className="flex items-center gap-3 text-emerald-700 mb-2 sm:mb-3">
                 <Icon size={20} />
                 <h2 className="font-bold text-base sm:text-lg">{label}</h2>
               </div>
