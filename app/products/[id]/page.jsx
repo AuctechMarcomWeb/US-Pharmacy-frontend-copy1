@@ -730,7 +730,11 @@ export default function MedicineDetailPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 sm:gap-4">
               {related.map((item) => (
-                <MedicineCard key={item.id} med={item} />
+                <MedicineCard
+                  key={item.id}
+                  med={item}
+                  onViewDetails={(med) => router.push(`/products/${med.id}`)}
+                />
               ))}
             </div>
           </div>
