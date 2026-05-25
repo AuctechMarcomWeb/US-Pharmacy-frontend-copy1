@@ -396,8 +396,7 @@ export default function BlogPage() {
                   dispMarket && dispPrice
                     ? Math.round(((dispMarket - dispPrice) / dispMarket) * 100)
                     : p.discount;
-                const selInStock =
-                  selPack.stock > 0 && selPack.isActive !== false;
+                const selInStock = selPack.isActive !== false;
                 const isAdded = !!addedMap[p.id];
 
                 return (
