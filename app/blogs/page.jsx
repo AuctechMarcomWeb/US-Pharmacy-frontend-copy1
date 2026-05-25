@@ -7,7 +7,7 @@ import { noTokenGetRequest } from "../../helper/index";
 import { ChevronDown } from "lucide-react";
 import { createPortal } from "react-dom";
 
- const metadata = {
+const metadata = {
   title: "Our Products | US Pharmacy",
   description:
     "Browse quality medicines and healthcare products at US Pharmacy. Explore verified medicines, affordable packs, and fast delivery options.",
@@ -133,7 +133,7 @@ function PackDropdown({ packs, activePack, onSelect }) {
         }`}
       >
         <div className="flex flex-col items-start min-w-0">
-          <span className="text-[#0e7490] font-semibold text-xs sm:text-sm truncate">
+          <span className="text-[#166534] font-semibold text-xs sm:text-sm truncate">
             {selPack.label || "Select pack"}
           </span>
           <span className="text-[10px] text-slate-400 mt-0.5">
@@ -541,7 +541,7 @@ export default function BlogPage() {
                                 ? "bg-slate-200 text-slate-400 cursor-not-allowed"
                                 : isAdded
                                   ? "bg-teal-600 text-white shadow-md"
-                                  : "bg-[#166534] hover:bg-[#1f3477] text-white shadow-md"
+                                  : "bg-[#166534] hover:bg-[#093319] text-white shadow-md"
                             }`}
                           >
                             <CartIcon />

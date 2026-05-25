@@ -135,22 +135,12 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
         <div className="flex flex-col items-start min-w-0">
           {sel ? (
             <>
-              <span className="text-[#0e7490] font-semibold text-sm truncate">
+              <span className="text-[#166534] font-semibold text-sm truncate">
                 {sel.label}
               </span>
               <span className="text-[11px] text-slate-400 mt-0.5">
                 {sel.mrp > sel.price && <s className="mr-1">₹{sel.mrp}</s>}₹
                 {sel.price}
-                {sel.stock <= 20 && sel.stock > 0 && (
-                  <span className="ml-2 text-amber-500 font-semibold">
-                    Only {sel.stock} left
-                  </span>
-                )}
-                {sel.stock === 0 && (
-                  <span className="ml-2 text-red-500 font-semibold">
-                    Out of stock
-                  </span>
-                )}
               </span>
             </>
           ) : (
