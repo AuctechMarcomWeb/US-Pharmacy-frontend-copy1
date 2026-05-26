@@ -526,7 +526,7 @@ export default function MedicinesPage() {
           <div className="flex items-center gap-3">
             <div className="flex-1">
               <label className="text-[11px] text-slate-400 font-medium uppercase tracking-wide block mb-1">
-                Min (₹)
+                Min ($)
               </label>
               <input
                 type="number"
@@ -540,7 +540,7 @@ export default function MedicinesPage() {
             <span className="text-slate-300 mt-4">—</span>
             <div className="flex-1">
               <label className="text-[11px] text-slate-400 font-medium uppercase tracking-wide block mb-1">
-                Max (₹)
+                Max ($)
               </label>
               <input
                 type="number"
@@ -566,8 +566,8 @@ export default function MedicinesPage() {
             className="w-full accent-emerald-600 cursor-pointer"
           />
           <div className="flex justify-between text-[11px] text-slate-400">
-            <span>₹0</span>
-            <span>₹10,000+</span>
+            <span>$0</span>
+            <span>$10,000+</span>
           </div>
         </div>
       </SidebarSection>
@@ -770,7 +770,7 @@ export default function MedicinesPage() {
           <div className="flex items-center gap-3">
             <div className="flex-1">
               <label className="text-[11px] text-slate-400 font-medium uppercase tracking-wide block mb-1">
-                Min (₹)
+                Min ($)
               </label>
               <input
                 type="number"
@@ -784,7 +784,7 @@ export default function MedicinesPage() {
             <span className="text-slate-300 mt-4">—</span>
             <div className="flex-1">
               <label className="text-[11px] text-slate-400 font-medium uppercase tracking-wide block mb-1">
-                Max (₹)
+                Max ($)
               </label>
               <input
                 type="number"
@@ -810,8 +810,8 @@ export default function MedicinesPage() {
             className="w-full accent-emerald-600 cursor-pointer"
           />
           <div className="flex justify-between text-[11px] text-slate-400">
-            <span>₹0</span>
-            <span>₹10,000+</span>
+            <span>$0</span>
+            <span>$10,000+</span>
           </div>
         </div>
       </SidebarSection>
@@ -1018,7 +1018,7 @@ export default function MedicinesPage() {
                 )}
                 {(minPrice !== "" || maxPrice !== "") && (
                   <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full">
-                    ₹{minPrice || 0} – ₹{maxPrice || "Any"}
+                    ${minPrice || 0} – ${maxPrice || "Any"}
                     <button
                       onClick={() => {
                         setMinPrice("");

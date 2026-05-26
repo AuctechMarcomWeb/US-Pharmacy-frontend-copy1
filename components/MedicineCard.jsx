@@ -197,10 +197,10 @@ export default function MedicineCard({ med, onViewDetails }) {
           {lowestVariant && (
             <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap">
               <span className="text-[12px] sm:text-[14px] font-bold text-gray-900 font-mono">
-                ₹{fmt(lowestVariant.price)}
+                ${fmt(lowestVariant.price)}
               </span>
               <span className="text-[10px] sm:text-[11px] text-gray-400 line-through font-mono">
-                ₹{fmt(lowestVariant.mrp)}
+                ${fmt(lowestVariant.mrp)}
               </span>
               {off && (
                 <span className="text-[9px] sm:text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">
@@ -279,7 +279,7 @@ export default function MedicineCard({ med, onViewDetails }) {
                       </span>
                       {/* Price below strength — mobile only (below sm) */}
                       <span className="sm:hidden text-[10px] font-bold text-gray-900 font-mono leading-tight mt-0.5">
-                        ₹{fmt(selectedVariant.price)}
+                        ${fmt(selectedVariant.price)}
                       </span>
                       {vOff && (
                         <span className="sm:hidden text-[9px] font-bold text-red-500 leading-tight">
@@ -298,7 +298,7 @@ export default function MedicineCard({ med, onViewDetails }) {
                     {/* Price inline — sm and above only */}
                     <div className="hidden sm:flex flex-col min-w-0 flex-shrink overflow-hidden">
                       <span className="text-[12px] font-bold text-gray-900 font-mono leading-tight truncate">
-                        ₹{fmt(selectedVariant.price)}
+                        ${fmt(selectedVariant.price)}
                       </span>
                       {vOff && (
                         <span className="text-[9px] font-bold text-red-500 leading-tight">

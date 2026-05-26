@@ -139,7 +139,7 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
                 {sel.label}
               </span>
               <span className="text-[11px] text-slate-400 mt-0.5">
-                {sel.mrp > sel.price && <s className="mr-1">₹{sel.mrp}</s>}₹
+                {sel.mrp > sel.price && <s className="mr-1">${sel.mrp}</s>}$
                 {sel.price}
               </span>
             </>
@@ -200,10 +200,10 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       {mv.mrp > mv.price && (
-                        <s className="text-[11px] text-slate-400">₹{mv.mrp}</s>
+                        <s className="text-[11px] text-slate-400">${mv.mrp}</s>
                       )}
                       <span className="text-sm font-bold text-slate-800">
-                        ₹{mv.price}
+                        ${mv.price}
                       </span>
                       {isSelected && (
                         <span className="text-[9px] font-black text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded-full">
@@ -555,15 +555,15 @@ export default function MedicineDetailPage() {
               <div className="flex items-end gap-2 sm:gap-3 mb-4">
                 {hasDiscount && (
                   <span className="text-base sm:text-lg text-slate-400 line-through font-medium">
-                    ₹{variant.mrp}
+                    ${variant.mrp}
                   </span>
                 )}
                 <span className="text-3xl sm:text-4xl font-black text-[#166534]">
-                  ₹{variant.price}
+                  ${variant.price}
                 </span>
                 {hasDiscount && (
                   <span className="text-xs sm:text-sm font-bold text-green-600 bg-green-50 px-2 py-1 rounded-lg mb-1">
-                    Save ₹{variant.mrp - variant.price}
+                    Save ${variant.mrp - variant.price}
                   </span>
                 )}
               </div>

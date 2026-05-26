@@ -138,9 +138,9 @@ function PackDropdown({ packs, activePack, onSelect }) {
           </span>
           <span className="text-[10px] text-slate-400 mt-0.5">
             {selPack.marketPrice && (
-              <s className="mr-1">₹{selPack.marketPrice}</s>
+              <s className="mr-1">${selPack.marketPrice}</s>
             )}
-            ₹{selPack.price}
+            ${selPack.price}
           </span>
         </div>
         <ChevronDown
@@ -186,11 +186,11 @@ function PackDropdown({ packs, activePack, onSelect }) {
                   <div className="flex items-center gap-1.5 flex-shrink-0">
                     {pack.marketPrice && (
                       <s className="text-[10px] text-slate-400">
-                        ₹{pack.marketPrice}
+                        ${pack.marketPrice}
                       </s>
                     )}
                     <span className="text-xs font-bold text-slate-800">
-                      ₹{pack.price}
+                      ${pack.price}
                     </span>
                     {activePack === idx && (
                       <span className="text-[9px] font-black text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded-full">
@@ -497,15 +497,15 @@ export default function BlogPage() {
                         <div className="flex items-baseline gap-2 mb-3">
                           {dispMarket && (
                             <span className="text-sm text-slate-400 line-through font-medium">
-                              ₹{dispMarket}
+                              ${dispMarket}
                             </span>
                           )}
                           <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                            ₹{dispPrice}
+                            ${dispPrice}
                           </span>
                           {saved > 0 && (
                             <span className="text-xs font-bold text-green-600">
-                              Save ₹{saved.toFixed(2)}
+                              Save ${saved.toFixed(2)}
                             </span>
                           )}
                         </div>

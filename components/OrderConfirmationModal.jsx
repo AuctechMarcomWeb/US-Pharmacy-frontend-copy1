@@ -69,7 +69,7 @@ export default function OrderConfirmModal({
             {itemCount} item{itemCount !== 1 ? "s" : ""}
           </span>
           <span className="text-[11px] font-bold bg-white/10 border border-white/20 text-white px-3 py-1 rounded-full">
-            ₹{fmt(total)}
+            ${fmt(total)}
           </span>
           {selectedCountry && (
             <span className="text-[11px] font-bold bg-white/10 border border-white/20 text-white px-3 py-1 rounded-full truncate max-w-[140px]">

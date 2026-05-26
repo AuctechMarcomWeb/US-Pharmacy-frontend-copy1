@@ -41,7 +41,7 @@ export default function CartBar() {
             <div className="flex items-center gap-3">
               {totalSavings > 0 && (
                 <span className="text-xs font-semibold text-[#337642] bg-green-50 px-2.5 py-1 rounded-full">
-                  You save ₹{fmt(totalSavings)}
+                  You save ${fmt(totalSavings)}
                 </span>
               )}
               <button
@@ -79,7 +79,7 @@ export default function CartBar() {
                     <p className="text-[11px] text-slate-500">
                       {item.strength} · {item.packageQty} tabs ·{" "}
                       <span className="font-semibold text-[#337642]">
-                        ₹{fmt(item.price)}
+                        ${fmt(item.price)}
                       </span>
                     </p>
                   </div>
@@ -113,7 +113,7 @@ export default function CartBar() {
 
                   {/* Line total */}
                   <span className="text-[13px] font-bold text-slate-800 font-mono flex-shrink-0 w-20 text-right">
-                    ₹{fmt(item.price * item.qty)}
+                    ${fmt(item.price * item.qty)}
                   </span>
 
                   {/* Remove */}
@@ -180,7 +180,7 @@ export default function CartBar() {
                 Total
               </p>
               <p className="text-lg font-black font-mono leading-none">
-                ₹{fmt(totalPrice)}
+                ${fmt(totalPrice)}
               </p>
             </div>
             <button
