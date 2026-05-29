@@ -451,6 +451,7 @@ export default function CheckoutPage() {
   const [paymentLoading, setPaymentLoading] = useState(true);
   const [paymentError, setPaymentError] = useState(null);
   const [paymentDropdownOpen, setPaymentDropdownOpen] = useState(false);
+  console.log("cart  details", cart);
 
   useEffect(() => {
     if (cart.length === 0 && step === 1) router.replace("/products");
@@ -794,10 +795,24 @@ export default function CheckoutPage() {
                                 {item.strength} · {item.packageQty} tabs
                               </p>
                             )}
-                            <div className="flex items-center gap-2 mt-1">
+                            <div className="flex items-center gap-2 mt-1 flex-wrap">
                               <span className="text-xs sm:text-sm font-black text-[#064e3b]">
                                 ${fmt(item.price)}
                               </span>
+                              {item.mrp && item.mrp > item.price && (
+                                <>
+                                  <span className="text-[10px] sm:text-xs text-slate-400 line-through font-medium">
+                                    ${fmt(item.mrp)}
+                                  </span>
+                                  <span className="text-[9px] sm:text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
+                                    {Math.round(
+                                      ((item.mrp - item.price) / item.mrp) *
+                                        100,
+                                    )}
+                                    % off
+                                  </span>
+                                </>
+                              )}
                             </div>
                           </div>
                         </div>
