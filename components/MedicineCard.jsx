@@ -57,18 +57,18 @@ function QtyStepper({ qty, onDec, onInc }) {
       <button
         onClick={onDec}
         disabled={qty <= 1}
-        className="h-7 w-6 sm:h-8 sm:w-8 flex items-center justify-center text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-sm font-bold"
+        className="h-7 w-6 sm:h-6 sm:w-6 flex items-center justify-center text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-sm font-bold"
         aria-label="Decrease quantity"
       >
         −
       </button>
-      <span className="h-7 w-6 sm:h-8 sm:w-8 flex items-center justify-center text-[11px] sm:text-[13px] font-bold text-slate-800 border-x border-slate-200 select-none">
+      <span className="h-7 w-6 sm:h-6 sm:w-6 flex items-center justify-center text-[11px] sm:text-[13px] font-bold text-slate-800 border-x border-slate-200 select-none">
         {qty}
       </span>
-      <button
+    <button
         onClick={onInc}
         disabled={qty >= 99}
-        className="h-7 w-6 sm:h-8 sm:w-8 flex items-center justify-center text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-sm font-bold"
+        className="h-7 w-6 sm:h-6 sm:w-6 flex items-center justify-center text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-sm font-bold"
         aria-label="Increase quantity"
       >
         +

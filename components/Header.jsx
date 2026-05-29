@@ -88,7 +88,7 @@ export default function Header() {
     <>
       {/* ── HEADER ── */}
       <header className="fixed top-0 left-0 w-full z-50 bg-white/100 backdrop-blur-2xl border-b border-white/20 shadow-sm">
-        <div className="flex items-center justify-between px-4 md:px-10 h-[65px]">
+        <div className="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-6 lg:px-8 h-[65px]">
           {/* LOGO */}
           <h2
             onClick={() => router.push("/")}

@@ -4,46 +4,45 @@
  * PhoneField — drop-in replacement for the mobile number field in CheckoutPage.
  *
  * Props:
- *   value          – current raw digit string (no dial code)
- *   onChange       – (rawDigits: string) => void
+ *   value          – current raw digit string (no dial code) — internal display value
+ *   onChange       – (fullNumber: string) => void  ← receives dialCode + digits e.g. "+911234567890"
  *   countries      – the same `countries` array already fetched in CheckoutPage
  *                    each item: { name, alpha2Code, flag }
  *   selectedCountry – the currently selected country object (same as checkout)
+ *   onCountryChange – (country) => void  optional, called when dial-code country changes
  *   required        – bool
  *
  * The component manages its own dial-code dropdown state so it doesn't
- * pollute the parent with extra state. It calls onChange with validated
- * digits only (strips non-numeric, respects maxLength for the country).
+ * pollute the parent with extra state. It calls onChange with the full
+ * concatenated phone number: dialCode + rawDigits  (e.g. "+911234567890").
+ * The input itself only shows the raw digits for a clean UX.
  *
- * Usage in CheckoutPage — replace the old mobile <div> block with:
+ * Usage in CheckoutPage:
  *
  *   <PhoneField
  *     value={form.mobile}
- *     onChange={(digits) => setForm((p) => ({ ...p, mobile: digits }))}
+ *     onChange={(fullNumber) => setForm((p) => ({ ...p, mobile: fullNumber }))}
+ *     onCountryChange={setPhoneCountry}
  *     countries={countries}
  *     selectedCountry={selectedCountry}
  *     required
  *   />
  *
- * And add `phoneCountry` to form state so you can read the dial code on submit:
- *   const [phoneCountry, setPhoneCountry] = useState(null);
- * Then pass  onCountryChange={setPhoneCountry}  to read the selected dial-code country.
+ * form.mobile will now hold the full number e.g. "+911234567890"
+ * which you can send directly in the API payload.
  */
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import {
-  Phone,
   ChevronDown,
   Search,
   X,
   CheckCircle2,
   AlertCircle,
-  TriangleAlert,
 } from "lucide-react";
 
 // ─── Country dial codes ────────────────────────────────────────────────────────
-// A comprehensive map: alpha2Code → { dialCode, maxLen, minLen, pattern label }
 const DIAL_META = {
   AF: { dialCode: "+93", min: 9, max: 9 },
   AL: { dialCode: "+355", min: 9, max: 9 },
@@ -236,8 +235,13 @@ function getDialMeta(alpha2Code) {
   return DIAL_META[alpha2Code] || { dialCode: "+1", min: 7, max: 15 };
 }
 
-function getPlaceholder(meta, countryName) {
-  return "X".repeat(meta.max);
+// Extract raw digits from a full number string (strip the leading dial code if present)
+function stripDialCode(fullNumber, dialCode) {
+  if (!fullNumber) return "";
+  const stripped = fullNumber.startsWith(dialCode)
+    ? fullNumber.slice(dialCode.length)
+    : fullNumber;
+  return stripped.replace(/\D/g, "");
 }
 
 // ─── Dial-code dropdown ────────────────────────────────────────────────────────
@@ -294,7 +298,7 @@ function DialDropdown({
   }, [isOpen, onClose]);
 
   const filtered = countries
-    .filter((c) => DIAL_META[c.alpha2Code]) // only countries with known dial code
+    .filter((c) => DIAL_META[c.alpha2Code])
     .filter(
       (c) =>
         search.trim() === "" ||
@@ -318,15 +322,17 @@ function DialDropdown({
           updateCoords();
           onToggle();
         }}
-        className={`h-full flex items-center gap-1.5 pl-3.5 pr-2.5 rounded-l-xl border-2 border-r-0 transition-all text-sm font-bold bg-slate-50 min-w-[90px]
-          ${isOpen ? "border-cyan-400 bg-white" : "border-slate-200 hover:border-slate-300"}`}
+        className={`h-full flex items-center gap-1.5 pl-3 pr-2 rounded-l-lg border-r-0 transition-all text-sm font-bold bg-slate-50 min-w-[80px]
+          ${isOpen ? "border-slate-400 bg-white" : "border-slate-200 hover:border-slate-300"}`}
       >
-        <span className="text-base leading-none">
+        <span className="text-sm leading-none">
           {selectedCountry?.flag || "🌐"}
         </span>
-        <span className="text-[#162555] text-xs">{meta.dialCode}</span>
+        <span className="text-xs font-semibold text-slate-600">
+          {meta.dialCode}
+        </span>
         <ChevronDown
-          size={12}
+          size={11}
           className={`text-slate-400 transition-transform duration-200 ml-0.5 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
@@ -343,13 +349,13 @@ function DialDropdown({
               width: coords.width,
               zIndex: 99999,
             }}
-            className="bg-white border border-slate-200 rounded-2xl shadow-2xl shadow-slate-300/60 overflow-hidden"
+            className="bg-white border border-slate-200 rounded-xl shadow-2xl shadow-slate-300/60 overflow-hidden"
           >
             <div className="p-2 border-b border-slate-100">
               <div className="relative">
                 <Search
-                  size={13}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300"
+                  size={11}
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-300"
                 />
                 <input
                   ref={searchRef}
@@ -357,22 +363,22 @@ function DialDropdown({
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search country…"
-                  className="w-full pl-8 pr-7 py-2 text-xs font-medium rounded-lg bg-slate-50 border border-slate-200 text-[#162555] placeholder-slate-300 outline-none focus:border-cyan-400 transition-all"
+                  className="w-full pl-7 pr-7 py-1.5 text-xs font-medium rounded-md bg-slate-50 border border-slate-200 text-slate-700 placeholder-slate-300 outline-none focus:border-slate-400 transition-all"
                 />
                 {search && (
                   <button
                     type="button"
                     onClick={() => setSearch("")}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500"
                   >
-                    <X size={12} />
+                    <X size={11} />
                   </button>
                 )}
               </div>
             </div>
-            <div className="max-h-56 overflow-y-auto">
+            <div className="max-h-48 overflow-y-auto">
               {filtered.length === 0 ? (
-                <div className="px-4 py-6 text-center text-xs text-slate-400">
+                <div className="px-4 py-4 text-center text-xs text-slate-400">
                   No countries found
                 </div>
               ) : (
@@ -388,23 +394,23 @@ function DialDropdown({
                         onSelect(country);
                         setSearch("");
                       }}
-                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold transition-colors
-                    ${i < filtered.length - 1 ? "border-b border-slate-50" : ""}
-                    ${isSelected ? "bg-cyan-50 text-cyan-700" : "text-slate-600 hover:bg-slate-50"}`}
+                      className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-semibold transition-colors
+                        ${i < filtered.length - 1 ? "border-b border-slate-50" : ""}
+                        ${isSelected ? "bg-slate-100 text-slate-800" : "text-slate-600 hover:bg-slate-50"}`}
                     >
-                      <span className="text-base w-6 text-center flex-shrink-0">
+                      <span className="text-sm w-5 text-center flex-shrink-0">
                         {country.flag || "🌐"}
                       </span>
                       <span className="flex-1 text-left truncate">
                         {country.name}
                       </span>
-                      <span className="text-slate-400 font-mono flex-shrink-0">
+                      <span className="text-slate-400 font-mono flex-shrink-0 text-[10px]">
                         {m.dialCode}
                       </span>
                       {isSelected && (
                         <CheckCircle2
-                          size={12}
-                          className="text-cyan-500 flex-shrink-0"
+                          size={11}
+                          className="text-emerald-500 flex-shrink-0"
                         />
                       )}
                     </button>
@@ -420,80 +426,65 @@ function DialDropdown({
 }
 
 // ─── Main PhoneField ───────────────────────────────────────────────────────────
-/**
- * onChange now fires with the FULL concatenated number: dialCode + digits
- * e.g. "+919876543210"
- *
- * Extra prop:
- *   shippingCountry – the country selected in the shipping section (for mismatch warning)
- */
 export default function PhoneField({
   value = "",
   onChange,
   onCountryChange,
   countries = [],
   selectedCountry: externalCountry,
-  shippingCountry, // ← NEW: pass the shipping selectedCountry here for mismatch check
   required = false,
 }) {
-  // Internal phone-country state (may differ from shipping country)
   const [phoneCountry, setPhoneCountry] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [touched, setTouched] = useState(false);
   const inputRef = useRef(null);
 
   // Sync with external country on first load / change
-  // Only auto-sync if user hasn't manually picked a different phone country
-  const [userPickedPhoneCountry, setUserPickedPhoneCountry] = useState(false);
   useEffect(() => {
-    if (externalCountry && !userPickedPhoneCountry) {
+    if (
+      externalCountry &&
+      (!phoneCountry || phoneCountry.alpha2Code !== externalCountry.alpha2Code)
+    ) {
       setPhoneCountry(externalCountry);
       onCountryChange?.(externalCountry);
     }
-  }, [externalCountry, userPickedPhoneCountry]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalCountry]);
 
   const meta = phoneCountry
     ? getDialMeta(phoneCountry.alpha2Code)
     : { dialCode: "+1", min: 7, max: 15 };
 
-  // Strip the leading dial code from value if present, to get raw digits
-  // value coming in may be full "+91XXXXXXXXXX" or just "XXXXXXXXXX"
-  const rawDigits = (() => {
-    if (!value) return "";
-    const stripped = value.startsWith(meta.dialCode)
-      ? value.slice(meta.dialCode.length)
-      : value;
-    return stripped.replace(/\D/g, "");
-  })();
+  // The display value is always raw digits (strip dial code from stored value)
+  const displayDigits = stripDialCode(value, meta.dialCode);
 
-  // Validation
-  const isValid = rawDigits.length >= meta.min && rawDigits.length <= meta.max;
-  const showError = touched && rawDigits.length > 0 && !isValid;
-  const showSuccess = touched && rawDigits.length > 0 && isValid;
+  // Validation against raw digits
+  const isValid =
+    displayDigits.length >= meta.min && displayDigits.length <= meta.max;
+  const showError = touched && displayDigits.length > 0 && !isValid;
+  const showSuccess = touched && displayDigits.length > 0 && isValid;
 
-  // ── Mismatch check ──────────────────────────────────────────────────────────
-  // Compare phone country vs shipping country (by alpha2Code)
-  const effectiveShipping = shippingCountry || externalCountry;
-  const isMismatch =
-    phoneCountry &&
-    effectiveShipping &&
-    phoneCountry.alpha2Code !== effectiveShipping.alpha2Code;
+  // Emit dialCode + digits to parent
+  const emitChange = useCallback(
+    (rawDigits, dialCode) => {
+      onChange(dialCode + rawDigits);
+    },
+    [onChange],
+  );
 
   const handleInput = (e) => {
-    const digits = e.target.value.replace(/\D/g, "").slice(0, meta.max);
-    // Fire with concatenated full number
-    onChange(meta.dialCode + digits);
+    const raw = e.target.value.replace(/\D/g, "").slice(0, meta.max);
+    emitChange(raw, meta.dialCode);
   };
 
   const handleCountrySelect = (country) => {
     setPhoneCountry(country);
-    setUserPickedPhoneCountry(true);
     onCountryChange?.(country);
     setDropdownOpen(false);
-    // Re-validate digits against new country rules
     const newMeta = getDialMeta(country.alpha2Code);
-    const clipped = rawDigits.slice(0, newMeta.max);
-    onChange(newMeta.dialCode + clipped);
+    // Re-emit with new dial code; trim digits if they exceed new country's max
+    const trimmedDigits = displayDigits.slice(0, newMeta.max);
+    onChange(newMeta.dialCode + trimmedDigits);
     setTimeout(() => inputRef.current?.focus(), 80);
   };
 
@@ -501,146 +492,45 @@ export default function PhoneField({
     ? "border-red-400"
     : showSuccess
       ? "border-emerald-400"
-      : isMismatch
-        ? "border-amber-400"
-        : dropdownOpen
-          ? "border-cyan-400 ring-2 ring-cyan-100"
-          : "border-slate-200 hover:border-slate-300";
+      : dropdownOpen
+        ? "border-slate-400 ring-2 ring-slate-100"
+        : "border-slate-200 hover:border-slate-300";
 
   return (
-    <div>
-      <label className="block text-xs font-bold text-slate-500 mb-1.5 ml-1">
-        Mobile Number *
-      </label>
-
-      <div
-        className={`flex rounded-xl border-2 bg-slate-50 transition-all overflow-hidden ${borderClass}`}
-      >
-        {/* Dial code trigger */}
-        <DialDropdown
-          countries={countries}
-          selectedCountry={phoneCountry}
-          isOpen={dropdownOpen}
-          onToggle={() => setDropdownOpen((p) => !p)}
-          onSelect={handleCountrySelect}
-          onClose={() => setDropdownOpen(false)}
+    <div
+      className={`flex rounded-lg border-2 bg-slate-50 transition-all overflow-hidden ${borderClass}`}
+    >
+      <DialDropdown
+        countries={countries}
+        selectedCountry={phoneCountry}
+        isOpen={dropdownOpen}
+        onToggle={() => setDropdownOpen((p) => !p)}
+        onSelect={handleCountrySelect}
+        onClose={() => setDropdownOpen(false)}
+      />
+      <div className="w-px bg-slate-200 self-stretch flex-shrink-0" />
+      <div className="relative flex-1">
+        <input
+          ref={inputRef}
+          type="tel"
+          inputMode="numeric"
+          value={displayDigits}
+          onChange={handleInput}
+          onBlur={() => setTouched(true)}
+          placeholder={"X".repeat(meta.max)}
+          maxLength={meta.max}
+          required={required}
+          className="w-full h-full px-3 py-2 bg-transparent text-slate-700 placeholder-slate-300 outline-none text-xs font-medium tracking-wide"
         />
-
-        {/* Separator */}
-        <div className="w-px bg-slate-200 self-stretch flex-shrink-0" />
-
-        {/* Number input */}
-        <div className="relative flex-1">
-          <input
-            ref={inputRef}
-            type="tel"
-            inputMode="numeric"
-            value={rawDigits}
-            onChange={handleInput}
-            onBlur={() => setTouched(true)}
-            placeholder={getPlaceholder(meta)}
-            maxLength={meta.max}
-            required={required}
-            className="w-full h-full px-3.5 py-3.5 bg-transparent text-[#162555] placeholder-slate-300 outline-none text-sm font-medium tracking-wide"
-          />
-          {/* Status icon */}
-          {rawDigits.length > 0 && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-              {showSuccess && !isMismatch && (
-                <CheckCircle2 size={16} className="text-emerald-500" />
-              )}
-              {showError && <AlertCircle size={16} className="text-red-400" />}
-              {isMismatch && !showError && (
-                <TriangleAlert size={16} className="text-amber-500" />
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Hint / error / success line */}
-      <div className="ml-1 mt-1.5 text-[11px] font-medium min-h-[16px]">
-        {showError ? (
-          <span className="text-red-500">
-            {rawDigits.length < meta.min
-              ? `Too short — needs ${meta.min} digits for ${phoneCountry?.name || "this country"} (${meta.dialCode})`
-              : `Too long — max ${meta.max} digits for ${phoneCountry?.name || "this country"} (${meta.dialCode})`}
-          </span>
-        ) : showSuccess ? (
-          <span className="text-emerald-600">
-            ✓ Full number: {meta.dialCode} {rawDigits}
-          </span>
-        ) : (
-          <span className="text-slate-400">
-            {meta.dialCode} ·{" "}
-            {meta.min === meta.max ? `${meta.min}` : `${meta.min}–${meta.max}`}{" "}
-            digits
-          </span>
+        {displayDigits.length > 0 && (
+          <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+            {showSuccess && (
+              <CheckCircle2 size={13} className="text-emerald-500" />
+            )}
+            {showError && <AlertCircle size={13} className="text-red-400" />}
+          </div>
         )}
       </div>
-
-      {/* ── Mismatch disclaimer ─────────────────────────────────────────────── */}
-      {isMismatch && (
-        <div className="mt-2.5 flex items-start gap-2.5 px-3.5 py-3 rounded-xl bg-amber-50 border border-amber-200">
-          <TriangleAlert
-            size={15}
-            className="text-amber-500 flex-shrink-0 mt-0.5"
-          />
-          <div className="flex-1 min-w-0">
-            <p className="text-[11px] font-bold text-amber-700 leading-snug">
-              Phone country doesn't match shipping country
-            </p>
-            <p className="text-[11px] text-amber-600 mt-0.5 leading-snug">
-              Your shipping address is set to{" "}
-              <span className="font-bold">
-                {effectiveShipping?.flag} {effectiveShipping?.name}
-              </span>
-              , but the phone code is for{" "}
-              <span className="font-bold">
-                {phoneCountry?.flag} {phoneCountry?.name} ({meta.dialCode})
-              </span>
-              . This is fine if you're using a foreign number — just
-              double-check before submitting.
-            </p>
-          </div>
-          {/* Quick-fix button: snap phone country to match shipping */}
-          <button
-            type="button"
-            onClick={() => {
-              handleCountrySelect(effectiveShipping);
-              setUserPickedPhoneCountry(false);
-            }}
-            className="flex-shrink-0 text-[10px] font-black text-amber-700 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-2 py-1 rounded-lg transition-colors whitespace-nowrap"
-          >
-            Use {effectiveShipping?.flag}{" "}
-            {getDialMeta(effectiveShipping?.alpha2Code)?.dialCode}
-          </button>
-        </div>
-      )}
     </div>
   );
 }
-
-// ─── HOW TO INTEGRATE INTO CheckoutPage ───────────────────────────────────────
-//
-// 1. Import at the top:
-//      import PhoneField from "./PhoneField";
-//
-// 2. Replace the old Mobile Number <div> with:
-//
-//      <PhoneField
-//        value={form.mobile}
-//        onChange={(fullNumber) => setForm((p) => ({ ...p, mobile: fullNumber }))}
-//        countries={countries}
-//        selectedCountry={selectedCountry}   // shipping country — auto-syncs dial code
-//        shippingCountry={selectedCountry}   // same ref — used for mismatch disclaimer
-//        required
-//      />
-//
-// 3. form.mobile now holds the FULL number e.g. "+919876543210"
-//    Use it directly in the payload — no manual concatenation needed:
-//
-//      shippingAddress: { phone: form.mobile, ... }
-//
-// The mismatch disclaimer appears automatically when the phone country differs
-// from the shipping country, and includes a one-click fix button.

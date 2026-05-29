@@ -14,6 +14,7 @@ export default function Hero() {
           min-height: 250px;
           overflow: hidden;
           background: #f7f9f5;
+         
         }
 
         /* ── LEFT PANEL ── */
@@ -24,7 +25,7 @@ export default function Hero() {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 1.4rem 2.5rem 1.4rem 2rem;
+          padding: 1.4rem 0rem 1.4rem 8rem;
           gap: 0.7rem;
         }
 
@@ -146,7 +147,7 @@ export default function Hero() {
         .ph-discount-card {
           position: absolute;
           bottom: 1rem;
-          right: 1rem;
+          right: 7rem;
           background: #ffffff;
           border-radius: 10px;
           padding: 0.65rem 0.9rem;
@@ -190,7 +191,7 @@ export default function Hero() {
         .ph-corner-tag {
           position: absolute;
           top: 0.85rem;
-          right: 0.85rem;
+          right: 7rem;
           background: #2e7d32;
           color: #fff;
           font-size: 0.62rem;
@@ -290,13 +291,15 @@ export default function Hero() {
         <div className="ph-right">
           <div className="ph-right-img" aria-hidden="true" />
           <div className="ph-right-overlay" aria-hidden="true" />
-          <div className="ph-corner-tag">New Year</div>
-          <div className="ph-discount-card" aria-hidden="true">
-            <div className="big-num">
-              <span>↑</span>30<span>%</span>
+          <div className="ph-right-content">
+            <div className="ph-corner-tag">New Year</div>
+            <div className="ph-discount-card" aria-hidden="true">
+              <div className="big-num">
+                <span>↑</span>30<span>%</span>
+              </div>
+              <div className="card-label">Off Today</div>
+              <div className="card-sub">On all medicines</div>
             </div>
-            <div className="card-label">Off Today</div>
-            <div className="card-sub">On all medicines</div>
           </div>
         </div>
       </section>

@@ -83,7 +83,7 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
         }
 
         .cat-section {
-          padding: 48px 70px;
+          padding: 50px 120px;
           font-family: var(--font-inter), sans-serif;
           background: #f8faff;
         }

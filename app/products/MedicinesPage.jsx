@@ -917,14 +917,14 @@ export default function MedicinesPage() {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto px-3 md:px-12 py-10">
+      <div className="max-w-7xl mx-auto px-3 md:px-20 py-10">
         <div className="flex gap-8">
           {/* DESKTOP SIDEBAR */}
           {/* DESKTOP SIDEBAR — card + alphabet strip side-by-side */}
-          <aside className="hidden lg:block w-[280px] flex-shrink-0">
+          <aside className="hidden lg:block w-[250px] flex-shrink-0">
             <div className="flex items-start sticky top-6">
               {/* Filters card — pr makes room so content never hides under strip */}
-              <div className="flex-1 bg-white rounded-[0.3rem] border border-slate-200 shadow-sm p-6 min-w-0">
+              <div className="flex-1 bg-white rounded-[0.3rem] border border-slate-200 shadow-sm p-3 min-w-0">
                 {renderSidebarContent()}
               </div>
               {/* A–Z strip — sits outside the card on the right */}
