@@ -35,3 +35,15 @@ h5,
 h6 {
   font-family: var(--font-poppins);
 }
+
+button,
+a,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="checkbox"],
+input[type="radio"],
+select,
+summary {
+  cursor: pointer;
+}

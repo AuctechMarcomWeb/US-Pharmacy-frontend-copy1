@@ -38,8 +38,12 @@ function StepBar({ step }) {
         <div className="flex items-center justify-center flex-wrap">
           {steps.map((label, i) => {
             const idx = i;
-            const done = idx === 0 || step > idx;
-            const active = idx !== 0 && step === idx;
+            const isFinalStep = step === steps.length - 1;
+
+            const done =
+              idx === 0 || step > idx || (isFinalStep && idx === step);
+
+            const active = idx !== 0 && step === idx && !isFinalStep;
             return (
               <div key={label} className="flex items-center">
                 <div className="flex items-center gap-1.5 sm:gap-2">
@@ -414,7 +418,7 @@ function PaymentDropdown({
 // ─── MAIN PAGE ─────────────────────────────────────────────────────────────────
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, updateQty, removeFromCart, clearCart, totalSavings } =
+  const { cart, updateQty, removeFromCart, clearCart, totalSavings, totalMrp } =
     useCart();
 
   // step: 1 = Order Summary, 2 = Shipping + Payment, 3 = Thank You
@@ -637,7 +641,7 @@ export default function CheckoutPage() {
                     </div>
                     <div>
                       <p className="text-slate-400 font-medium mb-0.5">
-                        Payment
+                        Payment Method
                       </p>
                       <p className="text-[#064e3b] font-bold capitalize">
                         {confirmedPaymentName}
@@ -813,7 +817,7 @@ export default function CheckoutPage() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-slate-500">MRP Total</span>
-                <span className="text-[#064e3b]">${fmt(total)}</span>
+                <span className="text-[#064e3b]">${fmt(totalMrp)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Product Discount</span>
@@ -956,9 +960,9 @@ export default function CheckoutPage() {
               </div>
 
               {/* Row 3: Payment label + dropdown inline */}
-              <div className="flex items-center gap-3">
+              <div className="flex sm:flex-col  gap-3">
                 <label className="text-[10px] font-bold text-slate-500 flex items-center gap-1 flex-shrink-0">
-                  Payment <span className="text-red-400">*</span>
+                  Payment Method <span className="text-red-400">*</span>
                 </label>
                 <div className="flex-1">
                   {paymentLoading ? (
