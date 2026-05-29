@@ -1145,10 +1145,6 @@ export default function CheckoutPage() {
                   </>
                 )}
               </button>
-
-              <p className="text-center text-[10px] text-slate-400">
-                By placing an order, you agree to our Terms & Privacy Policy
-              </p>
             </div>
           </form>
         </div>
