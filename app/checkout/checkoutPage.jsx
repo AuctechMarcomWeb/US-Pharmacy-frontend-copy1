@@ -1085,7 +1085,27 @@ export default function CheckoutPage() {
                   </div>
                 </div>
                 <p className="text-[10px] text-slate-600 leading-relaxed font-medium flex-1">
-                  I agree to the Terms & Conditions and Privacy Policy.
+                  I agree to the
+                  <span
+                    className="text-emerald-600 underline font-semibold hover:text-emerald-700"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowDisclaimer(true);
+                    }}
+                  >
+                    Terms & Conditions
+                  </span>
+                  and
+                  <span
+                    className="text-emerald-600 underline font-semibold hover:text-emerald-700"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowDisclaimer(true);
+                    }}
+                  >
+                    Privacy Policy
+                  </span>
+                  .
                 </p>
                 <button
                   type="button"
@@ -1175,24 +1195,9 @@ export default function CheckoutPage() {
               </button>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed">
-              By proceeding, you agree to our{" "}
-              <a
-                href="/terms"
-                target="_blank"
-                className="text-emerald-600 underline font-semibold hover:text-emerald-700"
-              >
-                Terms & Conditions
-              </a>{" "}
-              and{" "}
-              <a
-                href="/privacy"
-                target="_blank"
-                className="text-emerald-600 underline font-semibold hover:text-emerald-700"
-              >
-                Privacy Policy
-              </a>
-              . This is an order request and will be reviewed and processed
-              within 24 business hours.
+              By proceeding, you agree to our Terms & Conditions and Privacy
+              Policy . This is an order request and will be reviewed and
+              processed within 24 business hours.
             </p>
             <button
               type="button"
