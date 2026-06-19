@@ -402,11 +402,7 @@ export default function BlogPage() {
                   <div className="flex flex-col sm:flex-row">
                     {/* ── IMAGE PANEL — smaller ── */}
                     <div className="relative bg-[#eef4fb] sm:w-[200px] lg:w-[240px] shrink-0 p-3 sm:p-4 flex flex-col gap-2.5">
-                      {/* {dispDiscount > 0 && (
-                        <span className="absolute top-2.5 right-2.5 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10">
-                          -{dispDiscount}% OFF
-                        </span>
-                      )} */}
+
 
                       {/* MAIN IMAGE — reduced height */}
                       <div className="bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center h-[150px] sm:h-[180px] lg:h-[200px]">

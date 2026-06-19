@@ -16,6 +16,7 @@ import {
   Newspaper,
   Pill,
   Phone,
+  ClipboardList,
 } from "lucide-react";
 
 import { useAuth } from "../context/AuthContext";
@@ -130,7 +131,7 @@ export default function Header() {
               onClick={() => router.push("/checkout")}
               className="relative text-black hover:text-[#337642] transition hover:scale-110"
             >
-              <ShoppingCart size={20} />
+              <ClipboardList size={20} />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full font-bold">
                   {cartCount}

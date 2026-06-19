@@ -126,11 +126,10 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
         ref={triggerRef}
         type="button"
         onClick={handleOpen}
-        className={`w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl border-2 text-sm font-semibold transition-all bg-white ${
-          open
-            ? "border-emerald-400 ring-2 ring-emerald-100"
-            : "border-slate-200 hover:border-slate-300"
-        }`}
+        className={`w-full flex items-center justify-between gap-2 px-4 py-3 rounded-xl border-2 text-sm font-semibold transition-all bg-white ${open
+          ? "border-emerald-400 ring-2 ring-emerald-100"
+          : "border-slate-200 hover:border-slate-300"
+          }`}
       >
         <div className="flex flex-col items-start min-w-0">
           {sel ? (
@@ -179,11 +178,10 @@ function PackDropdown({ variants, activeIdx, onSelect }) {
                       onSelect(idx);
                       setOpen(false);
                     }}
-                    className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${
-                      idx < variants.length - 1
-                        ? "border-b border-slate-100"
-                        : ""
-                    } ${isSelected ? "bg-emerald-50 text-emerald-700" : "hover:bg-slate-50 text-slate-600"}`}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${idx < variants.length - 1
+                      ? "border-b border-slate-100"
+                      : ""
+                      } ${isSelected ? "bg-emerald-50 text-emerald-700" : "hover:bg-slate-50 text-slate-600"}`}
                   >
                     <div className="flex flex-col items-start">
                       <span className="font-semibold text-sm">{mv.label}</span>
@@ -364,7 +362,7 @@ export default function MedicineDetailPage() {
       qty,
     );
 
-    toast.success(`${medicine.name} added to cart`);
+    toast.success(`${medicine.name} Added to Inquiry List ✓`);
     setAdded(true);
     setTimeout(() => setAdded(false), 1400);
   };
@@ -457,11 +455,7 @@ export default function MedicineDetailPage() {
                   <BadgeCheck size={11} /> Featured
                 </span>
               )}
-              {hasDiscount && (
-                <span className="absolute top-3 right-3 z-10 bg-green-500 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-lg">
-                  -{discountPct}% OFF
-                </span>
-              )}
+
               <img
                 src={images[activeImg]}
                 alt={medicine.name}
@@ -479,11 +473,10 @@ export default function MedicineDetailPage() {
                   <button
                     key={idx}
                     onClick={() => setActiveImg(idx)}
-                    className={`flex-shrink-0 h-14 w-14 sm:h-20 sm:w-20 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                      activeImg === idx
-                        ? "border-emerald-500 shadow-md shadow-emerald-200 scale-105"
-                        : "border-slate-200 opacity-60 hover:opacity-100 hover:border-slate-300"
-                    }`}
+                    className={`flex-shrink-0 h-14 w-14 sm:h-20 sm:w-20 rounded-xl overflow-hidden border-2 transition-all duration-200 ${activeImg === idx
+                      ? "border-emerald-500 shadow-md shadow-emerald-200 scale-105"
+                      : "border-slate-200 opacity-60 hover:opacity-100 hover:border-slate-300"
+                      }`}
                   >
                     <img
                       src={img}
@@ -514,27 +507,16 @@ export default function MedicineDetailPage() {
 
             {/* NAME */}
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#166534] leading-tight mb-2.5 sm:mb-3">
-              {medicine.name}
+              {medicine?.name}
             </h1>
 
-            {/* RATING */}
-            {/* <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <Stars rating={medicine.rating} size={14} />
-              <span className="text-xs sm:text-sm text-slate-500">
-                {medicine.rating > 0
-                  ? `${medicine.rating.toFixed(1)} · ${medicine.totalReviews} review${medicine.totalReviews !== 1 ? "s" : ""}`
-                  : "No reviews yet"}
-              </span>
-            </div> */}
 
-            {/* DESCRIPTION */}
             <p className="text-slate-600 leading-relaxed text-sm sm:text-[15px] mb-4 sm:mb-5 border-b border-slate-100 pb-4 sm:pb-5">
-              {medicine.description ||
+              {medicine?.description ||
                 "Premium pharmaceutical-grade formulation."}
             </p>
 
-            {/* PACK DROPDOWN */}
-            {medicine.variants.length > 0 && (
+            {medicine?.variants?.length > 0 && (
               <div className="mb-4 sm:mb-5">
                 <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">
                   Select Pack
@@ -561,11 +543,7 @@ export default function MedicineDetailPage() {
                 <span className="text-3xl sm:text-4xl font-black text-[#166534]">
                   ${variant.price}
                 </span>
-                {hasDiscount && (
-                  <span className="text-xs sm:text-sm font-bold text-green-600 bg-green-50 px-2 py-1 rounded-lg mb-1">
-                    Save ${variant.mrp - variant.price}
-                  </span>
-                )}
+
               </div>
             )}
 
@@ -599,112 +577,23 @@ export default function MedicineDetailPage() {
             <button
               onClick={handleAddToCart}
               disabled={!variant || variant.stock === 0}
-              className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-[0.3rem] font-bold text-sm transition-all duration-300 ${
-                added
-                  ? "bg-green-500 text-white shadow-lg shadow-green-200"
-                  : !variant || variant.stock === 0
-                    ? "bg-slate-200 text-slate-400 cursor-not-allowed"
-                    : "bg-[#166534] hover:bg-[#1f3477] text-white shadow-lg shadow-[#166534]/20 hover:shadow-xl hover:-translate-y-0.5"
-              }`}
+              className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-[0.3rem] font-bold text-sm transition-all duration-300 ${added
+                ? "bg-green-500 text-white shadow-lg shadow-green-200"
+                : !variant || variant.stock === 0
+                  ? "bg-slate-200 text-slate-400 cursor-not-allowed"
+                  : "bg-[#166534] hover:bg-[#1f3477] text-white shadow-lg shadow-[#166534]/20 hover:shadow-xl hover:-translate-y-0.5"
+                }`}
             >
-              <ShoppingCart size={16} />
+              <Send size={16} />
+
               {added
                 ? "Added ✓"
-                : variant?.stock === 0
-                  ? "Out of Stock"
-                  : "Add to Cart"}
+
+                : "Request Availability"}
             </button>
           </div>
         </div>
 
-        {/* ── REVIEWS ── */}
-        {/* <div className="mt-8 sm:mt-10 bg-white/70 backdrop-blur border border-white rounded-[0.3rem] shadow-sm p-4 sm:p-6 md:p-8">
-          <div className="flex items-center justify-between mb-5 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-extrabold text-[#166534]">
-              Customer Reviews
-            </h2>
-            <span className="text-xs sm:text-sm text-slate-400 font-medium">
-              {reviews.length} review{reviews.length !== 1 ? "s" : ""}
-            </span>
-          </div>
-
-          <div className="bg-slate-50 border border-slate-200 rounded-[0.3rem] p-3 sm:p-4 mb-5 sm:mb-6">
-            <p className="text-sm font-semibold text-[#166534] mb-3">
-              Write a Review
-            </p>
-            <div className="flex items-center gap-1 mb-3">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setReviewRating(s)}
-                  type="button"
-                >
-                  <Star
-                    size={18}
-                    className={
-                      s <= reviewRating
-                        ? "text-amber-400 fill-amber-400"
-                        : "text-slate-300 fill-slate-100"
-                    }
-                  />
-                </button>
-              ))}
-              <span className="ml-2 text-xs text-slate-400 font-medium">
-                {
-                  ["", "Poor", "Fair", "Good", "Very Good", "Excellent"][
-                    reviewRating
-                  ]
-                }
-              </span>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <input
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-                onKeyDown={(e) =>
-                  e.key === "Enter" && !reviewSubmitting && handleAddReview()
-                }
-                placeholder="Share your experience…"
-                disabled={reviewSubmitting}
-                className="flex-1 px-3 sm:px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-[#166534] placeholder-slate-400 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              />
-              <button
-                onClick={handleAddReview}
-                disabled={reviewSubmitting || !reviewText.trim()}
-                type="button"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-[#166534] hover:bg-[#1d3475] text-white text-sm font-semibold rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {reviewSubmitting ? (
-                  <>
-                    <Loader2 size={14} className="animate-spin" /> Posting…
-                  </>
-                ) : (
-                  <>
-                    <Send size={14} /> Post
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-
-          {reviews.length === 0 ? (
-            <div className="text-center py-10">
-              <Star
-                size={32}
-                className="text-slate-200 fill-slate-100 mx-auto mb-2"
-              />
-              <p className="text-slate-400 text-sm">
-                No reviews yet. Be the first!
-              </p>
-            </div>
-          ) : (
-            <div className="overflow-hidden">
-              <ReviewSlider reviews={reviews} />
-            </div>
-          )}
-        </div> */}
-
-        {/* ── RELATED PRODUCTS ── */}
         {related.length > 0 && (
           <div className="mt-8 sm:mt-10">
             <div className="flex items-center justify-between mb-4 sm:mb-5">

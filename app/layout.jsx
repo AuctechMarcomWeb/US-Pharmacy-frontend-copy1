@@ -15,14 +15,18 @@ import Footer from "../components/Footer";
 import CartBarWrapper from "../components/CartBarWrapper";
 
 export const metadata = {
-  title: "US Pharmacy - Online Medicine Store",
+  title: "US Pharmacy - Prescription Medicine Information & Inquiry Platform",
   description:
-    "Buy genuine medicines online with secure checkout and fast delivery.",
+    "Access prescription medicine information, indicative pricing, and submit prescription inquiries. All requests are manually reviewed and subject to prescription verification and applicable legal requirements.",
   keywords: [
-    "online pharmacy",
-    "buy medicines online",
-    "pharmacy",
-    "healthcare",
+    "prescription medicine information",
+    "medication information",
+    "drug information",
+    "prescription inquiry",
+    "request availability",
+    "submit prescription request",
+    "prescription verification",
+    "health information",
   ],
 };
 

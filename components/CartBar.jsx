@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ShoppingCart, X, Plus, Minus, Trash2, ChevronUp } from "lucide-react";
+import { ShoppingCart, X, Plus, Minus, Trash2, ChevronUp, ClipboardList } from "lucide-react";
 import { useCart } from "../context/CartContext";
 
 const fmt = (n) => Number(n).toFixed(2);
@@ -28,22 +28,17 @@ export default function CartBar() {
     <div className="fixed bottom-0 left-0 right-0 z-50">
       {/* ── EXPANDED DRAWER ── */}
       <div
-        className={`bg-white border-t border-slate-200 shadow-2xl transition-all duration-300 ease-in-out overflow-hidden ${
-          expanded ? "max-h-[60vh]" : "max-h-0"
-        }`}
+        className={`bg-white border-t border-slate-200 shadow-2xl transition-all duration-300 ease-in-out overflow-hidden ${expanded ? "max-h-[60vh]" : "max-h-0"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 overflow-y-auto max-h-[55vh]">
           {/* Drawer header */}
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-bold text-slate-700 uppercase tracking-wider">
-              Cart ({totalItems} item{totalItems > 1 ? "s" : ""})
+              Inquiry List ({totalItems} item{totalItems > 1 ? "s" : ""})
             </span>
             <div className="flex items-center gap-3">
-              {totalSavings > 0 && (
-                <span className="text-xs font-semibold text-[#337642] bg-green-50 px-2.5 py-1 rounded-full">
-                  You save ${fmt(totalSavings)}
-                </span>
-              )}
+
               <button
                 onClick={clearCart}
                 className="text-xs text-red-400 hover:text-red-600 font-semibold flex items-center gap-1 transition"
@@ -140,19 +135,18 @@ export default function CartBar() {
             className="flex items-center gap-2.5"
           >
             <div className="relative">
-              <ShoppingCart size={22} />
+              <ClipboardList size={22} />
               <span className="absolute -top-2 -right-2 h-4 w-4 bg-teal-400 text-[#337642] text-[10px] font-black rounded-full flex items-center justify-center">
                 {totalItems > 9 ? "9+" : totalItems}
               </span>
             </div>
             <span className="text-sm font-semibold hidden sm:block">
-              {totalItems} item{totalItems > 1 ? "s" : ""} in cart
+              {totalItems} item{totalItems > 1 ? "s" : ""} in inquiry list
             </span>
             <ChevronUp
               size={16}
-              className={`text-white/60 transition-transform duration-200 ${
-                expanded ? "rotate-180" : ""
-              }`}
+              className={`text-white/60 transition-transform duration-200 ${expanded ? "rotate-180" : ""
+                }`}
             />
           </button>
 
@@ -177,7 +171,7 @@ export default function CartBar() {
           <div className="flex items-center gap-3 flex-shrink-0">
             <div className="text-right">
               <p className="text-[10px] text-white/50 uppercase tracking-wider leading-none mb-0.5">
-                Total
+                Estimated Total
               </p>
               <p className="text-lg font-black font-mono leading-none">
                 ${fmt(totalPrice)}
@@ -187,7 +181,7 @@ export default function CartBar() {
               className="bg-[#337642] hover:bg-[#285e35] text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors"
               onClick={() => router.push("/checkout")}
             >
-              Checkout
+              Request Availability
             </button>
           </div>
         </div>

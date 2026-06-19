@@ -13,17 +13,28 @@ import {
   LockKeyhole,
   Mail,
   Loader2,
-  Package,
   ArrowRight,
   ChevronDown,
   Plus,
   Minus,
   Trash2,
   X,
-  Globe,
-  Search,
   MapPin,
 } from "lucide-react";
+
+
+import { Country } from "country-state-city";
+import { Select } from "antd";
+
+// Build a countries list compatible with PhoneField: { name, alpha2Code, flag }
+const allCountries = Country.getAllCountries().map((c) => ({
+  name: c.name,
+  alpha2Code: c.isoCode,
+  flag: c.flag || "🌐",
+}));
+
+// Default to United States
+const DEFAULT_COUNTRY = allCountries.find((c) => c.alpha2Code === "US") || allCountries[0];
 
 const fmt = (n) => Number(n).toFixed(2);
 const FALLBACK_IMG =
@@ -83,187 +94,35 @@ function StepBar({ step }) {
   );
 }
 
-// ── Country Dropdown (portal) ──────────────────────────────────────────────────
-function CountryDropdown({
-  countries,
-  selectedCountry,
-  isOpen,
-  onToggle,
-  onSelect,
-  onClose,
-  loading,
-  error,
-}) {
-  const triggerRef = useRef(null);
-  const listRef = useRef(null);
-  const searchRef = useRef(null);
-  const [coords, setCoords] = useState({ top: 0, left: 0, width: 0 });
-  const [search, setSearch] = useState("");
 
-  const updateCoords = useCallback(() => {
-    if (!triggerRef.current) return;
-    const rect = triggerRef.current.getBoundingClientRect();
-    setCoords({
-      top: rect.bottom + window.scrollY + 4,
-      left: rect.left + window.scrollX,
-      width: rect.width,
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setSearch("");
-      return;
-    }
-    updateCoords();
-    window.addEventListener("scroll", updateCoords, true);
-    window.addEventListener("resize", updateCoords);
-    setTimeout(() => searchRef.current?.focus(), 50);
-    return () => {
-      window.removeEventListener("scroll", updateCoords, true);
-      window.removeEventListener("resize", updateCoords);
-    };
-  }, [isOpen, updateCoords]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    const handler = (e) => {
-      if (
-        !triggerRef.current?.contains(e.target) &&
-        !listRef.current?.contains(e.target)
-      )
-        onClose();
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [isOpen, onClose]);
-
-  const filtered = search.trim()
-    ? countries.filter((c) =>
-      c.name.toLowerCase().includes(search.toLowerCase()),
-    )
-    : countries;
+function CountrySelect({ value, onChange }) {
+  const options = Country.getAllCountries().map((country) => ({
+    value: country.isoCode,
+    label: `(${country.isoCode})  ${country.name} `,
+    countryName: country.name,
+    phoneCode: country.phonecode,
+    isoCode: country.isoCode,
+  }));
 
   return (
-    <div onClick={(e) => e.stopPropagation()}>
-      <button
-        ref={triggerRef}
-        type="button"
-        onClick={() => {
-          updateCoords();
-          onToggle();
-        }}
-        disabled={loading || !!error}
-        className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg border-2 transition-all text-sm font-semibold bg-slate-50 disabled:opacity-60 disabled:cursor-not-allowed ${isOpen
-          ? "border-emerald-400 bg-white ring-2 ring-emerald-100"
-          : "border-slate-200 hover:border-slate-300"
-          }`}
-      >
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="h-5 w-5 rounded-md bg-emerald-50 border border-emerald-100 flex items-center justify-center flex-shrink-0">
-            {loading ? (
-              <Loader2 size={11} className="text-emerald-400 animate-spin" />
-            ) : selectedCountry?.flag ? (
-              <span className="text-xs leading-none">
-                {selectedCountry.flag}
-              </span>
-            ) : (
-              <Globe size={11} className="text-emerald-600" />
-            )}
-          </div>
-          <span className="text-[#064e3b] truncate text-xs sm:text-sm">
-            {loading
-              ? "Loading…"
-              : error
-                ? "Could not load"
-                : selectedCountry?.name || "Select a country"}
-          </span>
-        </div>
-        <ChevronDown
-          size={13}
-          className={`text-slate-400 transition-transform duration-200 flex-shrink-0 ${isOpen ? "rotate-180" : ""
-            }`}
-        />
-      </button>
-
-      {isOpen &&
-        !loading &&
-        !error &&
-        typeof document !== "undefined" &&
-        createPortal(
-          <div
-            ref={listRef}
-            style={{
-              position: "absolute",
-              top: coords.top,
-              left: coords.left,
-              width: coords.width,
-              zIndex: 99999,
-            }}
-            className="bg-white border border-slate-200 rounded-xl shadow-2xl shadow-slate-300/60 overflow-hidden"
-          >
-            <div className="p-2 border-b border-slate-100">
-              <div className="relative">
-                <Search
-                  size={11}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-300"
-                />
-                <input
-                  ref={searchRef}
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search country…"
-                  className="w-full pl-7 pr-8 py-1.5 text-xs font-medium rounded-md bg-slate-50 border border-slate-200 text-[#064e3b] placeholder-slate-300 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-100 transition-all"
-                />
-                {search && (
-                  <button
-                    type="button"
-                    onClick={() => setSearch("")}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500"
-                  >
-                    <X size={11} />
-                  </button>
-                )}
-              </div>
-            </div>
-            <div className="max-h-48 overflow-y-auto">
-              {filtered.length === 0 ? (
-                <div className="px-4 py-4 text-center text-xs text-slate-400 font-medium">
-                  No countries found
-                </div>
-              ) : (
-                filtered.map((country, i) => (
-                  <button
-                    key={country.alpha2Code || country.name}
-                    type="button"
-                    onClick={() => {
-                      onSelect(country);
-                      setSearch("");
-                    }}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-semibold transition-colors ${i < filtered.length - 1 ? "border-b border-slate-50" : ""
-                      } ${selectedCountry?.name === country.name
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "text-slate-600 hover:bg-slate-50"
-                      }`}
-                  >
-                    <span className="text-sm leading-none w-5 text-center flex-shrink-0">
-                      {country.flag || "🌐"}
-                    </span>
-                    <span className="flex-1 text-left">{country.name}</span>
-                    {selectedCountry?.name === country.name && (
-                      <span className="text-[9px] font-black text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded-full flex-shrink-0">
-                        ✓
-                      </span>
-                    )}
-                  </button>
-                ))
-              )}
-            </div>
-          </div>,
-          document.body,
-        )}
-    </div>
+    <Select
+      showSearch
+      placeholder="Select Country"
+      value={value}
+      onChange={(value, option) =>
+        onChange?.({
+          countryCode: option.isoCode,
+          countryName: option.countryName,
+          phoneCode: option.phoneCode,
+        })
+      }
+      style={{ width: "100%" }}
+      options={options}
+      optionFilterProp="label"
+      filterOption={(input, option) =>
+        option?.label?.toLowerCase().includes(input.toLowerCase())
+      }
+    />
   );
 }
 
@@ -412,13 +271,16 @@ export default function CheckoutPage() {
   // step: 1 = Order Summary, 2 = Shipping + Payment, 3 = Thank You
   const [step, setStep] = useState(1);
 
-  const [countries, setCountries] = useState([]);
-  const [countriesLoading, setCountriesLoading] = useState(true);
-  const [countriesError, setCountriesError] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
   const [phoneCountry, setPhoneCountry] = useState(null);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [country, setCountry] = useState(null);
+
+  // Keep form.country in sync with CountrySelect
+  useEffect(() => {
+    if (country?.countryName) {
+      setForm((p) => ({ ...p, country: country.countryName }));
+    }
+  }, [country]);
 
   const [form, setForm] = useState({
     fullName: "",
@@ -440,51 +302,9 @@ export default function CheckoutPage() {
   const [paymentError, setPaymentError] = useState(null);
   const [paymentDropdownOpen, setPaymentDropdownOpen] = useState(false);
   console.log("cart  details", cart);
-
   useEffect(() => {
     if (cart.length === 0 && step === 1) router.replace("/products");
   }, [cart, step, router]);
-
-  // Load countries
-  useEffect(() => {
-    (async () => {
-      try {
-        setCountriesLoading(true);
-        const res = await fetch(
-          "https://restcountries.com/v3.1/all?fields=name,cca2,flag",
-        );
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        const normalized = data
-          .map((c) => ({
-            name: c.name?.common || c.name?.official || "",
-            alpha2Code: c.cca2,
-            flag: c.flag || "🌐",
-          }))
-          .filter((c) => c.name)
-          .sort((a, b) => a.name.localeCompare(b.name));
-        setCountries(normalized);
-        const us =
-          normalized.find((c) => c.alpha2Code === "US") || normalized[0];
-        if (us) {
-          setSelectedCountry(us);
-          setForm((p) => ({ ...p, country: us.name }));
-        }
-      } catch {
-        setCountriesError("Could not load countries.");
-        const fallback = {
-          name: "United States",
-          alpha2Code: "US",
-          flag: "🇺🇸",
-        };
-        setCountries([fallback]);
-        setSelectedCountry(fallback);
-        setForm((p) => ({ ...p, country: "United States" }));
-      } finally {
-        setCountriesLoading(false);
-      }
-    })();
-  }, []);
 
   // Load payment methods
   useEffect(() => {
@@ -817,26 +637,13 @@ export default function CheckoutPage() {
 
           {/* RIGHT — payment details sidebar */}
           <div className="w-full lg:w-72 lg:flex-shrink-0 bg-white rounded-xl border border-slate-200 p-4">
-            <h2 className="text-sm font-black text-[#064e3b] mb-3">
-              Inquiry Summary
-            </h2>
+
             <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-slate-500">MRP Total</span>
-                <span className="text-[#064e3b]">${fmt(totalMrp)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">Product Discount</span>
-                <span className="text-emerald-600">
-                  ${fmt(totalSavings ?? 0)}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">Delivery Fee</span>
-                <span className="text-emerald-600">FREE</span>
-              </div>
+
+
+
               <div className="flex justify-between border-t border-slate-100 pt-2 mt-1">
-                <span className="font-black text-[#064e3b]">Total Payable</span>
+                <span className="font-black text-[#064e3b]">Estimated Total</span>
                 <span className="font-black text-[#064e3b]">${fmt(total)}</span>
               </div>
             </div>
@@ -933,20 +740,8 @@ export default function CheckoutPage() {
                   <label className="text-[10px] font-bold text-slate-500 flex items-center gap-1">
                     Country <span className="text-red-400">*</span>
                   </label>
-                  <CountryDropdown
-                    countries={countries}
-                    selectedCountry={selectedCountry}
-                    isOpen={countryDropdownOpen}
-                    onToggle={() => setCountryDropdownOpen((p) => !p)}
-                    onSelect={(country) => {
-                      setSelectedCountry(country);
-                      setForm((p) => ({ ...p, country: country.name }));
-                      setCountryDropdownOpen(false);
-                    }}
-                    onClose={() => setCountryDropdownOpen(false)}
-                    loading={countriesLoading}
-                    error={countriesError}
-                  />
+
+                  <CountrySelect value={country?.countryCode} onChange={setCountry} />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[10px] font-bold text-slate-500 flex items-center gap-1">
@@ -958,8 +753,12 @@ export default function CheckoutPage() {
                       setForm((p) => ({ ...p, mobile: digits }))
                     }
                     onCountryChange={setPhoneCountry}
-                    countries={countries}
-                    selectedCountry={selectedCountry}
+                    countries={allCountries}
+                    selectedCountry={
+                      country?.countryCode
+                        ? allCountries.find((c) => c.alpha2Code === country.countryCode) || DEFAULT_COUNTRY
+                        : DEFAULT_COUNTRY
+                    }
                     required
                   />
                 </div>
@@ -1037,25 +836,7 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* Mini order total */}
-              {/* <div className="px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-slate-500 text-xs">
-                  <Package size={12} />
-                  <span>
-                    {cart.reduce((s, i) => s + i.qty, 0)} item
-                    {cart.reduce((s, i) => s + i.qty, 0) !== 1 ? "s" : ""}
-                  </span>
-                  <span className="text-slate-300">·</span>
-                  <span className="text-emerald-600 font-semibold">
-                    Free delivery
-                  </span>
-                </div>
-                <span className="text-sm font-black text-[#064e3b]">
-                  ${fmt(total)}
-                </span>
-              </div> */}
 
-              {/* Terms checkbox */}
               <label
                 className={`flex items-start gap-2 cursor-pointer select-none p-2.5 rounded-xl border-2 transition-all ${termsAccepted
                   ? "border-emerald-400 bg-emerald-50/40"

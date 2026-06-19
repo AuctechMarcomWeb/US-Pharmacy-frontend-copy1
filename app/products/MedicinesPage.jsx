@@ -23,18 +23,11 @@ const PAGE_SIZE = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export const metadata = {
-  title: "Buy Medicines Online | US Pharmacy",
+  title: "Medicine Information & Prescription Inquiry | US Pharmacy",
   description:
-    "Browse medicines, healthcare products, and wellness essentials at US Pharmacy. Fast delivery, verified products, and secure online ordering.",
-  keywords: [
-    "online pharmacy",
-    "buy medicines online",
-    "healthcare products",
-    "pharmacy",
-    "wellness products",
-  ],
+    "Browse medicine information, indicative pricing, uses, dosage details, side effects, warnings and submit prescription inquiries. All requests are manually reviewed and subject to prescription verification.",
   alternates: {
-    canonical: "/products",
+    canonical: "/medicines",
   },
 };
 
@@ -95,10 +88,9 @@ function AlphabetIndex({ activeLetter, onSelect }) {
       <button
         onClick={() => onSelect("")}
         className={`w-6 h-5 text-[10px] font-bold rounded transition leading-none
-          ${
-            activeLetter === ""
-              ? "bg-emerald-500 text-white shadow-sm"
-              : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
+          ${activeLetter === ""
+            ? "bg-emerald-500 text-white shadow-sm"
+            : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
           }`}
       >
         All
@@ -108,10 +100,9 @@ function AlphabetIndex({ activeLetter, onSelect }) {
           key={letter}
           onClick={() => onSelect(letter === activeLetter ? "" : letter)}
           className={`w-6 h-5 text-[11px] font-semibold rounded transition leading-none
-            ${
-              activeLetter === letter
-                ? "bg-emerald-500 text-white shadow-sm"
-                : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
+            ${activeLetter === letter
+              ? "bg-emerald-500 text-white shadow-sm"
+              : "text-slate-400 hover:text-emerald-600 hover:bg-emerald-50"
             }`}
         >
           {letter}
@@ -407,7 +398,7 @@ export default function MedicinesPage() {
       </SidebarSection>
 
       {/* CATEGORIES */}
-      <SidebarSection title="Product Categories">
+      <SidebarSection title="Medicine  Categories">
         {catLoading ? (
           <div className="h-10 bg-slate-100 rounded-xl animate-pulse" />
         ) : (
@@ -434,7 +425,7 @@ export default function MedicinesPage() {
               )}
               <span className="flex-1 text-left hover:text-[#166534] font-medium">
                 {categoryId === ""
-                  ? "All Products"
+                  ? "All Medicine "
                   : categories.find((c) => c._id === categoryId)?.name}
               </span>
               {categoryId === "" && (
@@ -471,7 +462,7 @@ export default function MedicinesPage() {
                   <span
                     className={`flex-1 text-left ${categoryId === "" ? "text-emerald-700 font-semibold" : "text-slate-600"}`}
                   >
-                    All Products
+                    All Medicine
                   </span>
                   <span className="text-xs text-slate-400">
                     {totalProducts}
@@ -521,7 +512,7 @@ export default function MedicinesPage() {
       </SidebarSection>
 
       {/* PRICE RANGE */}
-      <SidebarSection title="Price Range">
+      {/* <SidebarSection title="Price Range">
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <div className="flex-1">
@@ -570,7 +561,7 @@ export default function MedicinesPage() {
             <span>$10,000+</span>
           </div>
         </div>
-      </SidebarSection>
+      </SidebarSection> */}
 
       {/* FEATURED */}
       <SidebarSection title="Filter">
@@ -681,16 +672,14 @@ export default function MedicinesPage() {
                     setStagedCategory("");
                     setMobileCategoryOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${
-                    stagedCategory === "" ? "bg-emerald-50" : "hover:bg-slate-50"
-                  }`}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${stagedCategory === "" ? "bg-emerald-50" : "hover:bg-slate-50"
+                    }`}
                 >
                   <div
-                    className={`h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 transition ${
-                      stagedCategory === ""
-                        ? "border-emerald-400 bg-emerald-100"
-                        : "border-slate-200 bg-slate-100"
-                    }`}
+                    className={`h-7 w-7 rounded-lg flex-shrink-0 flex items-center justify-center border-2 transition ${stagedCategory === ""
+                      ? "border-emerald-400 bg-emerald-100"
+                      : "border-slate-200 bg-slate-100"
+                      }`}
                   >
                     <Tag
                       size={13}
@@ -722,18 +711,16 @@ export default function MedicinesPage() {
                       setStagedCategory(cat._id);
                       setMobileCategoryOpen(false);
                     }}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${
-                      stagedCategory === cat._id
-                        ? "bg-emerald-50"
-                        : "hover:bg-slate-50"
-                    }`}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition ${stagedCategory === cat._id
+                      ? "bg-emerald-50"
+                      : "hover:bg-slate-50"
+                      }`}
                   >
                     <div
-                      className={`h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 transition ${
-                        stagedCategory === cat._id
-                          ? "border-emerald-400"
-                          : "border-slate-200"
-                      }`}
+                      className={`h-7 w-7 rounded-lg overflow-hidden flex-shrink-0 border-2 transition ${stagedCategory === cat._id
+                        ? "border-emerald-400"
+                        : "border-slate-200"
+                        }`}
                     >
                       <img
                         src={cat.image}
@@ -746,11 +733,10 @@ export default function MedicinesPage() {
                       />
                     </div>
                     <span
-                      className={`flex-1 text-left capitalize leading-tight ${
-                        stagedCategory === cat._id
-                          ? "text-emerald-700 font-semibold"
-                          : "text-slate-600"
-                      }`}
+                      className={`flex-1 text-left capitalize leading-tight ${stagedCategory === cat._id
+                        ? "text-emerald-700 font-semibold"
+                        : "text-slate-600"
+                        }`}
                     >
                       {cat.name}
                     </span>

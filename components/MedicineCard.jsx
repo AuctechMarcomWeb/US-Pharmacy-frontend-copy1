@@ -65,7 +65,7 @@ function QtyStepper({ qty, onDec, onInc }) {
       <span className="h-7 w-6 sm:h-6 sm:w-6 flex items-center justify-center text-[11px] sm:text-[13px] font-bold text-slate-800 border-x border-slate-200 select-none">
         {qty}
       </span>
-    <button
+      <button
         onClick={onInc}
         disabled={qty >= 99}
         className="h-7 w-6 sm:h-6 sm:w-6 flex items-center justify-center text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-sm font-bold"
@@ -202,11 +202,11 @@ export default function MedicineCard({ med, onViewDetails }) {
               <span className="text-[10px] sm:text-[11px] text-gray-400 line-through font-mono">
                 ${fmt(lowestVariant.mrp)}
               </span>
-              {off && (
+              {/* {off && (
                 <span className="text-[9px] sm:text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">
                   {off}% OFF
                 </span>
-              )}
+              )} */}
             </div>
           )}
           {strengths.length > 1 && (
@@ -321,11 +321,10 @@ export default function MedicineCard({ med, onViewDetails }) {
                     />
                     <button
                       onClick={(e) => handleAddToCart(e, strength)}
-                      className={`text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-1 rounded-md border-[1.5px] transition-all whitespace-nowrap ${
-                        added
-                          ? "bg-teal-600 text-white border-teal-600"
-                          : "bg-white hover:bg-[#337642] text-[#162555] hover:text-white"
-                      }`}
+                      className={`text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-1 rounded-md border-[1.5px] transition-all whitespace-nowrap ${added
+                        ? "bg-teal-600 text-white border-teal-600"
+                        : "bg-white hover:bg-[#337642] text-[#162555] hover:text-white"
+                        }`}
                       aria-label={`Add ${strength} to cart`}
                     >
                       {added ? "✓" : "+ Add"}

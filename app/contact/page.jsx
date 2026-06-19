@@ -14,18 +14,19 @@ import {
 import { postRequest } from "../../helper";
 
 const metadata = {
-  title: "Contact Us | US Pharmacy",
+  title: "Contact Us | Prescription Medicine Information & Inquiry",
   description:
-    "Contact US Pharmacy for medicine support, healthcare assistance, product inquiries, and customer service.",
+    "Contact our team for prescription medicine information, availability inquiries, prescription assistance, and general support.",
   keywords: [
-    "contact pharmacy",
-    "medical support",
-    "healthcare assistance",
-    "online pharmacy contact",
     "medicine inquiry",
+    "prescription information",
+    "availability inquiry",
+    "contact support",
+    "drug information",
+    "prescription assistance",
   ],
   alternates: {
-    canonical: "/contact",
+    canonical: "/contact-us",
   },
 };
 
@@ -67,15 +68,15 @@ export default function ContactPage() {
       showToast(
         "success",
         res?.data?.message ||
-          "Message sent successfully! We'll get back to you soon.",
+        "Inquiry submitted successfully.Our team will review your request and contact you if further information is required.",
       );
       setForm({ name: "", phone: "", email: "", title: "", discription: "" });
     } catch (err) {
       showToast(
         "error",
         err?.response?.data?.message ||
-          err.message ||
-          "Failed to send message. Please try again.",
+        err.message ||
+        "Unable to submit your inquiry. Please try again.",
       );
     } finally {
       setLoading(false);
@@ -94,11 +95,10 @@ export default function ContactPage() {
       {/* TOAST */}
       {toast && (
         <div
-          className={`fixed top-4 right-4 left-4 sm:left-auto sm:right-6 sm:top-6 z-50 flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 rounded-2xl shadow-xl border text-sm font-semibold sm:max-w-sm transition-all ${
-            toast.type === "success"
-              ? "bg-green-50 border-green-200 text-[#285e35]"
-              : "bg-red-50 border-red-200 text-red-700"
-          }`}
+          className={`fixed top-4 right-4 left-4 sm:left-auto sm:right-6 sm:top-6 z-50 flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 rounded-2xl shadow-xl border text-sm font-semibold sm:max-w-sm transition-all ${toast.type === "success"
+            ? "bg-green-50 border-green-200 text-[#285e35]"
+            : "bg-red-50 border-red-200 text-red-700"
+            }`}
         >
           {toast.type === "success" ? (
             <CheckCircle2
@@ -128,10 +128,10 @@ export default function ContactPage() {
           className="text-3xl sm:text-4xl md:text-3xl font-extrabold tracking-tight text-[#285e35]"
           id="contact-heading"
         >
-          Contact US Pharmacy
+          Contact Our Support Team
         </h1>
         <p className="mt-3 sm:mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
-          Send secure queries to our clinical intelligence support system.
+          Contact our team for medicine information, prescription assistance, availability inquiries, or general support. All requests are reviewed manually.
         </p>
       </header>
 
@@ -146,7 +146,7 @@ export default function ContactPage() {
           className="order-1 md:order-2 bg-[#eef8f1] backdrop-blur-2xl border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-xl"
         >
           <h2 className="text-xl sm:text-2xl font-bold text-[#285e35] mb-5 sm:mb-6">
-            Send Message
+            Submit Inquiry
           </h2>
 
           {/* NAME + PHONE row */}
@@ -187,7 +187,7 @@ export default function ContactPage() {
             name="title"
             value={form.title}
             onChange={handleChange}
-            placeholder="Subject / Title"
+            placeholder="Inquiry Subject"
             required
             className="w-full p-3 sm:p-4 mb-3 sm:mb-4 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all text-sm"
           />
@@ -197,7 +197,7 @@ export default function ContactPage() {
             name="discription"
             value={form.discription}
             onChange={handleChange}
-            placeholder="Your Message"
+            placeholder="Describe your inquiry or provide additional information"
             rows={4}
             required
             className="w-full p-3 sm:p-4 mb-4 sm:mb-5 rounded-2xl bg-white border border-slate-200 text-[#285e35] placeholder:text-slate-400 outline-none resize-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100 transition-all text-sm"
@@ -212,12 +212,12 @@ export default function ContactPage() {
             {loading ? (
               <>
                 <Loader2 size={18} className="animate-spin" />
-                Sending…
+                Submitting...
               </>
             ) : (
               <>
                 <Send size={18} />
-                Send Secure Message
+                Submit Inquiry
               </>
             )}
           </button>
