@@ -1,306 +1,585 @@
+// "use client";
+
+// export default function Hero() {
+//   return (
+//     <>
+//       <style>{`
+//         .ph-hero {
+//           position: relative;
+//           display: grid;
+//           grid-template-columns: 1fr 1fr;
+//           min-height: 260px;
+//           overflow: hidden;
+//           background: #f7f9f5;
+//         }
+
+//         /* LEFT */
+//         .ph-left {
+//           position: relative;
+//           z-index: 2;
+//           background: #ffffff;
+//           display: flex;
+//           flex-direction: column;
+//           justify-content: center;
+//           padding: 1.6rem 0rem 1.6rem 8rem;
+//           gap: 0.8rem;
+//         }
+
+//         .ph-left::after {
+//           content: "";
+//           position: absolute;
+//           top: 0;
+//           right: -50px;
+//           width: 50px;
+//           height: 100%;
+//           background: #ffffff;
+//           clip-path: polygon(0 0, 0 100%, 100% 100%);
+//           z-index: 3;
+//         }
+
+//         .ph-badge {
+//           display: inline-flex;
+//           align-items: center;
+//           gap: 0.5rem;
+//           width: fit-content;
+//         }
+
+//         .ph-badge-primary {
+//           background: #e8f5e9;
+//           color: #1b5e20;
+//           font-size: 0.7rem;
+//           font-weight: 700;
+//           padding: 0.3rem 0.75rem;
+//           border-radius: 4px;
+//           text-transform: uppercase;
+//         }
+
+//         .ph-badge-label {
+//           font-size: 0.7rem;
+//           color: #888;
+//         }
+
+//         .ph-title {
+//           font-size: clamp(1.4rem, 3vw, 2.2rem);
+//           font-weight: 800;
+//           line-height: 1.1;
+//           color: #0d1b0e;
+//           margin: 0;
+//         }
+
+//         .ph-title .highlight {
+//           color: #2e7d32;
+//         }
+
+//         .ph-description {
+//           max-width: 540px;
+//           color: #666;
+//           font-size: 0.9rem;
+//           line-height: 1.7;
+//         }
+
+//         .ph-tags {
+//           display: flex;
+//           flex-wrap: wrap;
+//           gap: 0.5rem;
+//         }
+
+//         .ph-tag {
+//           display: inline-flex;
+//           align-items: center;
+//           gap: 0.45rem;
+//           background: #f4f4f4;
+//           padding: 0.28rem 0.8rem;
+//           border-radius: 999px;
+//           font-size: 0.72rem;
+//           font-weight: 500;
+//           color: #333;
+//         }
+
+//         .ph-tag-dot {
+//           width: 6px;
+//           height: 6px;
+//           border-radius: 50%;
+//           background: #2e7d32;
+//         }
+
+//         /* RIGHT */
+//         .ph-right {
+//           position: relative;
+//           overflow: hidden;
+//         }
+
+//         .ph-right-img {
+//           position: absolute;
+//           inset: 0;
+//           background: url("https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80")
+//             center center / cover no-repeat;
+//         }
+
+//         .ph-right-overlay {
+//           position: absolute;
+//           inset: 0;
+//           background: linear-gradient(
+//             135deg,
+//             rgba(46, 125, 50, 0.12) 0%,
+//             rgba(0, 0, 0, 0.1) 100%
+//           );
+//         }
+
+//         .ph-corner-tag {
+//           position: absolute;
+//           top: 1rem;
+//           right: 7rem;
+//           background: #2e7d32;
+//           color: white;
+//           font-size: 0.65rem;
+//           font-weight: 700;
+//           padding: 0.3rem 0.9rem;
+//           border-radius: 999px;
+//           z-index: 3;
+//         }
+
+//         .ph-info-card {
+//           position: absolute;
+//           bottom: 1rem;
+//           right: 7rem;
+//           background: #fff;
+//           border-radius: 12px;
+//           padding: 1rem;
+//           box-shadow: 0 8px 24px rgba(0,0,0,.15);
+//           width: 220px;
+//           z-index: 3;
+//         }
+
+//         .ph-info-title {
+//           color: #2e7d32;
+//           font-size: 1rem;
+//           font-weight: 700;
+//           margin-bottom: 0.3rem;
+//         }
+
+//         .ph-info-text {
+//           font-size: 0.7rem;
+//           color: #555;
+//           line-height: 1.5;
+//         }
+
+//         .ph-warning-box {
+//           margin-top: 0.5rem;
+//           background: #fff8e1;
+//           border: 1px solid #ffe082;
+//           padding: 0.8rem 1rem;
+//           border-radius: 10px;
+//           font-size: 0.75rem;
+//           color: #555;
+//           line-height: 1.7;
+//           max-width: 580px;
+//         }
+
+//         /* MOBILE */
+//         @media (max-width: 768px) {
+//           .ph-hero {
+//             grid-template-columns: 1fr;
+//           }
+
+//           .ph-right {
+//             order: -1;
+//             height: 160px;
+//           }
+
+//           .ph-left {
+//             padding: 1rem;
+//           }
+
+//           .ph-left::after {
+//             display: none;
+//           }
+
+//           .ph-corner-tag {
+//             right: 1rem;
+//             top: 1rem;
+//           }
+
+//           .ph-info-card {
+//             display: none;
+//           }
+
+//           .ph-title {
+//             font-size: 1.4rem;
+//           }
+//         }
+//       `}</style>
+
+//       <section
+//         className="ph-hero"
+//         aria-label="Prescription Medicine Information & Inquiry Platform"
+//       >
+//         {/* LEFT */}
+//         <div className="ph-left">
+//           <div className="ph-badge">
+//             <span className="ph-badge-primary">
+//               Prescription Verification Required
+//             </span>
+
+//             <span className="ph-badge-label">
+//               Manual Review Process
+//             </span>
+//           </div>
+
+//           <h1 className="ph-title">
+//             Prescription Medicine <br />
+//             <span className="highlight">
+//               Information & Inquiry Platform
+//             </span>
+//           </h1>
+
+//           <div className="ph-description">
+//             Access medicine information, dosage details, possible side
+//             effects and submit prescription inquiries. All requests are
+//             manually reviewed and subject to prescription verification and
+//             applicable legal compliance requirements.
+//           </div>
+
+//           <div className="ph-tags">
+//             <span className="ph-tag">
+//               <span className="ph-tag-dot"></span>
+//               💊 Medicine Information
+//             </span>
+
+//             <span className="ph-tag">
+//               <span className="ph-tag-dot"></span>
+//               📋 Prescription Verification
+//             </span>
+
+//             <span className="ph-tag">
+//               <span className="ph-tag-dot"></span>
+//               🔍 Availability Inquiry
+//             </span>
+//           </div>
+
+//           <div className="ph-warning-box">
+//             <strong>Important Notice:</strong> This website functions as a
+//             prescription medicine information and inquiry platform. Submission
+//             of an inquiry does not constitute a purchase, sale, shipment, or
+//             delivery of medicines. All requests are manually reviewed and may
+//             require prescription verification in accordance with applicable
+//             regulations.
+//           </div>
+//         </div>
+
+//         {/* RIGHT */}
+//         <div className="ph-right">
+//           <div className="ph-right-img"></div>
+//           <div className="ph-right-overlay"></div>
+
+//           <div className="ph-corner-tag">
+//             Information Only
+//           </div>
+
+//           <div className="ph-info-card">
+//             <div className="ph-info-title">
+//               Prescription Notice
+//             </div>
+
+//             <div className="ph-info-text">
+//               Availability inquiries are reviewed manually. Prescription
+//               verification may be required before further processing.
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     </>
+//   );
+// }
+
+
+
 "use client";
 
 export default function Hero() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
-
         .ph-hero {
-          font-family: --var(--font-inter);
           position: relative;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          min-height: 250px;
+          min-height: 260px;
           overflow: hidden;
           background: #f7f9f5;
-         
         }
 
-        /* ── LEFT PANEL ── */
+        /* LEFT */
         .ph-left {
           position: relative;
           z-index: 2;
-          background: #ffffff;
+          background: #fff;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 1.4rem 0rem 1.4rem 8rem;
-          gap: 0.7rem;
+          padding: 1.5rem 0rem 1.5rem 8rem;
+          gap: .8rem;
         }
 
         .ph-left::after {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           right: -50px;
           width: 50px;
           height: 100%;
-          background: #ffffff;
+          background: #fff;
           clip-path: polygon(0 0, 0 100%, 100% 100%);
-          z-index: 3;
         }
 
-        .ph-sale-badge {
+        .ph-badge {
           display: inline-flex;
           align-items: center;
-          gap: 0.45rem;
-          width: fit-content;
+          gap: .5rem;
         }
 
-        .ph-badge-pct {
-          font-family: --var(--font-poppins);
-          font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+        .ph-badge-main {
           background: #e8f5e9;
           color: #1b5e20;
-          padding: 0.22rem 0.65rem;
+          font-size: .7rem;
+          font-weight: 700;
+          padding: .3rem .8rem;
           border-radius: 4px;
         }
 
-        .ph-badge-label {
-          font-size: 0.68rem;
-          font-weight: 500;
-          color: #999;
-          letter-spacing: 0.03em;
+        .ph-badge-sub {
+          color: #888;
+          font-size: .7rem;
         }
 
         .ph-title {
-          font-family: --var(--font-inter);
-          font-size: clamp(1.25rem, 2.8vw, 2rem);
+          font-size: clamp(1.4rem, 3vw, 2.1rem);
           font-weight: 800;
-          line-height: 1.08;
-          color: #0d1b0e;
+          line-height: 1.1;
+          color: #111;
           margin: 0;
-          letter-spacing: -0.03em;
         }
 
-        .ph-title .num {
-          position: relative;
-          display: inline-block;
+        .ph-title span {
           color: #2e7d32;
         }
 
-        .ph-title .num::before {
-          content: '';
-          position: absolute;
-          bottom: 2px;
-          left: 0;
-          width: 100%;
-          height: 3px;
-          background: #a5d6a7;
-          border-radius: 2px;
-          z-index: -1;
+        .ph-description {
+          max-width: 550px;
+          font-size: .88rem;
+          line-height: 1.7;
+          color: #666;
         }
 
         .ph-tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.4rem;
+          gap: .5rem;
         }
 
         .ph-tag {
-          display: inline-flex;
+          display: flex;
           align-items: center;
-          gap: 0.4rem;
-          font-size: 0.72rem;
-          font-weight: 500;
-          color: #2e2e2e;
-          background: #f4f4f4;
+          gap: .4rem;
+          background: #f5f5f5;
+          padding: .25rem .8rem;
           border-radius: 999px;
-          padding: 0.22rem 0.65rem;
+          font-size: .72rem;
+          color: #333;
         }
 
-        .ph-tag-dot {
+        .ph-dot {
           width: 6px;
           height: 6px;
-          border-radius: 50%;
           background: #2e7d32;
-          flex-shrink: 0;
+          border-radius: 50%;
         }
 
-        .ph-tag-dot.delivery { background: #1565c0; }
-        .ph-tag-dot.verified { background: #6a1b9a; }
+        .ph-warning {
+          background: #fff8e1;
+          border: 1px solid #ffe082;
+          border-radius: 10px;
+          padding: .8rem 1rem;
+          font-size: .75rem;
+          color: #555;
+          line-height: 1.7;
+          max-width: 580px;
+        }
 
-        /* ── RIGHT PANEL ── */
+        /* RIGHT */
         .ph-right {
           position: relative;
-          z-index: 1;
           overflow: hidden;
         }
 
         .ph-right-img {
           position: absolute;
           inset: 0;
-          background: url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=900&q=85')
+          background:
+            url("https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80")
             center center / cover no-repeat;
         }
 
-        .ph-right-overlay {
+        .ph-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(46,125,50,0.15) 0%, rgba(0,0,0,0.08) 100%);
+          background:
+            linear-gradient(
+              135deg,
+              rgba(46,125,50,.12),
+              rgba(0,0,0,.1)
+            );
         }
 
-        .ph-discount-card {
+        .ph-corner {
+          position: absolute;
+          top: 1rem;
+          right: 7rem;
+          background: #2e7d32;
+          color: white;
+          font-size: .65rem;
+          font-weight: 700;
+          padding: .3rem .8rem;
+          border-radius: 999px;
+          z-index: 5;
+        }
+
+        .ph-card {
           position: absolute;
           bottom: 1rem;
           right: 7rem;
-          background: #ffffff;
-          border-radius: 10px;
-          padding: 0.65rem 0.9rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.1rem;
-          box-shadow: 0 6px 24px rgba(0,0,0,0.16);
-          min-width: 110px;
-          z-index: 4;
-          animation: floatUp 0.7s ease 0.3s both;
+          background: white;
+          padding: 1rem;
+          border-radius: 12px;
+          width: 220px;
+          box-shadow: 0 8px 24px rgba(0,0,0,.15);
+          z-index: 5;
         }
 
-        .ph-discount-card .big-num {
-          font-family: --var(--font-poppins);
-          font-size: 1.75rem;
-          font-weight: 800;
+        .ph-card-title {
           color: #2e7d32;
-          line-height: 1;
-          letter-spacing: -0.04em;
-        }
-
-        .ph-discount-card .big-num span {
-          font-size: 0.85rem;
-          vertical-align: super;
           font-weight: 700;
+          margin-bottom: .4rem;
         }
 
-        .ph-discount-card .card-label {
-          font-size: 0.65rem;
-          font-weight: 600;
-          color: #444;
-          text-transform: uppercase;
-          letter-spacing: 0.07em;
+        .ph-card-text {
+          font-size: .72rem;
+          color: #666;
+          line-height: 1.6;
         }
 
-        .ph-discount-card .card-sub {
-          font-size: 0.6rem;
-          color: #aaa;
-        }
+        @media (max-width:768px) {
 
-        .ph-corner-tag {
-          position: absolute;
-          top: 0.85rem;
-          right: 7rem;
-          background: #2e7d32;
-          color: #fff;
-          font-size: 0.62rem;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          padding: 0.28rem 0.7rem;
-          border-radius: 999px;
-          z-index: 4;
-          animation: floatUp 0.6s ease 0.1s both;
-        }
-
-        @keyframes floatUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── MOBILE ── */
-        @media (max-width: 600px) {
           .ph-hero {
             grid-template-columns: 1fr;
-            grid-template-rows: auto;
-            min-height: unset;
           }
 
-          /* on mobile: image goes on top as a short strip */
           .ph-right {
             order: -1;
-            height: 130px;
+            height: 160px;
           }
 
           .ph-left {
-            padding: 1rem 1rem 1.1rem;
-            gap: 0.55rem;
+            padding: 1rem;
           }
 
-          .ph-left::after { display: none; }
-
-          .ph-title {
-            font-size: 1.2rem;
-            line-height: 1.1;
+          .ph-left::after {
+            display: none;
           }
 
-          /* hide the floating card on mobile — too cramped */
-          .ph-discount-card { display: none; }
-
-          /* move corner tag inside the short image strip */
-          .ph-corner-tag {
-            top: 0.6rem;
-            right: 0.6rem;
-            font-size: 0.58rem;
-            padding: 0.22rem 0.55rem;
+          .ph-card {
+            display: none;
           }
 
-          .ph-tags { gap: 0.3rem; }
-
-          .ph-tag {
-            font-size: 0.67rem;
-            padding: 0.18rem 0.55rem;
+          .ph-corner {
+            right: 1rem;
           }
-        }
-
-        @media (max-width: 380px) {
-          .ph-title { font-size: 1.05rem; }
-          .ph-right { height: 110px; }
         }
       `}</style>
 
-      <section className="ph-hero" aria-label="New Year Sale — up to 30% off">
+      <section
+        className="ph-hero"
+        aria-label="Prescription Medicine Information & Inquiry Platform"
+      >
+        {/* LEFT */}
         <div className="ph-left">
-          <div className="ph-sale-badge">
-            <span className="ph-badge-pct">🎉 New Year Sale</span>
-            <span className="ph-badge-label">Limited time offer</span>
+
+          <div className="ph-badge">
+            <span className="ph-badge-main">
+              📋 Prescription Verification Required
+            </span>
+
+            <span className="ph-badge-sub">
+              Manual Review Process
+            </span>
           </div>
 
           <h1 className="ph-title">
-            Get Upto <span className="num">30% Off</span>
-            <br />
-            On This New Year Sale
+            Prescription Medicine <br />
+            <span>Information & Inquiry Platform</span>
           </h1>
 
-          <div className="ph-tags">
-            <span className="ph-tag">
-              <span className="ph-tag-dot" />
-              💊 Medicines
-            </span>
-            <span className="ph-tag">
-              <span className="ph-tag-dot delivery" />
-              🚚 Fast Delivery
-            </span>
-            <span className="ph-tag">
-              <span className="ph-tag-dot verified" />✅ Verified Products
-            </span>
+          <div className="ph-description">
+            Access medicine information, dosage details, side effects and
+            submit prescription inquiries. All requests are manually reviewed
+            and subject to prescription verification and applicable legal
+            compliance requirements.
           </div>
+
+          <div className="ph-tags">
+
+            <div className="ph-tag">
+              <span className="ph-dot"></span>
+              💊 Medicine Information
+            </div>
+
+            <div className="ph-tag">
+              <span className="ph-dot"></span>
+              📋 Prescription Verification
+            </div>
+
+            <div className="ph-tag">
+              <span className="ph-dot"></span>
+              🔍 Availability Inquiry
+            </div>
+
+          </div>
+
+          <div className="ph-warning">
+            <strong>Important Notice:</strong> This website functions as a
+            prescription medicine information and inquiry platform. Submission
+            of an inquiry does not constitute a purchase, sale, shipment,
+            supply or delivery. All requests are manually reviewed and may
+            require prescription verification in accordance with applicable
+            regulations.
+          </div>
+
         </div>
 
+        {/* RIGHT */}
         <div className="ph-right">
-          <div className="ph-right-img" aria-hidden="true" />
-          <div className="ph-right-overlay" aria-hidden="true" />
-          <div className="ph-right-content">
-            <div className="ph-corner-tag">New Year</div>
-            <div className="ph-discount-card" aria-hidden="true">
-              <div className="big-num">
-                <span>↑</span>30<span>%</span>
-              </div>
-              <div className="card-label">Off Today</div>
-              <div className="card-sub">On all medicines</div>
-            </div>
+
+          <div className="ph-right-img"></div>
+
+          <div className="ph-overlay"></div>
+
+          <div className="ph-corner">
+            Information Only
           </div>
+
+          <div className="ph-card">
+
+            <div className="ph-card-title">
+              Prescription Notice
+            </div>
+
+            <div className="ph-card-text">
+              Availability inquiries are reviewed manually. Prescription
+              verification may be required before further processing.
+            </div>
+
+          </div>
+
         </div>
       </section>
     </>

@@ -31,7 +31,7 @@ const FALLBACK_IMG =
 
 // ─── Step Bar ─────────────────────────────────────────────────────────────────
 function StepBar({ step }) {
-  const steps = ["Cart", "Order Summary", "Shipping", "Confirm"];
+  const steps = ["Inquiry List", "Request Details", "Prescription Verification", "Submitted"];
   return (
     <div className="relative z-20 bg-white border-b border-slate-200 shadow-sm flex-shrink-0">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3">
@@ -48,33 +48,30 @@ function StepBar({ step }) {
               <div key={label} className="flex items-center">
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <div
-                    className={`h-5 w-5 sm:h-6 sm:w-6 rounded-full flex items-center justify-center text-[9px] sm:text-[10px] font-bold flex-shrink-0 transition-all ${
-                      done
-                        ? "bg-emerald-500 text-white"
-                        : active
-                          ? "bg-[#064e3b] text-white"
-                          : "bg-slate-100 text-slate-400 border border-slate-200"
-                    }`}
+                    className={`h-5 w-5 sm:h-6 sm:w-6 rounded-full flex items-center justify-center text-[9px] sm:text-[10px] font-bold flex-shrink-0 transition-all ${done
+                      ? "bg-emerald-500 text-white"
+                      : active
+                        ? "bg-[#064e3b] text-white"
+                        : "bg-slate-100 text-slate-400 border border-slate-200"
+                      }`}
                   >
                     {done ? "✓" : idx}
                   </div>
                   <span
-                    className={`text-[10px] sm:text-xs font-semibold whitespace-nowrap ${
-                      done
-                        ? "text-emerald-600"
-                        : active
-                          ? "text-[#064e3b]"
-                          : "text-slate-400"
-                    }`}
+                    className={`text-[10px] sm:text-xs font-semibold whitespace-nowrap ${done
+                      ? "text-emerald-600"
+                      : active
+                        ? "text-[#064e3b]"
+                        : "text-slate-400"
+                      }`}
                   >
                     {label}
                   </span>
                 </div>
                 {i < steps.length - 1 && (
                   <div
-                    className={`w-5 sm:w-14 h-px mx-1.5 sm:mx-3 transition-all ${
-                      done ? "bg-emerald-400" : "bg-slate-200"
-                    }`}
+                    className={`w-5 sm:w-14 h-px mx-1.5 sm:mx-3 transition-all ${done ? "bg-emerald-400" : "bg-slate-200"
+                      }`}
                   />
                 )}
               </div>
@@ -143,8 +140,8 @@ function CountryDropdown({
 
   const filtered = search.trim()
     ? countries.filter((c) =>
-        c.name.toLowerCase().includes(search.toLowerCase()),
-      )
+      c.name.toLowerCase().includes(search.toLowerCase()),
+    )
     : countries;
 
   return (
@@ -157,11 +154,10 @@ function CountryDropdown({
           onToggle();
         }}
         disabled={loading || !!error}
-        className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg border-2 transition-all text-sm font-semibold bg-slate-50 disabled:opacity-60 disabled:cursor-not-allowed ${
-          isOpen
-            ? "border-emerald-400 bg-white ring-2 ring-emerald-100"
-            : "border-slate-200 hover:border-slate-300"
-        }`}
+        className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg border-2 transition-all text-sm font-semibold bg-slate-50 disabled:opacity-60 disabled:cursor-not-allowed ${isOpen
+          ? "border-emerald-400 bg-white ring-2 ring-emerald-100"
+          : "border-slate-200 hover:border-slate-300"
+          }`}
       >
         <div className="flex items-center gap-2 min-w-0">
           <div className="h-5 w-5 rounded-md bg-emerald-50 border border-emerald-100 flex items-center justify-center flex-shrink-0">
@@ -185,9 +181,8 @@ function CountryDropdown({
         </div>
         <ChevronDown
           size={13}
-          className={`text-slate-400 transition-transform duration-200 flex-shrink-0 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`text-slate-400 transition-transform duration-200 flex-shrink-0 ${isOpen ? "rotate-180" : ""
+            }`}
         />
       </button>
 
@@ -246,13 +241,11 @@ function CountryDropdown({
                       onSelect(country);
                       setSearch("");
                     }}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-semibold transition-colors ${
-                      i < filtered.length - 1 ? "border-b border-slate-50" : ""
-                    } ${
-                      selectedCountry?.name === country.name
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-semibold transition-colors ${i < filtered.length - 1 ? "border-b border-slate-50" : ""
+                      } ${selectedCountry?.name === country.name
                         ? "bg-emerald-50 text-emerald-700"
                         : "text-slate-600 hover:bg-slate-50"
-                    }`}
+                      }`}
                   >
                     <span className="text-sm leading-none w-5 text-center flex-shrink-0">
                       {country.flag || "🌐"}
@@ -331,11 +324,10 @@ function PaymentDropdown({
           updateCoords();
           onToggle();
         }}
-        className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg border-2 transition-all text-sm font-semibold bg-slate-50 ${
-          isOpen
-            ? "border-emerald-400 bg-white ring-2 ring-emerald-100"
-            : "border-slate-200 hover:border-slate-300"
-        }`}
+        className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg border-2 transition-all text-sm font-semibold bg-slate-50 ${isOpen
+          ? "border-emerald-400 bg-white ring-2 ring-emerald-100"
+          : "border-slate-200 hover:border-slate-300"
+          }`}
       >
         <div className="flex items-center gap-2">
           <div className="h-5 w-5 rounded-md bg-emerald-50 border border-emerald-100 flex items-center justify-center flex-shrink-0">
@@ -347,9 +339,8 @@ function PaymentDropdown({
         </div>
         <ChevronDown
           size={13}
-          className={`text-slate-400 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+            }`}
         />
       </button>
 
@@ -373,22 +364,19 @@ function PaymentDropdown({
                   key={method._id}
                   type="button"
                   onClick={() => onSelect(method._id)}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-semibold capitalize transition-colors ${
-                    i < paymentMethods.length - 1
-                      ? "border-b border-slate-100"
-                      : ""
-                  } ${
-                    selectedId === method._id
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-semibold capitalize transition-colors ${i < paymentMethods.length - 1
+                    ? "border-b border-slate-100"
+                    : ""
+                    } ${selectedId === method._id
                       ? "bg-emerald-50 text-emerald-700"
                       : "text-slate-600 hover:bg-slate-50"
-                  }`}
+                    }`}
                 >
                   <div
-                    className={`h-5 w-5 rounded-md flex items-center justify-center flex-shrink-0 ${
-                      selectedId === method._id
-                        ? "bg-emerald-100 border border-emerald-200"
-                        : "bg-slate-100 border border-slate-200"
-                    }`}
+                    className={`h-5 w-5 rounded-md flex items-center justify-center flex-shrink-0 ${selectedId === method._id
+                      ? "bg-emerald-100 border border-emerald-200"
+                      : "bg-slate-100 border border-slate-200"
+                      }`}
                   >
                     <CreditCard
                       size={11}
@@ -591,11 +579,14 @@ export default function CheckoutPage() {
                     <BadgeCheck size={20} className="text-emerald-600" />
                   </div>
                   <h1 className="text-xl font-black text-[#064e3b] leading-tight">
-                    Thank you for submitting your Request!
+                    Thank you for submitting your Prescription Inquiry
                   </h1>
                   <p className="mt-1.5 text-slate-500 text-xs leading-relaxed max-w-sm">
-                    Your request will be processed within 24 hours during
-                    working days. We will notify you by phone once submitted.
+                    Your inquiry has been received successfully.
+
+                    Submission of an inquiry does not constitute a purchase, sale, shipment, or delivery.
+
+                    All requests are manually reviewed and subject to prescription verification and applicable legal requirements.
                   </p>
                 </div>
                 <div>
@@ -625,7 +616,7 @@ export default function CheckoutPage() {
                   onClick={() => router.push("/products")}
                   className="w-fit px-5 py-2 rounded-full text-white font-bold text-sm shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all bg-gradient-to-r from-[#064e3b] to-[#059669]"
                 >
-                  Continue Shopping
+                  Back to Medicines
                 </button>
               </div>
 
@@ -633,7 +624,7 @@ export default function CheckoutPage() {
               <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
                 <div className="px-4 pt-4 pb-3 border-b border-dashed border-slate-200">
                   <h2 className="text-sm font-black text-[#064e3b] mb-2">
-                    Order Summary
+                    Request Summary
                   </h2>
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div>
@@ -801,16 +792,16 @@ export default function CheckoutPage() {
                               </span>
                               {item.mrp && item.mrp > item.price && (
                                 <>
-                                  <span className="text-[10px] sm:text-xs text-slate-400 line-through font-medium">
+                                  {/* <span className="text-[10px] sm:text-xs text-slate-400 line-through font-medium">
                                     ${fmt(item.mrp)}
-                                  </span>
-                                  <span className="text-[9px] sm:text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
+                                  </span> */}
+                                  {/* <span className="text-[9px] sm:text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-1.5 py-0.5 rounded-full">
                                     {Math.round(
                                       ((item.mrp - item.price) / item.mrp) *
-                                        100,
+                                      100,
                                     )}
                                     % off
-                                  </span>
+                                  </span> */}
                                 </>
                               )}
                             </div>
@@ -827,7 +818,7 @@ export default function CheckoutPage() {
           {/* RIGHT — payment details sidebar */}
           <div className="w-full lg:w-72 lg:flex-shrink-0 bg-white rounded-xl border border-slate-200 p-4">
             <h2 className="text-sm font-black text-[#064e3b] mb-3">
-              Payment details
+              Inquiry Summary
             </h2>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
@@ -854,7 +845,7 @@ export default function CheckoutPage() {
               disabled={cart.length === 0}
               className="mt-4 w-full py-2.5 rounded-xl text-white font-black text-sm shadow-xl shadow-emerald-900/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-[#064e3b] to-[#059669] hover:from-[#065f46] hover:to-[#10b981]"
             >
-              Proceed to Shipping <ArrowRight size={14} />
+              Continue to Inquiry Details <ArrowRight size={14} />
             </button>
           </div>
         </div>
@@ -884,7 +875,7 @@ export default function CheckoutPage() {
               </button>
               <div className="flex items-center gap-2">
                 <h2 className="text-xs font-black text-[#064e3b] tracking-wide">
-                  CHECKOUT
+                  PRESCRIPTION INQUIRY
                 </h2>
                 <span className="h-1 w-1 rounded-full bg-slate-300" />
                 <span className="text-[10px] text-slate-400 font-medium">
@@ -1066,11 +1057,10 @@ export default function CheckoutPage() {
 
               {/* Terms checkbox */}
               <label
-                className={`flex items-start gap-2 cursor-pointer select-none p-2.5 rounded-xl border-2 transition-all ${
-                  termsAccepted
-                    ? "border-emerald-400 bg-emerald-50/40"
-                    : "border-slate-200 bg-white hover:border-slate-300"
-                }`}
+                className={`flex items-start gap-2 cursor-pointer select-none p-2.5 rounded-xl border-2 transition-all ${termsAccepted
+                  ? "border-emerald-400 bg-emerald-50/40"
+                  : "border-slate-200 bg-white hover:border-slate-300"
+                  }`}
               >
                 <div className="flex-shrink-0 mt-0.5">
                   <input
@@ -1080,11 +1070,10 @@ export default function CheckoutPage() {
                     onChange={(e) => setTermsAccepted(e.target.checked)}
                   />
                   <div
-                    className={`h-3.5 w-3.5 rounded border-2 flex items-center justify-center transition-all ${
-                      termsAccepted
-                        ? "bg-emerald-500 border-emerald-500"
-                        : "bg-white border-slate-300"
-                    }`}
+                    className={`h-3.5 w-3.5 rounded border-2 flex items-center justify-center transition-all ${termsAccepted
+                      ? "bg-emerald-500 border-emerald-500"
+                      : "bg-white border-slate-300"
+                      }`}
                   >
                     {termsAccepted && (
                       <svg width="8" height="6" viewBox="0 0 11 9" fill="none">
@@ -1145,7 +1134,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex-1">
                     <p className="text-[10px] font-bold text-red-700">
-                      Order Failed
+                      Inquiry Submission Failed
                     </p>
                     <p className="text-[10px] text-red-500 mt-0.5">
                       {orderError}
@@ -1165,21 +1154,20 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className={`w-full py-3 rounded-xl font-black text-xs transition-all active:scale-[0.98] flex items-center justify-center gap-2 whitespace-nowrap disabled:cursor-not-allowed ${
-                  canSubmit
-                    ? "bg-gradient-to-r from-[#064e3b] to-[#059669] hover:from-[#065f46] hover:to-[#10b981] text-white shadow-xl shadow-emerald-900/30"
-                    : "bg-slate-200 text-slate-400"
-                }`}
+                className={`w-full py-3 rounded-xl font-black text-xs transition-all active:scale-[0.98] flex items-center justify-center gap-2 whitespace-nowrap disabled:cursor-not-allowed ${canSubmit
+                  ? "bg-gradient-to-r from-[#064e3b] to-[#059669] hover:from-[#065f46] hover:to-[#10b981] text-white shadow-xl shadow-emerald-900/30"
+                  : "bg-slate-200 text-slate-400"
+                  }`}
               >
                 {orderLoading ? (
                   <>
                     <Loader2 size={13} className="animate-spin flex-shrink-0" />
-                    <span>Placing Order...</span>
+                    <span>Submitting Inquiry...</span>
                   </>
                 ) : (
                   <>
                     <LockKeyhole size={12} className="flex-shrink-0" />
-                    <span>Place Secure Order · ${fmt(total)}</span>
+                    <span>Submit Inquiry ·</span>
                     <ArrowRight size={12} className="flex-shrink-0" />
                   </>
                 )}
@@ -1211,8 +1199,11 @@ export default function CheckoutPage() {
             </div>
             <p className="text-xs text-slate-600 leading-relaxed">
               By proceeding, you agree to our Terms & Conditions and Privacy
-              Policy . This is an order request and will be reviewed and
-              processed within 24 business hours.
+              Policy . This website operates as a Prescription Medicine Information & Inquiry Platform.
+
+              Submission of an inquiry does not constitute a purchase, sale, shipment, or delivery.
+
+              All requests are manually reviewed and subject to prescription verification and applicable legal compliance requirements.
             </p>
             <button
               type="button"

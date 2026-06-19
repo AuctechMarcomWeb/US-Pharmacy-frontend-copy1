@@ -304,11 +304,11 @@ export default function Categories({ onSelect, apiEndpoint = "/category" }) {
       >
         <div className="cat-header">
           <div>
-            <h2 className="cat-title" id="shop-category-heading">
-              Shop by <span>Category</span>
+            <h2 className="cat-title">
+              Browse <span>Medicine Categories</span>
             </h2>
             <p className="cat-subtitle">
-              Browse medicines you need, fast and easily
+              Explore medicine information and submit availability inquiries.
             </p>
           </div>
         </div>
