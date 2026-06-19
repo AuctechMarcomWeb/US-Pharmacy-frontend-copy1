@@ -193,7 +193,7 @@ function PaymentDropdown({
             <CreditCard size={11} className="text-emerald-600" />
           </div>
           <span className="text-[#064e3b] capitalize text-xs sm:text-sm">
-            {selectedPaymentMethod?.name || "Select a payment method"}
+            {selectedPaymentMethod?.name || "Select a Request Preferences"}
           </span>
         </div>
         <ChevronDown
@@ -306,7 +306,7 @@ export default function CheckoutPage() {
     if (cart.length === 0 && step === 1) router.replace("/products");
   }, [cart, step, router]);
 
-  // Load payment methods
+
   useEffect(() => {
     (async () => {
       try {
@@ -317,7 +317,7 @@ export default function CheckoutPage() {
         );
         setPaymentMethods(active);
       } catch {
-        setPaymentError("Could not load payment methods.");
+        setPaymentError("Could not load Request Preferences.");
       } finally {
         setPaymentLoading(false);
       }
@@ -453,7 +453,7 @@ export default function CheckoutPage() {
                     </div>
                     <div>
                       <p className="text-slate-400 font-medium mb-0.5">
-                        Payment Method
+                        Request Preferences
                       </p>
                       <p className="text-[#064e3b] font-bold capitalize">
                         {confirmedPaymentName}
@@ -767,7 +767,7 @@ export default function CheckoutPage() {
               {/* Row 3: Payment label + dropdown inline */}
               <div className="flex sm:flex-col  gap-3">
                 <label className="text-[10px] font-bold text-slate-500 flex items-center gap-1 flex-shrink-0">
-                  Payment Method <span className="text-red-400">*</span>
+                  Request Preferences <span className="text-red-400">*</span>
                 </label>
                 <div className="flex-1">
                   {paymentLoading ? (
@@ -793,7 +793,7 @@ export default function CheckoutPage() {
                     </div>
                   ) : paymentMethods.length === 0 ? (
                     <div className="px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-slate-400 text-xs">
-                      No payment methods available
+                      No Request Preferences available
                     </div>
                   ) : (
                     <PaymentDropdown
